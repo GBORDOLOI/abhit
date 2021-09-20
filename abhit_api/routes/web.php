@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('website.home');
 });
+
+Route::get('/course', function () {
+    return view('website.course.course');
+});
+
+Route::get('/course/details', function () {
+    return view('website.course.courseDetails');
+});
+
+
+Route::view('login','admin.auth.login')->name('login');
+Route::post('signin',[AuthController::class,'customLogin'])->name('custom.signin');
