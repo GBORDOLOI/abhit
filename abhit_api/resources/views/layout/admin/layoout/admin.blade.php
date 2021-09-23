@@ -60,6 +60,13 @@
     <script src="{{ asset('asset_admin/js/dashboard.js') }}"></script>
     <script src="{{ asset('asset_admin/js/todolist.js' )}}"></script>
     <!-- End custom js for this page -->
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     @yield('scripts')
 </body>
 

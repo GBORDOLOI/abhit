@@ -7,12 +7,12 @@
         <h3 class="page-title">
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-book"></i>
-            </span> Course
+            </span> Banner
         </h3>
         <nav aria-label="breadcrumb">
             <ul class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">
-                    <a href="{{ route('admin.create.course') }}" class="btn btn-gradient-primary btn-fw">Add Course</a>
+                    <a href="{{ route('admin.create.banner') }}" class="btn btn-gradient-primary btn-fw">Add Banner</a>
                     {{-- <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i> --}}
                 </li>
             </ul>
@@ -22,26 +22,26 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Course List</h4>
+                <h4 class="card-title">Banner List</h4>
                 </p>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th> # </th>
-                            <th> First name </th>
-                            <th> Image </th>
+                            <th> Subject name </th>
+                            <th>Banner</th>
                             <th> Status </th>
-                            <th>Publish Date & Time</th>
+                            <th> Description </th>
                             <th> Action </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($course as $key => $item)
+                        @foreach ($banners as $key => $item)
                             <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $item->name }}</td>
+                                <td> {{ $key + 1 }} </td>
+                                <td> {{ $item->name }} </td>
                                 <td>
-                                    <img src="{{ asset($item->course_pic) }}" alt="" srcset="">
+                                    <img src="{{ asset($item->banner_image) }}" alt="" srcset="">
                                 </td>
                                 <td>
                                     @if ($item->is_activate == 1)
@@ -56,19 +56,11 @@
                                         </label>
                                     @endif
                                 </td>
+                                <td>{{ $item->description }}</td>
                                 <td>
-                                    {{\Carbon\Carbon::parse($item->publish_date)->format('Y-m-d H:i:s')}}
-                                </td>
-                                <td class="d-flex">
-
-                                    <a href="#" class="btn mr-2 btn-gradient-primary btn-rounded btn-icon anchor_rounded">
+                                    <a href="{{route('admin.edit.banner',['id'=>\Crypt::encrypt($item->id)])}}"  class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
                                         <i class="mdi mdi-pencil-outline"></i>
                                     </a>
-
-                                    <a href="#" class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
-                                        <i class="mdi mdi-plus-outline"></i>
-                                    </a>
-
                                 </td>
                             </tr>
                         @endforeach
@@ -78,4 +70,33 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document.body).on('change', '#testingUpdate', function() {
+            var status = $(this).prop('checked') == true ? 1 : 0;
+            var user_id = $(this).data('id');
+            // console.log(status);
+            var formDat = {
+                catId: user_id,
+                active: status
+            }
+            // console.log(formDat);
+            $.ajax({
+                type: "post",
+
+                url: "{{ route('admin.active.banner') }}",
+                data: formDat,
+
+                success: function(data) {
+                    console.log(data)
+                }
+            });
+        });
+
+
+    </script>
+
+
 @endsection

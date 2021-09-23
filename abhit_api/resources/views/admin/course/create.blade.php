@@ -1,10 +1,23 @@
+@php
+use App\Models\Subject;
+$subjects = Subject::where('is_activate',1)->orderBy('id','DESC')->get();
+
+@endphp
+
 @extends('layout.admin.layoout.admin')
 
 @section('head')
-
+<link rel="stylesheet" href="https://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.css">
 <link rel="stylesheet"
 href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css">
 <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css">
+
+<link href=
+'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/
+ui-lightness/jquery-ui.css'
+        rel='stylesheet'>
+
+
 @endsection
 
 @section('content')
@@ -12,24 +25,26 @@ href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Create Course</h4>
-        <form class="forms-sample" enctype="multipart/form-data">
+        <form  id="createCourse" enctype="multipart/form-data">
           <div class="form-group">
             <label for="exampleInputName1">Name</label>
-            <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+            <input type="text" class="form-control" name="name" placeholder="Name">
           </div>
 
           <div class="form-group">
-            <label for="exampleSelectGender">Categories</label>
-            <select class="form-control" id="exampleSelectGender">
-              <option>Phyics</option>
-              <option>Chemistry</option>
+            <label for="exampleSelectGender">Subjects</label>
+            <select class="form-control" name="subject_id">
+                <option value="" disabled selected>-- Select Subject --</option>
+              @foreach ($subjects as $item)
+                  <option value="{{$item->id}}">{{$item->name}}</option>
+              @endforeach
             </select>
           </div>
 
-          <div class="form-group">
+          {{-- <div class="form-group">
             <label for="exampleInputPassword4">Price</label>
             <input type="number" class="form-control" id="exampleInputPassword4" placeholder="Enter Price">
-          </div>
+          </div> --}}
 
           <div class="form-group">
             <label>File upload</label>
@@ -37,19 +52,21 @@ href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image
           </div>
           <div class="form-group">
             <label for="exampleInputCity1">Publish Date</label>
-            <input type="text" class="form-control" id="exampleInputCity1" placeholder="Publish Date">
+            <input type="text" class="form-control" name="publish_date" id="publish_date" placeholder="Publish Date">
           </div>
 
           <div class="form-group">
             <label for="exampleInputCity1">Publish Time</label>
-            <input type="text" class="form-control" id="exampleInputCity1" placeholder="Publish Time">
+            <input type="text" class="form-control" name="publish_time" id="publish_time" placeholder="Publish Time">
           </div>
 
           <div class="form-group">
             <label for="exampleTextarea1">Description</label>
-            <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+            <textarea class="form-control" name="description" rows="4"></textarea>
           </div>
-          <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+
+
+          <button  class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
@@ -57,7 +74,14 @@ href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image
 @endsection
 
 @section('scripts')
+<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" >
+    </script>
 
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" >
+    </script>
+<script src="https://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.js"></script>
 <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
 <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js">
 </script>
@@ -98,7 +122,7 @@ href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image
         }
     );
 
-    $("#createFormData").submit(function(e) {
+    $("#createCourse").submit(function(e) {
 
         e.preventDefault(); // avoid to execute the actual submit of the form.
 
@@ -107,14 +131,18 @@ href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image
         pondFiles = pond.getFiles();
         for (var i = 0; i < pondFiles.length; i++) {
             // append the blob file
-            formdata.append('pic[]', pondFiles[i].file);
+            formdata.append('pic', pondFiles[i].file);
         }
 
 
         $.ajax({
 
             type: "POST",
-            url: "#",
+            url: "{{route('admin.creating.course')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+
             // data: form.serialize(), // serializes the form's elements.
             data: formdata,
             processData: false,
@@ -130,8 +158,9 @@ href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image
                     });
 
                 },
-                200: function() {
-                    alert('200 status code! success');
+                200: function(data) {
+
+                    // alert('200 status code! success');
                 },
                 500: function() {
                     alert('500 someting went wrong');
@@ -141,7 +170,21 @@ href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image
 
 
     })
-    // $('.input-images').imageUploader();
-</script>
+
+    $('#publish_time').clockpicker({
+        autoclose: true,
+        twelvehour: true,
+    });
+    $( "#publish_date" ).datepicker({
+        changeMonth: true,
+			changeYear: true,
+			yearRange: '1990:+0',
+            minDate: 0,
+			// showButtonPanel: true,
+			dateFormat: 'yy-mm-dd',
+    });
+
+    </script>
+
 
 @endsection

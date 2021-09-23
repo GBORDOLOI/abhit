@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Banner extends Model
+class Course extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'banners';
+    protected $table = 'courses';
     protected $guarded = [];
     protected $dates = ['deleted_at'];
 
