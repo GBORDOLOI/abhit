@@ -8,8 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="{{asset('asset_admin/vendors/mdi/css/materialdesignicons.min.css') }}">
-    <link rel="stylesheet" href="{{asset('asset_admin/vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset_admin/vendors/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset_admin/vendors/css/vendor.bundle.base.css') }}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -46,7 +46,7 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="{{asset( 'asset_admin/vendors/js/vendor.bundle.base.js') }}"></script>
+    <script src="{{ asset('asset_admin/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="{{ asset('asset_admin/vendors/chart.js/Chart.min.js') }}"></script>
@@ -54,11 +54,11 @@
     <!-- inject:js -->
     <script src="{{ asset('asset_admin/js/off-canvas.js') }}"></script>
     <script src="{{ asset('asset_admin/js/hoverable-collapse.js') }}"></script>
-    <script src="{{asset( 'asset_admin/js/misc.js') }}"></script>
+    <script src="{{ asset('asset_admin/js/misc.js') }}"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="{{ asset('asset_admin/js/dashboard.js') }}"></script>
-    <script src="{{ asset('asset_admin/js/todolist.js' )}}"></script>
+    <script src="{{ asset('asset_admin/js/todolist.js') }}"></script>
     <!-- End custom js for this page -->
     <script>
         $.ajaxSetup({
@@ -66,6 +66,10 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
     @yield('scripts')
 </body>

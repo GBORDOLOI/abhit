@@ -31,7 +31,7 @@ class BannerController extends Controller
         Banner::create([
             'name' => $request->name,
             'description' => $request->description,
-            'course_id' => 1,
+            'course_id' => $request->course_list,
             'banner_image' => $file
         ]);
 

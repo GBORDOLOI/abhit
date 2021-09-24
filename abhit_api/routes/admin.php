@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\BannerController;
+use App\Http\Controllers\admin\ChapterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,16 @@ Route::prefix('course')->group(function () {
     Route::get('',[CourseController::class,'index'])->name('admin.get.course');
     Route::view('create', 'admin.course.create')->name('admin.create.course');
     Route::post('creating',[CourseController::class,'create'])->name('admin.creating.course');
+
+});
+
+/* ------------------------------- CHAPTER ------------------------------------ */
+Route::prefix('chapter')->group(function () {
+
+    /* ------------------------------- CHAPTER ------------------------------------ */
+    Route::get('{id}',[ChapterController::class,'index'])->name('admin.get.chapter');
+    // Route::view('create', 'admin.course.create')->name('admin.create.course');
+    Route::post('creating',[ChapterController::class,'create'])->name('admin.creating.chapter');
 
 });
 

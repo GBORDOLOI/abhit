@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AuthController;
+use App\Http\Controllers\website\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,18 +15,16 @@ use App\Http\Controllers\admin\AuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('website.home');
-});
+Route::get('',[DashboardController::class,'index'])->name('website.dashboard');
 
 Route::get('/course', function () {
     return view('website.course.course');
-});
+})->name('website.course');
 
 Route::get('/course/details', function () {
     return view('website.course.courseDetails');
-});
+})->name('website.course.details');
 
-
+/* ------------------------------- Admin Login ------------------------------------ */
 Route::view('login','admin.auth.login')->name('login');
 Route::post('signin',[AuthController::class,'customLogin'])->name('custom.signin');

@@ -13,8 +13,21 @@
         <div class="row">
             <div class="col-lg-12 p0">
                 <div class="owl-slider">
-                    <div id="carousel-banner" class="owl-carousel">
+                    <div id="carousel-banner" class="owl-carousel" style="border-radius: 20px">
+                        @foreach ($banner as $item)
                         <div class="item">
+                            <div class="home-slide" ><img src="{{asset($item->banner_image)}}" style="border-radius: 20px" class="w100"></div>
+                            <div class="home-desc">
+                                <h2 class="heading-black">{{$item->name}}</h2>
+                                <p class="banner-para">{{$item->description}}</p>
+                                @if ($item->course_id != null)
+                                    <div><a href="{{route('website.course.details')}}" target="_blank" class="about-view">View More</a></div>
+                                @endif
+                            </div>
+                        </div>
+
+                        @endforeach
+                        {{-- <div class="item">
                             <div class="home-slide"><img src="{{asset('asset_website/img/home/banner1.png')}}" class="w100"></div>
                             <div class="home-desc">
                                 <h2 class="heading-black">Find the Best Courses &amp;
@@ -22,25 +35,7 @@
                                 <p class="banner-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                 <div><a href="about.html" target="_blank" class="about-view">View More</a></div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="home-slide"><img src="{{asset('asset_website/img/home/banner1.png')}}" class="w100"></div>
-                            <div class="home-desc">
-                                <h2 class="heading-black">Find the Best Courses &amp;
-                                    Upgrade Your Skills.</h2>
-                                <p class="banner-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <div><a href="about.html" target="_blank" class="about-view">View More</a></div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="home-slide"><img src="{{asset('asset_website/img/home/banner1.png')}}" class="w100"></div>
-                            <div class="home-desc">
-                                <h2 class="heading-black">Find the Best Courses &amp;
-                                    Upgrade Your Skills.</h2>
-                                <p class="banner-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <div><a href="about.html" target="_blank" class="about-view">View More</a></div>
-                            </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

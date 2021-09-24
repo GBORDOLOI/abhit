@@ -61,12 +61,16 @@
                                 </td>
                                 <td class="d-flex">
 
-                                    <a href="#" class="btn mr-2 btn-gradient-primary btn-rounded btn-icon anchor_rounded">
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Edit Course" class="btn mr-2 btn-gradient-primary btn-rounded btn-icon anchor_rounded">
                                         <i class="mdi mdi-pencil-outline"></i>
                                     </a>
 
-                                    <a href="#" class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
+                                    <a href="{{route('admin.get.chapter',['id'=>\Crypt::encrypt($item->id)])}}" data-toggle="tooltip" data-placement="top" title="Add Chapter" class="btn mr-2 btn-gradient-primary btn-rounded btn-icon anchor_rounded">
                                         <i class="mdi mdi-plus-outline"></i>
+                                    </a>
+
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="View Details of Course" class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
+                                        <i class="mdi mdi-eye-outline"></i>
                                     </a>
 
                                 </td>

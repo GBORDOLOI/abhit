@@ -1,5 +1,7 @@
 @extends('layout.admin.layoout.admin')
 
+@section('title','Banner')
+
 @section('head')
 
     <link rel="stylesheet"

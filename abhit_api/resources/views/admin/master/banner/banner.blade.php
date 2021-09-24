@@ -1,5 +1,6 @@
 @extends('layout.admin.layoout.admin')
 
+@section('title','Banner')
 
 @section('content')
 

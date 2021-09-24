@@ -1,4 +1,13 @@
+@php
+use App\Models\Course;
+use App\Common\Activation;
+
+$course = Course::where('is_activate', Activation::Activate)->get();
+@endphp
+
 @extends('layout.admin.layoout.admin')
+
+@section('title','Banner')
 
 @section('head')
 
@@ -34,17 +43,20 @@
 
                     <div class="form-group">
                         <label for="exampleSelectGender">Related to Course</label>
-                        <select class="form-control" id="exampleSelectGender">
-                          <option value="yes">Yes</option>
-                          <option value="no">No</option>
+                        <select class="form-control" id="related_course" required>
+                            <option value="" disabled selected>-- Select --</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="course_id">
                         <label for="exampleSelectGender">Course</label>
-                        <select class="form-control" id="exampleSelectGender">
-                          <option value="yes">Yes</option>
-                          <option value="no">No</option>
+                        <select class="form-control" id="course_list" name="course_list">
+                            <option value="" disabled selected> -- Select Course --</option>
+                            @foreach ($course as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -68,6 +80,8 @@
 
 
     <script>
+        $('#course_id').hide();
+        $("#course_list").prop('required',false);
         FilePond.registerPlugin(
 
             // encodes the file as base64 data
@@ -113,7 +127,7 @@
             $.ajax({
 
                 type: "POST",
-                url: "{{route('admin.creating.banner')}}",
+                url: "{{ route('admin.creating.banner') }}",
                 // data: form.serialize(), // serializes the form's elements.
                 data: formdata,
                 processData: false,
@@ -143,6 +157,19 @@
 
         })
         // $('.input-images').imageUploader();
+
+        $("#related_course").change(function() {
+            var value = this.value;
+            if( this.value == 'yes'){
+                $('#course_id').show();
+                $("#course_list").prop('required',true);
+
+            } else {
+                $('#course_id').hide();
+                $("#course_list").prop('required',false);
+            }
+            // var firstDropVal = $('#pick').val();
+        });
     </script>
 
 @endsection
