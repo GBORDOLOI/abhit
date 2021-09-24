@@ -36,6 +36,9 @@
                     <li class="nav-item"> <a class="nav-link"
                             href="{{route('admin.get.subject')}}">Subjects</a></li>
 
+                    <li class="nav-item"> <a class="nav-link"
+                                href="{{route('admin.get.blog')}}">Blog</a></li>
+
                 </ul>
             </div>
         </li>

@@ -358,7 +358,18 @@
             </div>
             <div class="col-lg-12">
                 <ul class="list-inline blog-list">
-                    <li><span class="icon-Calender-09 calendar-icon"></span><span>April 20, 2021</span>
+                    @foreach ($blogs as $item)
+                    <li><span class="icon-Calender-09 calendar-icon"></span><span>{{\Carbon\Carbon::parse($item->created_ts)->format('M d, Y')}}</span>
+                        <div class="block-ellipsis1">
+                            <h4 class="small-heading-black">{{$item->name}}</h4>
+                        </div>
+                        <div class="block-ellipsis2 ">{!!$item->blog!!}</div>
+                        <div><a href="blog-details.html" target="_blank" class="read-more">Read More</a></div>
+                    </li>
+
+                    @endforeach
+
+                    {{-- <li><span class="icon-Calender-09 calendar-icon"></span><span>April 20, 2021</span>
                         <div class="block-ellipsis1">
                             <h4 class="small-heading-black">Integer congue magna at pretium
                                 purus pretium Integer congue magna at pretium
@@ -383,20 +394,7 @@
                             nostrud exercitation ullamco laboris nisi ut aliquip
                             ex ea commodo consequat</p>
                         <div><a href="blog-details.html" target="_blank" class="read-more">Read More</a></div>
-                    </li>
-                    <li><span class="icon-Calender-09 calendar-icon"></span><span>April 20, 2021</span>
-                        <div class="block-ellipsis1">
-                            <h4 class="small-heading-black">Integer congue magna at pretium
-                                purus pretium Integer congue magna at pretium
-                                purus pretium</h4>
-                        </div>
-                        <p class="block-ellipsis2 ">Lorem ipsum dolor sit amet, consectetur sed do
-                            eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip
-                            ex ea commodo consequat</p>
-                        <div><a href="blog-details.html" target="_blank" class="read-more">Read More</a></div>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

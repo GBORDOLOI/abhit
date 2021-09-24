@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\BannerController;
 use App\Http\Controllers\admin\ChapterController;
+use App\Http\Controllers\admin\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,14 +56,21 @@ Route::prefix('master')->group(function () {
 
     });
 
+    /* ------------------------------- Banner ------------------------------------ */
     Route::prefix('banner')->group(function () {
         Route::get('',[BannerController::class,'index'])->name('admin.get.banner');
         Route::view('create', 'admin.master.banner.create')->name('admin.create.banner');
         Route::post('creating',[BannerController::class,'create'])->name('admin.creating.banner');
         Route::post('active',[BannerController::class,'active'])->name('admin.active.banner');
         Route::get('edit/{id}',[BannerController::class,'editBanner'])->name('admin.edit.banner');
+    });
 
-
+    /* ------------------------------- Blog ------------------------------------ */
+    Route::prefix('blog')->group(function () {
+        Route::get('',[BlogController::class,'index'])->name('admin.get.blog');
+        Route::view('create','admin.master.blog.create')->name('admin.create.blog');
+        Route::post('creating',[BlogController::class,'create'])->name('admin.creating.blog');
+        Route::post('ckeditorImage',[BlogController::class,'ckeditorImage'])->name('upload');
     });
 
 

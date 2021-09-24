@@ -18,8 +18,6 @@ class BannerController extends Controller
     protected function create(Request $request)
     {
 
-        // dd($request->pic);
-
         $document = $request->pic;
         if (isset($document) && !empty($document)) {
             $new_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();

@@ -1,5 +1,7 @@
 @extends('layout.admin.layoout.admin')
 
+@section('title','Chapter')
+
 @section('head')
 
 @endsection
@@ -8,7 +10,7 @@
 <div class="col-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Create Chapter</h4>
+            <h4 class="card-title">Create Chapter </h4>
             <form id="createCourse" action="{{route('admin.creating.chapter')}}" method="POST">
                 @csrf
                 <input type="hidden" name="id" value="{{\Crypt::encrypt($course_id)}}">

@@ -10,6 +10,8 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 
 @extends('layout.admin.layoout.admin')
 
+@section('title','Course')
+
 @section('head')
     <link rel="stylesheet" href="https://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.css">
     <link rel="stylesheet"
