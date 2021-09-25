@@ -37,6 +37,7 @@ class BlogController extends Controller
 
     protected function create(Request $request){
 
+        $blog = $request->data;
         $document = $request->pic;
         if (isset($document) && !empty($document)) {
             $new_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
@@ -48,7 +49,7 @@ class BlogController extends Controller
         Blog::create([
             'name' => $request->name,
             'blog_image' => $file,
-            'blog' => $request->description
+            'blog' => $blog
         ]);
 
         return \response()->json(['status'=>1]);

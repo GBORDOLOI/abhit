@@ -9,13 +9,6 @@
     <link rel="stylesheet"
         href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css">
     <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css">
-
-    {{-- <style>
-        .ck-editor__editable_inline {
-            min-height: 400px;
-        }
-
-    </style> --}}
 @endsection
 
 @section('content')
@@ -72,16 +65,12 @@
 
         FilePond.registerPlugin(
 
-            // encodes the file as base64 data
             FilePondPluginFileEncode,
 
-            // validates the size of the file
             FilePondPluginFileValidateSize,
 
-            // corrects mobile image orientation
             FilePondPluginImageExifOrientation,
 
-            // previews dropped images
             FilePondPluginImagePreview
         );
 
@@ -93,9 +82,6 @@
                 instantUpload: false,
                 imagePreviewHeight: 135,
                 labelIdle: '<div style="width:100%;height:100%;"><p> Drag &amp; Drop your files or <span class="filepond--label-action" tabindex="0">Browse</span><br> Maximum number of image is 1 :</p> </div>',
-                // files: [{
-                //     source: "{{ asset('site/img/icons/check.png') }}",
-                // }]
             }
         );
 
@@ -105,11 +91,15 @@
 
             var formdata = new FormData(this);
 
+            var data = CKEDITOR.instances.editor.getData();
+
             pondFiles = pond.getFiles();
             for (var i = 0; i < pondFiles.length; i++) {
                 // append the blob file
                 formdata.append('pic', pondFiles[i].file);
             }
+
+            formdata.append('data', data);
 
 
             $.ajax({
@@ -144,9 +134,6 @@
 
 
         })
-
-
-        // config.resize( '100%', '500', true );
     </script>
 
 @endsection
