@@ -55,4 +55,5 @@ Route::view('contact','website.contact.contact')->name('website.contact');
 Route::view('cart','website.cart.cart')->name('website.cart');
 Route::view('checkout','website.cart.checkout')->name('website.checkout');
 Route::view('website/login','website.auth.login')->name('website.login');
+Route::view('website/forgot-password','website.auth.forgot')->name('website.forgot.password');
 
