@@ -58,7 +58,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15 Weeks</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">Physics</h4></div>
                             <span>₹3399</span>
-                            <a href="course-details.html" target="_blank" class="enroll">Enroll now</a>
+                            <a href="{{route('website.course.details')}}" target="_blank" class="enroll">Enroll now</a>
                         </div>
                     </li>
                     <li>
@@ -66,7 +66,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15 Weeks</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">Chemistry</h4></div>
                             <span>₹3399</span>
-                           <a href="course-details.html" target="_blank" class="enroll">Enroll now</a>
+                           <a href="{{route('website.course.details')}}" target="_blank" class="enroll">Enroll now</a>
                         </div>
                     </li>
                     <li>
@@ -74,7 +74,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15 Weeks</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">Biology</h4></div>
                             <span>₹3399</span>
-                            <a href="course-details.html" target="_blank" class="enroll">Enroll now</a>
+                            <a href="{{route('website.course.details')}}" target="_blank" class="enroll">Enroll now</a>
                         </div>
                     </li>
                     <li>
@@ -82,7 +82,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15 Weeks</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">English Core</h4></div>
                             <span>₹3399</span>
-                            <a href="course-details.html" target="_blank" class="enroll">Enroll now</a>
+                            <a href="{{route('website.course.details')}}" target="_blank" class="enroll">Enroll now</a>
                         </div>
                     </li>
                     <li>
@@ -90,7 +90,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15 Weeks</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">English Elective</h4></div>
                             <span>₹3399</span>
-                            <a href="course-details.html" target="_blank" class="enroll">Enroll now</a>
+                            <a href="{{route('website.course.details')}}" target="_blank" class="enroll">Enroll now</a>
                         </div>
                     </li>
                     <li>
@@ -98,7 +98,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15 Weeks</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">Computer Science</h4></div>
                             <span>₹3399</span>
-                           <a href="course-details.html" target="_blank" class="enroll">Enroll now</a>
+                           <a href="{{route('website.course.details')}}" target="_blank" class="enroll">Enroll now</a>
                         </div>
                     </li>
                     <li>
@@ -106,7 +106,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15 Weeks</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">Informatics Practices</h4></div>
                             <span>₹3399</span>
-                            <a href="course-details.html" target="_blank" class="enroll">Enroll now</a>
+                            <a href="{{route('website.course.details')}}" target="_blank" class="enroll">Enroll now</a>
                         </div>
                     </li>
                     <li>
@@ -114,7 +114,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15 Weeks</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">History</h4></div>
                             <span>₹3399</span>
-                            <a href="course-details.html" target="_blank" class="enroll">Enroll now</a>
+                            <a href="{{route('website.course.details')}}" target="_blank" class="enroll">Enroll now</a>
                         </div>
                     </li>
                     <li>
@@ -122,7 +122,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15 Weeks</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">Geography</h4></div>
                             <span>₹3399</span>
-                            <a href="course-details.html" target="_blank" class="enroll">Enroll now</a>
+                            <a href="{{route('website.course.details')}}" target="_blank" class="enroll">Enroll now</a>
                         </div>
                     </li>
                     <li>
@@ -130,7 +130,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15 Weeks</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">Political Science</h4></div>
                             <span>₹3399</span>
-                            <a href="course-details.html" target="_blank" class="enroll">Enroll now</a>
+                            <a href="{{route('website.course.details')}}" target="_blank" class="enroll">Enroll now</a>
                         </div>
                     </li>
                     <li>
@@ -138,7 +138,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15 Weeks</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">Economics</h4></div>
                             <span>₹3399</span>
-                            <a href="course-details.html" target="_blank" class="enroll">Enroll now</a>
+                            <a href="{{route('website.course.details')}}" target="_blank" class="enroll">Enroll now</a>
                         </div>
                     </li>
                     <li>
@@ -146,7 +146,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15 Weeks</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">Accountancy</h4></div>
                             <span>₹3399</span>
-                            <a href="course-details.html" target="_blank" class="enroll">Enroll now</a>
+                            <a href="{{route('website.course.details')}}" target="_blank" class="enroll">Enroll now</a>
                         </div>
                     </li>
                 </ul>
