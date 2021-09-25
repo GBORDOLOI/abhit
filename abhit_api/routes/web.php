@@ -35,3 +35,4 @@ Route::prefix('course')->group(function(){
 /* ------------------------------- Admin Login ------------------------------------ */
 Route::view('login','admin.auth.login')->name('login');
 Route::post('signin',[AuthController::class,'customLogin'])->name('custom.signin');
+
