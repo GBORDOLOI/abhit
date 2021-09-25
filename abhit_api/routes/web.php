@@ -54,4 +54,5 @@ Route::view('gallery','website.gallery.gallery')->name('website.gallery');
 Route::view('knowledge-forum','website.knowledge.knowledge_forum')->name('website.knowledge.forum');
 Route::view('knowledge-details-post','website.knowledge.knowledge_details_post')->name('website.knowledge.details.post');
 Route::view('knowledge-tab','website.knowledge.knowledge_tab')->name('website.knowledge.tab');
+Route::view('contact','website.contact.contact')->name('website.contact');
 
