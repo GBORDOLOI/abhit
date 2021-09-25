@@ -359,12 +359,12 @@
             <div class="col-lg-12">
                 <ul class="list-inline blog-list">
                     @foreach ($blogs as $item)
-                    <li><span class="icon-Calender-09 calendar-icon"></span><span>{{\Carbon\Carbon::parse($item->created_ts)->format('M d, Y')}}</span>
+                    <li><span class="icon-Calender-09 calendar-icon"></span><span>{{\Carbon\Carbon::parse($item->created_ts)->format('F d, Y')}}</span>
                         <div class="block-ellipsis1">
                             <h4 class="small-heading-black">{{$item->name}}</h4>
                         </div>
                         <div class="block-ellipsis2 ">{!!$item->blog!!}</div>
-                        <div><a href="blog-details.html" target="_blank" class="read-more">Read More</a></div>
+                        <div><a href="{{route('website.blog.details',['id'=>\Crypt::encrypt($item->id)])}}" target="_blank" class="read-more">Read More</a></div>
                     </li>
 
                     @endforeach
