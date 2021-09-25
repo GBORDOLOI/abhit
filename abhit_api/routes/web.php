@@ -46,3 +46,9 @@ Route::prefix('blog')->group(function(){
 Route::view('login','admin.auth.login')->name('login');
 Route::post('signin',[AuthController::class,'customLogin'])->name('custom.signin');
 
+
+
+/* ------------------------------- Views -> Alok ------------------------------------ */
+Route::view('about-us','website.about.about')->name('website.about');
+Route::view('gallery','website.gallery.gallery')->name('website.gallery');
+

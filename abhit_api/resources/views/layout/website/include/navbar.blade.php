@@ -6,9 +6,9 @@
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li class="active"><a href="{{route('website.dashboard')}}">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
+                <li><a href="{{route('website.about')}}">About Us</a></li>
                 <li><a href="{{route('website.course')}}">Courses</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="{{route('website.gallery')}}">Gallery</a></li>
                 <li><a href="blog.html">Blogs</a></li>
                 <li><a href="knowledge.html">Knowledge Forum</a></li>
                 <li><a href="contactus.html" class="about-view">Contact Us</a></li>
