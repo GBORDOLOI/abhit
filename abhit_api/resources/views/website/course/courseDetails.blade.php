@@ -15,7 +15,7 @@
                     </nav>
                     <h2 class="heading-white">Chemistry</h2>
                     <p>Basic understanding of chemistry and maths</p>
-                    <div class="text-box"><a data-toggle="modal" data-target="#add-test-modal" class="mcq-test">MCQ Test</a></div>
+                    <div class="text-box"><a data-toggle="modal" data-target="#add-test-modal" class="mcq-test" style="cursor: pointer">MCQ Test</a></div>
                 </div>
             </div>
             <div class="col-lg-6 p0">
@@ -148,16 +148,66 @@
                                     <li><a href="#" class="enquiry">Enquiry Now</a></li>
                                 </ul>
                             </div>
-
                         </div>
-
-
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </section>
+
+
+    <!-- The Modal -->
+    <div class="modal" id="add-test-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-heading">
+                    <h2 class="heading-mcq ">MCQ Test</h2>
+                    <p class="modal-sub-head-left">Question 1/15</p>
+                    <p class="modal-sub-head-right">Time Left : <b>15:00 Mins</b></p><button type="button" class="close" data-dismiss="modal"><span class="icon-cancel-20"></span></button>
+                </div>
+
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <ol class="pl15" type="1">
+                        <li>
+                            <h4 data-brackets-id="3991" class="small-heading-black mb20">The main source of chemicals which are used in
+                                industries is</h4>
+                            <div>
+                                <ul class="list-inline pl-0">
+                                    <li>
+                                        <input type="radio" id="test1" name="radio-group" checked>
+                                        <label for="test1"><span>(A)</span> Coke </label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="test2" name="radio-group">
+                                        <label for="test2"><span>(B)</span> Peat </label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="test3" name="radio-group">
+                                        <label for="test3"><span>(C)</span> Coal tar </label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="test4" name="radio-group">
+                                        <label for="test4"><span>(D)</span> Liquefied Petroleum Gas </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ol>
+                    <div class="btn-box-test">
+                        <a href="#" class="btn btn-block add-question">Next</a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
 
 
 @endsection
