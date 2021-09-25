@@ -13,7 +13,7 @@
             <div class="col-lg-4 col-12">
                 <ul class="list-inline login-details">
                     <li>
-                        <a href="login.html" class="login-text" target="_parent"><span class="icon-user-08 login-details-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>Login/Sign Up</a>
+                        <a href="{{route('website.login')}}" class="login-text" target="_parent"><span class="icon-user-08 login-details-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>Login/Sign Up</a>
                     </li>
                     <li>
                         <a href="{{route('website.cart')}}" class="login-text"><span class="icon-cart-08 login-details-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></span>Cart</a>

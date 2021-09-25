@@ -57,4 +57,5 @@ Route::view('knowledge-tab','website.knowledge.knowledge_tab')->name('website.kn
 Route::view('contact','website.contact.contact')->name('website.contact');
 Route::view('cart','website.cart.cart')->name('website.cart');
 Route::view('checkout','website.cart.checkout')->name('website.checkout');
+Route::view('website/login','website.auth.login')->name('website.login');
 
