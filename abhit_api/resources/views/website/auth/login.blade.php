@@ -61,7 +61,7 @@
                                         <div class="form-group mb0 col-lg-12">
                                             <button type="submit" class="btn btn-block login-btn">Login</button>
                                         </div>
-                                        <div class="col-lg-12 forgot-div"><a href="forgot.html" class="text-center">Forgot Password</a></div>
+                                        <div class="col-lg-12 forgot-div"><a href="{{route('website.forgot.password')}}" class="text-center">Forgot Password</a></div>
                                     </form>
 
                                     <div class="google-div"><a href="#" class="google-btn"><span class="icon-google-30 google-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span></span>Continue with Google</a></div>
