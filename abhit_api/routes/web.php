@@ -29,12 +29,9 @@ Route::prefix('course')->group(function(){
     })->name('website.course.details');
 });
 
-/* ------------------------------- Course ------------------------------------ */
+/* ------------------------------- Blog ------------------------------------ */
 Route::prefix('blog')->group(function(){
-    // Route::get('', function () {
-    //     return view('website.course.course');
-    // })->name('website.course');
-
+    Route::get('', [BlogController::class,'getBlog'])->name('website.blog');
     Route::get('details/{id}',[BlogController::class,'details'])->name('website.blog.details');
 });
 
