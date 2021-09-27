@@ -39,6 +39,10 @@
                     <li class="nav-item"> <a class="nav-link"
                                 href="{{route('admin.get.blog')}}">Blog</a></li>
 
+                    <li class="nav-item"> <a class="nav-link"
+                                    href="{{route('admin.get.gallery')}}">Gallery</a></li>
+
+
                 </ul>
             </div>
         </li>

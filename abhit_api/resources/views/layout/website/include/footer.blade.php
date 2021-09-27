@@ -1,3 +1,9 @@
+@php
+    use App\Models\Gallery;
+    use App\Common\Activation;
+    $gallery = Gallery::where('is_activate',Activation::Activate)->take(4)->get();
+@endphp
+
 <footer>
     <div class="container-fluid">
         <div class="row footer-top">
@@ -41,10 +47,12 @@
             </div>
             <div class="col-lg-4 footer-third p0">
                 <ul class="list-inline footer-image-list  mb0">
+                    @foreach ($gallery as $item)
+                        <li><img src="{{asset($item->gallery)}}" class="w100"></li>
+                    @endforeach
+                    {{-- <li><img src="{{asset('asset_website/img/home/image1.jpg')}}" class="w100"></li>
                     <li><img src="{{asset('asset_website/img/home/image1.jpg')}}" class="w100"></li>
-                    <li><img src="{{asset('asset_website/img/home/image1.jpg')}}" class="w100"></li>
-                    <li><img src="{{asset('asset_website/img/home/image1.jpg')}}" class="w100"></li>
-                    <li><img src="{{asset('asset_website/img/home/image1.jpg')}}" class="w100"></li>
+                    <li><img src="{{asset('asset_website/img/home/image1.jpg')}}" class="w100"></li> --}}
                 </ul>
             </div>
         </div>

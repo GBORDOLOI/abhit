@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\BannerController;
 use App\Http\Controllers\admin\ChapterController;
 use App\Http\Controllers\admin\BlogController;
+use App\Http\Controllers\admin\GalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,5 +74,12 @@ Route::prefix('master')->group(function () {
         Route::post('ckeditorImage',[BlogController::class,'ckeditorImage'])->name('upload');
     });
 
+     /* ------------------------------- Gallery ------------------------------------ */
+     Route::prefix('gallery')->group(function () {
+        Route::get('',[GalleryController::class,'index'])->name('admin.get.gallery');
+        Route::view('create','admin.master.gallery.create')->name('admin.create.gallery');
+        Route::post('creating',[GalleryController::class,'create'])->name('admin.creating.gallery');
+        // Route::post('ckeditorImage',[BlogController::class,'ckeditorImage'])->name('upload');
+    });
 
 });
