@@ -354,7 +354,7 @@
                     libero tempus, blandit posuere and ligula varius magna a porta</p>
             </div>
             <div class="col-lg-6">
-                <div><a href="blog.html" target="_blank" class="view">Read More Stories</a></div>
+                <div><a href="{{route('website.blog')}}" target="_blank" class="view">Read More Stories</a></div>
             </div>
             <div class="col-lg-12">
                 <ul class="list-inline blog-list">
