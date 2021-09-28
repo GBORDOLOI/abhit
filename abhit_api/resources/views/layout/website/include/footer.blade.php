@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row footer-top">
             <div class="col-lg-3 col-6 p0">
-                <div class="footer-logo"><a href="index.html"><img src="{{asset('asset_website/img/home/logo.png')}}" class="w100"></a></div>
+                <div class="footer-logo"><a href="{{route('website.dashboard')}}"><img src="{{asset('asset_website/img/home/logo.png')}}" class="w100"></a></div>
             </div>
             <div class="col-lg-9 col-6 p0">
                 <ul class="list-inline social-media mb0">
@@ -31,16 +31,16 @@
                 <ul class="list-inline footer-list mb0">
                     <li>
                         <ul class="mb0">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About us</a></li>
-                            <li><a href="course.html">Courses</a></li>
+                            <li><a href="{{route('website.dashboard')}}">Home</a></li>
+                            <li><a href="{{route('website.about')}}">About us</a></li>
+                            <li><a href="{{route('website.course')}}">Courses</a></li>
                         </ul>
                     </li>
                     <li>
                         <ul class="mb0">
-                            <li><a href="blog.html">Blogs</a></li>
-                            <li><a href="knowledge.html">Knowledge Forum</a></li>
-                            <li><a href="contactus.html">Contact Us</a></li>
+                            <li><a href="{{route('website.blog')}}">Blogs</a></li>
+                            <li><a href="{{route('website.knowledge.forum')}}">Knowledge Forum</a></li>
+                            <li><a href="{{route('website.contact')}}">Contact Us</a></li>
                         </ul>
                     </li>
                 </ul>

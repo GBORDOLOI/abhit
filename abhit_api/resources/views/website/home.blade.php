@@ -262,7 +262,7 @@
             <div class="col-lg-12 text-center">
                 <h2 class="heading-black">Knowledge forum</h2>
                 <p class="knowledge-para">Learn something new every day. Loaded with Knowledgebase, Forum &amp; more!</p>
-                <div><a href="knowledge.html" target="_blank" class="knowledge-link">Find out</a></div>
+                <div><a href="{{route('website.knowledge.forum')}}" target="_blank" class="knowledge-link">Find out</a></div>
             </div>
         </div>
     </div>
