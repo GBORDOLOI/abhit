@@ -16,23 +16,22 @@ class BlogController extends Controller
 
     protected function ckeditorImage(Request $request)
     {
-        $CKEditor = $request->input('CKEditor');
-        $funcNum  = $request->input('CKEditorFuncNum');
-        $message  = $url = '';
-        if (Input::hasFile('upload')) {
-            $file = Input::file('upload');
-            // if ($file->isValid()) {
-                $filename =rand(1000,9999).$file->getClientOriginalName();
-                $file->move(public_path('files/blog/ck'), $filename);
-                $url = asset('files/blog/ck/' . $filename);
-            // } else {
-            //     $message = 'An error occurred while uploading the file.';
-            // }
-        } else {
-            $message = 'No file uploaded.';
-        }
-        echo '<script>window.parent.CKEDITOR.tools.callFunction('.$funcNum.', "'.$url.'", "'.$message.'")</script>';
+        if($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName.'_'.time().'.'.$extension;
 
+            $request->file('upload')->move(public_path('files/blog/ckImage'), $fileName);
+
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('files/blog/ckImage/'.$fileName);
+            $msg = 'Image uploaded successfully';
+            $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+
+            @header('Content-type: text/html; charset=utf-8');
+            echo $response;
+        }
     }
 
     protected function create(Request $request){

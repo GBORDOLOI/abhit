@@ -13,4 +13,10 @@ class Course extends Model
     protected $guarded = [];
     protected $dates = ['deleted_at'];
 
+    protected function subject()
+    {
+        # code...
+        return $this->belongsTo(Subject::class,'subject_id','id');
+    }
+
 }

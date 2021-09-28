@@ -32,6 +32,7 @@ Route::prefix('course')->group(function () {
     Route::get('',[CourseController::class,'index'])->name('admin.get.course');
     Route::view('create', 'admin.course.create')->name('admin.create.course');
     Route::post('creating',[CourseController::class,'create'])->name('admin.creating.course');
+    Route::post('ckeditorImage',[CourseController::class,'ckeditorImage'])->name('admin.course.upload');
 
 });
 
