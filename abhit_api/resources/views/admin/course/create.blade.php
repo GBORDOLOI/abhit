@@ -170,7 +170,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 
                     },
                     200: function(data) {
-
+                        location.reload();
                         // alert('200 status code! success');
                     },
                     500: function() {
