@@ -9,7 +9,7 @@
                 <li><a href="{{route('website.about')}}">About Us</a></li>
                 <li><a href="{{route('website.course')}}">Courses</a></li>
                 <li><a href="{{route('website.gallery')}}">Gallery</a></li>
-                <li><a href="blog.html">Blogs</a></li>
+                <li><a href="{{route('website.blog')}}">Blogs</a></li>
                 <li><a href="{{route('website.knowledge.forum')}}">Knowledge Forum</a></li>
                 <li><a href="{{route('website.contact')}}" class="about-view">Contact Us</a></li>
 

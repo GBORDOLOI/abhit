@@ -7,7 +7,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
 @extends('layout.admin.layoout.admin')
 
-@section('title','Banner')
+@section('title','Gallery')
 
 @section('head')
 
@@ -20,44 +20,20 @@ $course = Course::where('is_activate', Activation::Activate)->get();
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Create Banner</h4>
+                <h4 class="card-title">Create Gallery</h4>
                 <form class="forms-sample" id="bannerForm" action="{{ route('admin.creating.subject') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputName1">Name</label>
                         <input type="text" class="form-control" id="banner_name" name="name"
-                            placeholder="Enter Banner Name">
+                            placeholder="Enter Gallery Name">
                     </div>
 
                     <div class="form-group">
                         <label>File upload</label>
                         <input type="file" class="filepond" name="pic" id="banner_pic" data-max-file-size="1MB"
                             data-max-files="1" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleTextarea1">Description</label>
-                        <textarea class="form-control" id="exampleTextarea1" name="description" rows="4"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleSelectGender">Related to Course</label>
-                        <select class="form-control" id="related_course" required>
-                            <option value="" disabled selected>-- Select --</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group" id="course_id">
-                        <label for="exampleSelectGender">Course</label>
-                        <select class="form-control" id="course_list" name="course_list">
-                            <option value="" disabled selected> -- Select Course --</option>
-                            @foreach ($course as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
                     </div>
 
                     <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
@@ -127,7 +103,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
             $.ajax({
 
                 type: "POST",
-                url: "{{ route('admin.creating.banner') }}",
+                url: "{{ route('admin.creating.gallery') }}",
                 // data: form.serialize(), // serializes the form's elements.
                 data: formdata,
                 processData: false,
@@ -144,8 +120,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
                     },
                     200: function(data) {
-                        // $('#bannerForm').trigger("reset");
-                        location.reload();
+                        $('#bannerForm').trigger("reset");
 
                         // alert('200 status code! success');
                     },

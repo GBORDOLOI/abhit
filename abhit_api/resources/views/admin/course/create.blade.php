@@ -10,16 +10,18 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 
 @extends('layout.admin.layoout.admin')
 
-@section('title','Course')
+@section('title', 'Course')
 
 @section('head')
+
+    <script src="{{ asset('asset_admin/ckeditor/ckeditor.js') }}"></script>
+
     <link rel="stylesheet" href="https://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.css">
     <link rel="stylesheet"
         href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css">
     <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css">
 
-    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/
-            ui-lightness/jquery-ui.css' rel='stylesheet'>
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css' rel='stylesheet'>
 
 
 @endsection
@@ -52,19 +54,19 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                     </div>
                     <div class="form-group">
                         <label for="exampleInputCity1">Publish Date</label>
-                        <input type="text" class="form-control" name="publish_date" id="publish_date"
+                        <input type="text" class="form-control" name="publish_date" id="publish_date" autocomplete="off"
                             placeholder="Publish Date">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputCity1">Publish Time</label>
-                        <input type="text" class="form-control" name="publish_time" id="publish_time"
+                        <input type="text" class="form-control" name="publish_time" id="publish_time" autocomplete="off"
                             placeholder="Publish Time">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleTextarea1">Description</label>
-                        <textarea class="form-control" name="description" rows="4"></textarea>
+                        <textarea class="form-control" id="editor" name="description" rows="4"></textarea>
                     </div>
 
 
@@ -93,6 +95,13 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 
 
     <script>
+        window.onload = function() {
+            CKEDITOR.replace('editor', {
+                height: 200,
+                filebrowserUploadMethod: 'form',
+                filebrowserUploadUrl: '{{ route('admin.course.upload', ['_token' => csrf_token()]) }}'
+            });
+        };
         FilePond.registerPlugin(
 
             // encodes the file as base64 data
@@ -127,12 +136,14 @@ $subjects = Subject::where('is_activate', Activation::Activate)
             e.preventDefault(); // avoid to execute the actual submit of the form.
 
             var formdata = new FormData(this);
+            var data = CKEDITOR.instances.editor.getData();
 
             pondFiles = pond.getFiles();
             for (var i = 0; i < pondFiles.length; i++) {
                 // append the blob file
                 formdata.append('pic', pondFiles[i].file);
             }
+            formdata.append('data', data);
 
 
             $.ajax({
@@ -159,7 +170,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 
                     },
                     200: function(data) {
-
+                        location.reload();
                         // alert('200 status code! success');
                     },
                     500: function() {
@@ -178,7 +189,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
         $("#publish_date").datepicker({
             changeMonth: true,
             changeYear: true,
-            yearRange: '1990:+0',
+            yearRange: '1990:+20',
             minDate: 0,
             // showButtonPanel: true,
             dateFormat: 'yy-mm-dd',
