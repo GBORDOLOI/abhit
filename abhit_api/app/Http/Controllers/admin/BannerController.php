@@ -50,4 +50,34 @@ class BannerController extends Controller
        return view('admin.master.banner.edit',\compact('banner'));
 
     }
+
+    protected function edit(Request $request) {
+        $banner_id = \Crypt::decrypt($request->id);
+        $document = $request->pic;
+        $banner = Banner::where('id',$banner_id)->first();
+
+        if ($document->getClientOriginalName() == 'blob') {
+            $banner->name = $request->name;
+            $banner->course_id = $request->course_list;
+            $banner->description = $request->description;
+            $banner->save();
+
+        } else {
+
+            if (isset($document) && !empty($document)) {
+                $new_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
+                // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
+                $document->move(public_path('/files/banner/'), $new_name);
+                $file = 'files/banner/' . $new_name;
+            }
+            $banner->name = $request->name;
+            $banner->course_id = $request->course_list;
+            $banner->banner_image = $file;
+            $banner->description = $request->description;
+            $banner->save();
+
+        }
+
+        return response()->json(['status'=>1]);
+    }
 }

@@ -10,6 +10,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 @section('title','Banner')
 
 @section('head')
+    <script src="{{ asset('asset_admin/ckeditor/ckeditor.js') }}"></script>
 
     <link rel="stylesheet"
         href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css">
@@ -38,7 +39,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
                     <div class="form-group">
                         <label for="exampleTextarea1">Description</label>
-                        <textarea class="form-control" id="exampleTextarea1" name="description" rows="4"></textarea>
+                        <textarea class="form-control" id="editor" name="description" rows="4"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -80,6 +81,13 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
 
     <script>
+         window.onload = function() {
+            CKEDITOR.replace('editor', {
+                height: 200,
+                filebrowserUploadMethod: 'form',
+                filebrowserUploadUrl: '{{ route('admin.course.upload', ['_token' => csrf_token()]) }}'
+            });
+        };
         $('#course_id').hide();
         $("#course_list").prop('required',false);
         FilePond.registerPlugin(
@@ -116,6 +124,8 @@ $course = Course::where('is_activate', Activation::Activate)->get();
             e.preventDefault(); // avoid to execute the actual submit of the form.
 
             var formdata = new FormData(this);
+            var data = CKEDITOR.instances.editor.getData();
+            formdata.append('description', data);
 
             pondFiles = pond.getFiles();
             for (var i = 0; i < pondFiles.length; i++) {

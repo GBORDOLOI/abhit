@@ -1,8 +1,17 @@
+@php
+use App\Models\Course;
+use App\Common\Activation;
+
+$course = Course::where('is_activate', Activation::Activate)->get();
+@endphp
+
+
 @extends('layout.admin.layoout.admin')
 
-@section('title','Banner')
+@section('title', 'Banner')
 
 @section('head')
+    <script src="{{ asset('asset_admin/ckeditor/ckeditor.js') }}"></script>
 
     <link rel="stylesheet"
         href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css">
@@ -14,12 +23,13 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Edit Banner</h4>
-                <form class="forms-sample" id="bannerForm" action="{{ route('admin.creating.subject') }}" method="POST"
+                <form class="forms-sample" id="bannerForm" action="{{ route('admin.editing.banner') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id" id="id" value="{{\Crypt::encrypt($banner->id)}}">
                     <div class="form-group">
                         <label for="exampleInputName1">Name</label>
-                        <input type="text" class="form-control" id="banner_name" value="{{$banner->name}}" name="name"
+                        <input type="text" class="form-control" id="banner_name" value="{{ $banner->name }}" name="name"
                             placeholder="Enter Banner Name">
                     </div>
 
@@ -31,22 +41,34 @@
 
                     <div class="form-group">
                         <label for="exampleTextarea1">Description</label>
-                        <textarea class="form-control" id="exampleTextarea1" name="description" rows="4">{{$banner->description}}</textarea>
+                        <textarea class="form-control" id="editor" name="description"
+                            rows="4">{{ $banner->description }}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleSelectGender">Related to Course</label>
-                        <select class="form-control" id="exampleSelectGender">
-                          <option value="yes">Yes</option>
-                          <option value="no">No</option>
+                        <select class="form-control" id="related_course" required>
+                            <option value="" disabled selected>-- Select --</option>
+                            <option value="yes" @if ($banner->course_id!=null)
+                                selected
+                            @endif>Yes</option>
+                            <option value="no"@if ($banner->course_id==null)
+                                selected
+                            @endif>No</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="course_id" @if ($banner->course_id==null)
+                        style="display:none"
+                    @endif>
                         <label for="exampleSelectGender">Course</label>
-                        <select class="form-control" id="exampleSelectGender">
-                          <option value="yes">Yes</option>
-                          <option value="no">No</option>
+                        <select class="form-control" id="course_list" name="course_list">
+                            <option value="" disabled selected> -- Select Course --</option>
+                            @foreach ($course as $item)
+                                <option value="{{ $item->id }}" @if ($banner->course_id == $item->id)
+                                    selected
+                                @endif>{{ $item->name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -70,6 +92,16 @@
 
 
     <script>
+        window.onload = function() {
+            CKEDITOR.replace('editor', {
+                height: 200,
+                filebrowserUploadMethod: 'form',
+                filebrowserUploadUrl: '{{ route('admin.course.upload', ['_token' => csrf_token()]) }}'
+            });
+        };
+
+        $("#course_list").prop('required',false);
+
         FilePond.registerPlugin(
 
             // encodes the file as base64 data
@@ -104,6 +136,8 @@
             e.preventDefault(); // avoid to execute the actual submit of the form.
 
             var formdata = new FormData(this);
+            var data = CKEDITOR.instances.editor.getData();
+            formdata.append('description', data);
 
             pondFiles = pond.getFiles();
             for (var i = 0; i < pondFiles.length; i++) {
@@ -115,7 +149,7 @@
             $.ajax({
 
                 type: "POST",
-                url: "{{route('admin.creating.banner')}}",
+                url: "{{ route('admin.editing.banner') }}",
                 // data: form.serialize(), // serializes the form's elements.
                 data: formdata,
                 processData: false,
@@ -132,8 +166,8 @@
 
                     },
                     200: function(data) {
-                        $('#bannerForm').trigger("reset");
-
+                        // $('#bannerForm').trigger("reset");
+                        location.reload();
                         // alert('200 status code! success');
                     },
                     500: function() {
@@ -144,6 +178,19 @@
 
 
         })
+
+        $("#related_course").change(function() {
+            var value = this.value;
+            if( this.value == 'yes'){
+                $('#course_id').show();
+                $("#course_list").prop('required',true);
+
+            } else {
+                $('#course_id').hide();
+                $("#course_list").prop('required',false);
+            }
+            // var firstDropVal = $('#pick').val();
+        });
     </script>
 
 @endsection

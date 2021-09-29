@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('asset_admin/css/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('asset_admin/images/favicon.ico') }}" />
+    <link rel="stylesheet" href="{{asset('asset_admin/toaster/toastr.min.css')}}">
     @yield('head')
 </head>
 
@@ -46,6 +47,9 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+    </script>
+    <script src="{{asset('asset_admin/toaster/toastr.min.js')}}"></script>
     <script src="{{ asset('asset_admin/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
@@ -65,12 +69,32 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+
         });
 
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()
         })
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
     </script>
+
     @yield('scripts')
 </body>
 
