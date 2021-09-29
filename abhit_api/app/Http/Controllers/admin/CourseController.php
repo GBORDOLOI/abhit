@@ -21,25 +21,50 @@ class CourseController extends Controller
     protected function create(Request $request)
     {
         # code...
-        $document = $request->pic;
-        if (isset($document) && !empty($document)) {
-            $new_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
-            // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
-            $document->move(public_path('/files/course/'), $new_name);
-            $file = 'files/course/' . $new_name;
+        if (Carbon::parse($request->publish_date)->format('Y-m-d') == Carbon::today()->format('Y-m-d')) {
+            $publishTime = Carbon::parse($request->publish_time)->format('H:i');
+            $presentTime = Carbon::now()->format('H:i');
+            if ($publishTime < $presentTime) {
+                return response()->json(["status"=>2,'error'=>'Publish Time can\'t be lesser then Present Time']);
+            } else {
+                $document = $request->pic;
+                if (isset($document) && !empty($document)) {
+                    $new_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
+                    // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
+                    $document->move(public_path('/files/course/'), $new_name);
+                    $file = 'files/course/' . $new_name;
+                }
+
+                Course::create([
+                    'name' => $request->name,
+                    'subject_id' => $request->subject_id,
+                    'course_pic' => $file,
+                    'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
+                    'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
+                    'description' => $request->data,
+                ]);
+                return response()->json(['status'=>1]);
+            }
+        } else {
+            $document = $request->pic;
+            if (isset($document) && !empty($document)) {
+                $new_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
+                // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
+                $document->move(public_path('/files/course/'), $new_name);
+                $file = 'files/course/' . $new_name;
+            }
+
+            Course::create([
+                'name' => $request->name,
+                'subject_id' => $request->subject_id,
+                'course_pic' => $file,
+                'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
+                'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
+                'description' => $request->data,
+
+            ]);
+            return response()->json(['status'=>1]);
         }
-
-        Course::create([
-            'name' => $request->name,
-            'subject_id' => $request->subject_id,
-            'course_pic' => $file,
-            'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
-            'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
-            'description' => $request->data,
-
-        ]);
-
-        return response()->json(['status'=>1]);
     }
 
     protected function ckeditorImage(Request $request)
@@ -75,7 +100,7 @@ class CourseController extends Controller
     {
         $course_id = \Crypt::decrypt($request->id);
         $document = $request->pic;
-        $course = Course::where('id',$course_id)->first();
+        $course = Course::where('id', $course_id)->first();
 
         if ($document->getClientOriginalName() == 'blob') {
             $course->name = $request->name;
@@ -84,9 +109,7 @@ class CourseController extends Controller
             $course->time = Carbon::parse($request->publish_time)->format('H:i:s');
             $course->description = $request->data;
             $course->save();
-
         } else {
-
             if (isset($document) && !empty($document)) {
                 $new_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
                 // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
@@ -100,14 +123,13 @@ class CourseController extends Controller
             $course->time = Carbon::parse($request->publish_time)->format('H:i:s');
             $course->description = $request->data;
             $course->save();
-
         }
 
         return response()->json(['status'=>1]);
-
     }
 
-    protected function active(Request $request) {
+    protected function active(Request $request)
+    {
         $course = Course::find($request->catId);
         $course->is_activate = $request->active;
         $course->save();

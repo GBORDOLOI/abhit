@@ -78,8 +78,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 @endsection
 
 @section('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-    </script>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
     </script>
@@ -170,8 +169,13 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 
                     },
                     200: function(data) {
-                        location.reload();
-                        // alert('200 status code! success');
+                        if (data.status == 2) {
+                            toastr["success"](data.error);
+
+                        } else {
+                            location.reload();
+
+                        }
                     },
                     500: function() {
                         alert('500 someting went wrong');
