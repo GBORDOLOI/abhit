@@ -33,6 +33,9 @@ Route::prefix('course')->group(function () {
     Route::view('create', 'admin.course.create')->name('admin.create.course');
     Route::post('creating',[CourseController::class,'create'])->name('admin.creating.course');
     Route::post('ckeditorImage',[CourseController::class,'ckeditorImage'])->name('admin.course.upload');
+    Route::get('edit/{id}',[CourseController::class,'editCourse'])->name('admin.edit.course');
+    Route::post('editing',[CourseController::class,'edit'])->name('admin.editing.course');
+    Route::post('active',[CourseController::class,'active'])->name('admin.active.course');
 
 });
 
@@ -65,6 +68,8 @@ Route::prefix('master')->group(function () {
         Route::post('creating',[BannerController::class,'create'])->name('admin.creating.banner');
         Route::post('active',[BannerController::class,'active'])->name('admin.active.banner');
         Route::get('edit/{id}',[BannerController::class,'editBanner'])->name('admin.edit.banner');
+        Route::post('editing',[BannerController::class,'edit'])->name('admin.editing.banner');
+
     });
 
     /* ------------------------------- Blog ------------------------------------ */

@@ -1,36 +1,52 @@
 @php
-use App\Models\Course;
+use App\Models\Subject;
 use App\Common\Activation;
 
-$course = Course::where('is_activate', Activation::Activate)->get();
-@endphp
+$subjects = Subject::where('is_activate', Activation::Activate)
+    ->orderBy('id', 'DESC')
+    ->get();
 
+@endphp
 
 @extends('layout.admin.layoout.admin')
 
-@section('title', 'Banner')
+@section('title','Course')
 
 @section('head')
     <script src="{{ asset('asset_admin/ckeditor/ckeditor.js') }}"></script>
+    <link rel="stylesheet" href="https://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.css">
 
     <link rel="stylesheet"
         href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css">
     <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css">
+
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css' rel='stylesheet'>
+
 @endsection
 
 @section('content')
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Edit Banner</h4>
-                <form class="forms-sample" id="bannerForm" action="{{ route('admin.editing.banner') }}" method="POST"
+                <h4 class="card-title">Edit Course</h4>
+                <form class="forms-sample" id="bannerForm" action="{{ route('admin.editing.course') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id" id="id" value="{{\Crypt::encrypt($banner->id)}}">
+                    <input type="hidden" name="id" id="id" value="{{\Crypt::encrypt($course->id)}}">
                     <div class="form-group">
                         <label for="exampleInputName1">Name</label>
-                        <input type="text" class="form-control" id="banner_name" value="{{ $banner->name }}" name="name"
+                        <input type="text" class="form-control" id="banner_name" value="{{ $course->name}}" name="name"
                             placeholder="Enter Banner Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleSelectGender">Subjects</label>
+                        <select class="form-control" name="subject_id">
+                            <option value="" disabled selected>-- Select Subject --</option>
+                            @foreach ($subjects as $item)
+                                <option value="{{ $item->id }}" @if ($course->subject_id == $item->id) selected @endif>{{ $item->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -40,39 +56,24 @@ $course = Course::where('is_activate', Activation::Activate)->get();
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleTextarea1">Description</label>
-                        <textarea class="form-control" id="editor" name="description"
-                            rows="4">{{ $banner->description }}</textarea>
+                        <label for="exampleInputCity1">Publish Date</label>
+                        <input type="text" class="form-control" name="publish_date" id="publish_date" autocomplete="off" value="{{\Carbon\Carbon::parse($course->publish_date)->format('Y-m-d')}}"
+                            placeholder="Publish Date">
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleSelectGender">Related to Course</label>
-                        <select class="form-control" id="related_course" required>
-                            <option value="" disabled selected>-- Select --</option>
-                            <option value="yes" @if ($banner->course_id!=null)
-                                selected
-                            @endif>Yes</option>
-                            <option value="no"@if ($banner->course_id==null)
-                                selected
-                            @endif>No</option>
-                        </select>
+                        <label for="exampleInputCity1">Publish Time</label>
+                        <input type="text" class="form-control" name="publish_time" id="publish_time" autocomplete="off" value="{{\Carbon\Carbon::parse($course->publish_date)->format('h:i A')}}"
+                            placeholder="Publish Time">
                     </div>
 
-                    <div class="form-group" id="course_id" @if ($banner->course_id==null)
-                        style="display:none"
-                    @endif>
-                        <label for="exampleSelectGender">Course</label>
-                        <select class="form-control" id="course_list" name="course_list">
-                            <option value="" disabled selected> -- Select Course --</option>
-                            @foreach ($course as $item)
-                                <option value="{{ $item->id }}" @if ($banner->course_id == $item->id)
-                                    selected
-                                @endif>{{ $item->name }}</option>
-                            @endforeach
-                        </select>
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea class="form-control" id="editor" name="description" rows="4">{{ $course->description}}</textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 </form>
             </div>
         </div>
@@ -80,6 +81,13 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 @endsection
 
 @section('scripts')
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
+    </script>
+    <script src="https://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.js"></script>
 
     <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
     <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js">
@@ -92,15 +100,13 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
 
     <script>
-        window.onload = function() {
+         window.onload = function() {
             CKEDITOR.replace('editor', {
                 height: 200,
                 filebrowserUploadMethod: 'form',
                 filebrowserUploadUrl: '{{ route('admin.course.upload', ['_token' => csrf_token()]) }}'
             });
         };
-
-        $("#course_list").prop('required',false);
 
         FilePond.registerPlugin(
 
@@ -126,7 +132,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
                 imagePreviewHeight: 135,
                 labelIdle: '<div style="width:100%;height:100%;"><p> Drag &amp; Drop your files or <span class="filepond--label-action" tabindex="0">Browse</span><br> Maximum number of image is 1 :</p> </div>',
                 files: [{
-                    source: "{{ asset($banner->banner_image) }}",
+                    source: "{{ asset( $course->course_pic) }}",
                 }]
             }
         );
@@ -137,8 +143,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
             var formdata = new FormData(this);
             var data = CKEDITOR.instances.editor.getData();
-            formdata.append('description', data);
-
+            formdata.append('data', data);
             pondFiles = pond.getFiles();
             for (var i = 0; i < pondFiles.length; i++) {
                 // append the blob file
@@ -149,8 +154,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
             $.ajax({
 
                 type: "POST",
-                url: "{{ route('admin.editing.banner') }}",
-                // data: form.serialize(), // serializes the form's elements.
+                url: "{{route('admin.editing.course')}}",
                 data: formdata,
                 processData: false,
                 contentType: false,
@@ -166,9 +170,8 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
                     },
                     200: function(data) {
-                        // $('#bannerForm').trigger("reset");
                         location.reload();
-                        // alert('200 status code! success');
+
                     },
                     500: function() {
                         alert('500 someting went wrong');
@@ -179,17 +182,17 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
         })
 
-        $("#related_course").change(function() {
-            var value = this.value;
-            if( this.value == 'yes'){
-                $('#course_id').show();
-                $("#course_list").prop('required',true);
-
-            } else {
-                $('#course_id').hide();
-                $("#course_list").prop('required',false);
-            }
-            // var firstDropVal = $('#pick').val();
+        $('#publish_time').clockpicker({
+            autoclose: true,
+            twelvehour: true,
+        });
+        $("#publish_date").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1990:+20',
+            minDate: 0,
+            // showButtonPanel: true,
+            dateFormat: 'yy-mm-dd',
         });
     </script>
 

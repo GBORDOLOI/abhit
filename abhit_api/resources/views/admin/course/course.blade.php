@@ -29,7 +29,7 @@
                     <thead>
                         <tr>
                             <th> # </th>
-                            <th> First name </th>
+                            <th> Name </th>
                             <th> Image </th>
                             <th> Status </th>
                             <th>Publish Date & Time</th>
@@ -39,7 +39,7 @@
                     <tbody>
                         @foreach ($course as $key => $item)
                             <tr>
-                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $course->firstItem() + $key }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>
                                     <img src="{{ asset($item->course_pic) }}" alt="" srcset="">
@@ -62,7 +62,7 @@
                                 </td>
                                 <td class="d-flex">
 
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Edit Course" class="btn mr-2 btn-gradient-primary btn-rounded btn-icon anchor_rounded">
+                                    <a href="{{route('admin.edit.course',['id'=>\Crypt::encrypt($item->id)])}}" data-toggle="tooltip" data-placement="top" title="Edit Course" class="btn mr-2 btn-gradient-primary btn-rounded btn-icon anchor_rounded">
                                         <i class="mdi mdi-pencil-outline"></i>
                                     </a>
 
@@ -83,4 +83,31 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document.body).on('change', '#testingUpdate', function() {
+            var status = $(this).prop('checked') == true ? 1 : 0;
+            var user_id = $(this).data('id');
+            // console.log(status);
+            var formDat = {
+                catId: user_id,
+                active: status
+            }
+            // console.log(formDat);
+            $.ajax({
+                type: "post",
+
+                url: "{{ route('admin.active.course') }}",
+                data: formDat,
+
+                success: function(data) {
+                    console.log(data)
+                }
+            });
+        });
+    </script>
+
+
 @endsection
