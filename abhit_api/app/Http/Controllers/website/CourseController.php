@@ -60,7 +60,7 @@ class CourseController extends Controller
             }
         }
         $subjects = Subject::where('is_activate',Activation::Activate)->get();
-        return view('website.course.course',\compact('courses','subjects','publishCourse'));
+        return view('website.course.course',\compact('subjects','publishCourse'));
     }
 
     protected function details(Request $request)
