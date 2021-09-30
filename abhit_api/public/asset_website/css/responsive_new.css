@@ -1,0 +1,49 @@
+@media (max-width: 576px) {
+    .course-pic img {
+        height: auto;
+    }
+
+    .counter-list li:nth-child(1) img{
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0; 
+    }
+
+    .about-view {
+        margin: 0 20px;
+    }
+}
+
+
+
+/* Ipad */
+@media (max-width: 768px) {
+    .course-pic img {
+        height: auto;
+    }
+
+    .courses-list li {
+        margin: 0;
+        padding: 15px 13px;
+    }
+
+    .number {
+        font-size: 18px;
+    }
+
+    .icon1 {
+        left: 63%;
+        top: 4px;
+    }
+    .icon2 {
+        left: 72%;
+        top: 4px;
+    }    
+    .icon3 {
+        left: 87%;
+        top: 4px;
+    }
+
+    .number-icon {
+        font-size: 20px;
+    }
+}

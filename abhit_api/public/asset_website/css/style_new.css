@@ -1,0 +1,21 @@
+.course-pic img {
+    height: 250px;
+    object-fit: cover;
+}
+
+.counter-list li{
+    height: 350px;
+}
+.counter-list img{
+    height: 350px;
+    object-fit: cover;
+}
+
+.counter-list li:nth-child(1) img{
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px 
+}
+
+.upcoming-desc{
+    width: 100%;
+}

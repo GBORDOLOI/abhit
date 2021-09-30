@@ -23,6 +23,11 @@
     <link href="{{asset('asset_website/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('asset_website/css/responsive.css')}}" rel="stylesheet">
 
+    {{-- ============================ Added by Alok ============================ --}}
+    <link href="{{asset('asset_website/css/style_new.css')}}" rel="stylesheet">
+    <link href="{{asset('asset_website/css/responsive_new.css')}}" rel="stylesheet">
+    {{-- ===================================================================== --}}
+
     <link href="{{asset('asset_website/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('asset_website/svg/icomoon/style.css')}}" rel="stylesheet">
 
@@ -55,7 +60,7 @@
 
     <script src="{{asset('asset_website/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('asset_website/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('asset_website/vendor/jquery.easing/jquery.easing.min.js')}}"></script>
+    {{-- <script src="{{asset('asset_website/vendor/jquery.easing/jquery.easing.min.js')}}"></script> --}}
     <script src="{{asset('asset_website/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
     <script src="{{asset('asset_website/js/main.js')}}"></script>
 
