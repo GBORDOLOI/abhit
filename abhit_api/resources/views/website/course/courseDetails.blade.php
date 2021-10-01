@@ -38,7 +38,7 @@
                             <h4 data-brackets-id="12020" class="small-heading-black mb20">Description</h4>
                             <p>{!!$course->description ?? 'Desciption not given'!!}</p>
 
-                            <div class="form-div1">
+                            <div class="form-div1 mt-5">
                                 <h4 data-brackets-id="12020" class="small-heading-black mb20">Enquiry</h4>
                                 <form class="row" action="">
                                     <div class="col-lg-6">
@@ -53,7 +53,7 @@
                                             <input type="email" class="form-control" placeholder="Email Id" id="email1">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 p-md-0">
                                         <div class="form-group">
                                             <textarea class="form-control" rows="3" placeholder="Message"
                                                 id="Message"></textarea>
@@ -94,8 +94,8 @@
                             </div>
                             <div class="total-cart">
                                 <ul class="list-inline total-car-list">
-                                    <li><button class="add-cart" id="add_cart">Add to Cart</button></li>
-                                    <li><a href="#" class="enquiry">Buy Now</a></li>
+                                    <li class="mr-md-3"><button class="add-cart form-control" id="add_cart">Add to Cart</button></li>
+                                    <li><a href="#" class="text-center enquiry form-control">Buy Now</a></li>
                                 </ul>
                             </div>
                 </div>

@@ -1145,7 +1145,7 @@ footer {
 
 /*about-details*/
 .about-us1 {
-    background-image: url('/assets/img/home/banner2.png');
+    background-image: url('/asset_website/img/home/banner2.png');
     margin: 60px 80px 0px 80px;
     background-position: bottom;
     background-repeat: no-repeat;
@@ -1198,7 +1198,7 @@ footer {
 }
 
 .moto-list li:first-child {
-    border-right: 3px solid #ddd;
+    border-right: 1px solid #ddd;
     padding-right: 60px;
 }
 
@@ -1299,7 +1299,7 @@ footer {
     background: #404749;
     position: relative;
     color: #fff;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 .subheader1-desc {
@@ -1307,7 +1307,7 @@ footer {
 }
 
 .subheader1-img img {
-    border-top-right-radius: 30px;
+    border-top-right-radius: 10px;
     border-bottom-right-radius: 30px;
 }
 
@@ -1384,7 +1384,7 @@ footer {
 }
 
 .course-desc-list li:first-child {
-    padding: 60px 50px 0px 0px;
+    padding: 20px 50px 0px 0px;
 }
 
 .course-desc-list li:last-child,
@@ -1393,7 +1393,7 @@ footer {
 }
 
 .course-desc-list1 {
-    padding: 60px 0px 0px 35px;
+    padding: 20px 0px 0px 35px;
 }
 
 .cart-box {
@@ -1499,7 +1499,7 @@ footer {
 }
 
 .total-car-list li {
-    width: 50%;
+    width: 48%;
     float: left;
     padding: 0px !important;
     border: none !important
@@ -2169,7 +2169,7 @@ input[type=number] {
 }
 
 .blog-list-div li:nth-child(odd) {
-    margin-right: 45px;
+    margin-right: 40px;
 }
 
 .blog-list-div li:nth-child(even) {

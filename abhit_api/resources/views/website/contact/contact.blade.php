@@ -39,7 +39,7 @@
                                 <input type="email" class="form-control" placeholder="Email Id" id="email3">
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 p-0">
                             <div class="form-group">
                                 <textarea class="form-control" rows="3" placeholder="Message" id="Message3"></textarea>
                             </div>

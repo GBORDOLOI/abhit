@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-lg-12 p0">
                     <span class="icon-Calender-09 calendar-icon"></span><span>{{\Carbon\Carbon::parse($blog->created_at)->format('F d, Y')}}</span>
-                    <div>
+                    <div class="mt-5">
                         {!!$blog->blog!!}
                     </div>
                 </div>

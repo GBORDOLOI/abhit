@@ -32,6 +32,15 @@
         object-fit: cover;
         margin-bottom: 10px;
     }
+
+    .subheader1 {
+        border-radius: 0;
+    }
+
+    .subheader1-img img {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 }
 
 
