@@ -41,6 +41,11 @@
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
     }
+
+    .logo img{
+        width: 65%;
+        margin-top: 15px;
+    }
 }
 
 
