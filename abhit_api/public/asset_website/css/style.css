@@ -596,7 +596,7 @@ main {
 /* about us */
 
 .about-us {
-    background-image: url('/assets/img/home/banner2.png');
+    background-image: url('/asset_website/img/home/banner2.png');
     margin: 60px 80px 0px 80px;
     background-position: bottom;
     background-repeat: no-repeat;
@@ -615,7 +615,7 @@ main {
 .enquiry-form {
     box-shadow: 0 -1px 30px -10px #000;
     background: #fff;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .about-view {
@@ -633,8 +633,8 @@ main {
     color: #fff;
     padding: 15px 25px;
     text-align: center;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     font-size: 18px;
 }
 
@@ -681,14 +681,14 @@ main {
 .course-desc {
     background: #f4f4f4;
     padding: 15px 20px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     position: relative;
 }
 
 .course-pic img {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .enroll {
@@ -935,9 +935,9 @@ main {
     border: none;
 }
 
-.knowledge-para {
+/* .knowledge-para {
     margin: 30px 0px;
-}
+} */
 
 /*blog-list*/
 .blogs {
@@ -953,7 +953,7 @@ main {
     color: #000;
     font-size: 33px;
     font-weight: 700;
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
 }
 
 .blog-list li {
@@ -1057,11 +1057,6 @@ main {
     border-radius: 20px;
 }
 
-.heading-blue {
-    color: #076fef;
-    font-size: 33px;
-    font-weight: 700;
-}
 
 .small-heading-black {
     font-size: 18px;
@@ -1184,7 +1179,7 @@ footer {
     color: #076fef;
     font-size: 33px;
     font-weight: 700;
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
 }
 
 /*moto*/

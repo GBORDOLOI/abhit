@@ -114,7 +114,7 @@
                                 selection of courses</h2>
                             <p>Choose from over 100,000 online video courses with
                                 new additions published every month</p>
-                            <div class=""><a href="{{route('website.course')}}" target="_blank" class="knowledge-link">View All
+                            <div class="mt-5"><a href="{{route('website.course')}}" target="_blank" class="knowledge-link">View All
                                 Coures</a></div>
                         </li>
 
