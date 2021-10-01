@@ -11,7 +11,7 @@ class GalleryController extends Controller
 {
     //
     protected function index() {
-        $gallery = Gallery::where('is_activate',Activation::Activate)->orderBy('id', 'DESC')->paginate(1);
+        $gallery = Gallery::where('is_activate',Activation::Activate)->orderBy('id', 'DESC')->paginate(9);
         return view('website.gallery.gallery', \compact('gallery'));
     }
 }
