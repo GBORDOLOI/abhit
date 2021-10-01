@@ -45,3 +45,15 @@
     height: 260px;
     object-fit: cover;
 }
+
+.subheader1-img img {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.pagination-gallery{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}

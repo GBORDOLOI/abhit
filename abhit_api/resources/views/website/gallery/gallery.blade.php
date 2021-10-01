@@ -38,7 +38,7 @@
 
                 </div>
             </div>
-            <div class="d-flex justify-content-end">
+            <div class="pagination-gallery">
                 {{ $gallery->links() }}
             </div>
         </div>
