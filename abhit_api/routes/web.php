@@ -57,4 +57,5 @@ Route::view('cart','website.cart.cart')->name('website.cart');
 Route::view('checkout','website.cart.checkout')->name('website.checkout');
 Route::view('website/login','website.auth.login')->name('website.login');
 Route::view('website/forgot-password','website.auth.forgot')->name('website.forgot.password');
+Route::view('website/new-password','website.auth.newpassword')->name('website.new.password');
 
