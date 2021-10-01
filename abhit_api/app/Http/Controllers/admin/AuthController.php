@@ -28,11 +28,7 @@ class AuthController extends Controller
     protected function login()
     {
         # code...
-        // if (auth()->user()) {
-        //     return redirect(route('admin.dashboard'));
-        // } else {
-            return redirect(route('login'));
-        // }
+        return redirect(route('login'));
     }
 
     protected function logout()
