@@ -29,8 +29,7 @@
                                     <a href="{{ asset($item->gallery) }}"
                                         class='portfolio- cwrapper fancybox imgContainer' data-fancybox="images"
                                         data-fancybox-group='image-gallery'>
-                                        <img src="{{ asset($item->gallery) }}"
-                                            class="w100" />
+                                        <img src="{{ asset($item->gallery) }}"/>
                                     </a>
                                 </li>
                             @endforeach

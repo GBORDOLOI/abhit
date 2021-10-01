@@ -11,6 +11,17 @@
     .about-view {
         margin: 0 20px;
     }
+
+    
+    .footer-image-list li img {
+        object-fit: cover;
+        height: 100%;
+        width: 50px;
+    }
+
+    .footer-image-list li {
+        width: unset;
+    }
 }
 
 
@@ -45,5 +56,9 @@
 
     .number-icon {
         font-size: 20px;
+    }
+
+    .footer-image-list {
+        margin-top: 10px;
     }
 }
