@@ -120,7 +120,8 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
                     },
                     200: function(data) {
-                        $('#bannerForm').trigger("reset");
+                        // $('#bannerForm').trigger("reset");
+                        location.reload();
 
                         // alert('200 status code! success');
                     },
