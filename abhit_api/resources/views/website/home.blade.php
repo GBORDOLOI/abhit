@@ -71,7 +71,7 @@
                             <p>Lorem ipsum dolor sit amet adipisicing elit, sed do eiusmod tempor</p>
                         </li>
                     </ul>
-                    <div><a href="about.html" target="_blank" class="about-view">View More</a></div>
+                    <div><a href="{{route('website.about')}}" target="_blank" class="about-view">View More</a></div>
                 </div>
                 <div class="col-lg-5 about-right">
                     <div class="enquiry-form">
