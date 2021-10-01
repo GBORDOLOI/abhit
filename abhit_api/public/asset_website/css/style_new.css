@@ -35,3 +35,13 @@
 .footer-image-list li {
     width: unset;
 }
+
+.blog-image{
+    width: 50%;
+}
+
+.blog-image img{
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}

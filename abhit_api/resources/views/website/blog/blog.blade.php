@@ -32,7 +32,9 @@
                                             <div class="block-ellipsis1">
                                                 <h4 class="small-heading-black">{{$item->name}}</h4>
                                             </div>
-                                            <p class="block-ellipsis2 ">{!!$item->blog!!}</p>
+                                            <div class="block-ellipsis2 ">
+                                                {!!$item->blog!!}
+                                            </div>
                                             <div>
                                                 <h6 class="mb0">Ramjan Ali Anik</h6>
                                                 <p class="mb0">Math Teacher</p>
