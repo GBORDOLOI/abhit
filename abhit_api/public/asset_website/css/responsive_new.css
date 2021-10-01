@@ -22,6 +22,16 @@
     .footer-image-list li {
         width: unset;
     }
+
+    
+    .blog-image{
+        width: 100%;
+    }
+
+    .blog-image img{
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
 }
 
 
@@ -60,5 +70,9 @@
 
     .footer-image-list {
         margin-top: 10px;
+    }
+
+    .blog-list-div li:nth-child(odd) {
+        margin-right: 10px;
     }
 }
