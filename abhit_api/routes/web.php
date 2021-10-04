@@ -6,6 +6,7 @@ use App\Http\Controllers\website\DashboardController;
 use App\Http\Controllers\website\BlogController;
 use App\Http\Controllers\website\GalleryController;
 use App\Http\Controllers\website\CourseController;
+use App\Http\Controllers\website\WebsiteAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,11 @@ Route::prefix('gallery')->group(function(){
 Route::view('login','admin.auth.login')->middleware('customRedirect')->name('login');
 Route::post('signin',[AuthController::class,'customLogin'])->name('custom.signin');
 
+
+/* ------------------------------- Website Login ---------------------------------- */
+Route::post('signup',[WebsiteAuthController::class,'signup'])->name('website.auth.signup');
+Route::post('login',[WebsiteAuthController::class,'login'])->name('website.auth.login');
+Route::post('logout',[WebsiteAuthController::class,'logout'])->name('website.auth.logout');
 
 
 /* ------------------------------- Views -> Alok ------------------------------------ */
