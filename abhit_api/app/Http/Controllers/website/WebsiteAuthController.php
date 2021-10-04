@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 use validator;
+use App\Common\Role;
+use App\Common\Activation;
 
 class WebsiteAuthController extends Controller
 {
@@ -18,7 +20,7 @@ class WebsiteAuthController extends Controller
         $email = $request->email;
         $password = $request->password;
         $confirm_pwd = $request->confirm_pwd;
-       
+
 
         $request->validate([
             'fullname' => 'required',
@@ -26,7 +28,7 @@ class WebsiteAuthController extends Controller
             'password' => 'required | min:5 | confirmed',
         ]);
 
-        $check_email_exists = User::where('email',$email)->exists();
+        $check_email_exists = User::where([['email',$email],['role_id',Role::User]])->exists();
         if($check_email_exists){
             return response()->json(['message' => 'Oops! Email already exists', 'status' => 422]);
         }else{
@@ -34,12 +36,12 @@ class WebsiteAuthController extends Controller
             $create = User::create([
                 'name' => $fullname,
                 'email' => $email,
-                'role_id' => 2,
+                'role_id' => Role::User,
                 'password' => Hash::make($password)
             ]);
 
             if($create){
-                return response()->json(['message'=> 'Signup Successfull', 'status' => 201]);
+                return response()->json(['message'=> 'Signup Successful', 'status' => 201]);
             }else{
                 return response()->json(['message'=> 'Oops! Something went wrong', 'status' => 500]);
             }
@@ -58,18 +60,17 @@ class WebsiteAuthController extends Controller
             'password' => 'required'
         ]);
 
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt(['email' => $request->email,  'password' => $request->password, 'role_id' => Role::User, 'is_activate'=> Activation::Activate ])) {
             return redirect()->route('website.dashboard');
         } else {
             return redirect()->back()->withErrors(['Credentials doesn\'t match with our record'])->withInput($request->input());
         }
-        
+
 
     }
 
     public function logout(Request $request){
-    
+
         Auth::logout();
         return redirect('');
     }

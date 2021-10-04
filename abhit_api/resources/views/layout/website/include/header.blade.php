@@ -22,11 +22,11 @@
                                     @csrf
                                     <button class="btn btn-sm btn-default" style="margin-left:-10px;color:black;font-weight:500;border:none;font-size:13px;">Sign Out</button>
                                 </form>
-                            </li>    
+                            </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="cart.html" class="login-text"><span class="icon-cart-08 login-details-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></span>Cart</a>
+                        <a href="{{route('website.cart')}}" class="login-text"><span class="icon-cart-08 login-details-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></span>Cart</a>
                     </li>
                 </ul>
             </div>
