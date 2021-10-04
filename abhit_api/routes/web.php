@@ -48,9 +48,11 @@ Route::post('signin',[AuthController::class,'customLogin'])->name('custom.signin
 
 
 /* ------------------------------- Website Login ---------------------------------- */
-Route::post('signup',[WebsiteAuthController::class,'signup'])->name('website.auth.signup');
-Route::post('login',[WebsiteAuthController::class,'login'])->name('website.auth.login');
-Route::post('logout',[WebsiteAuthController::class,'logout'])->name('website.auth.logout');
+Route::prefix('auth')->group(function(){
+    Route::post('signup', [WebsiteAuthController::class,'signup'])->name('website.auth.signup');
+    Route::post('login', [WebsiteAuthController::class,'login'])->name('website.auth.login');
+    Route::post('logout', [WebsiteAuthController::class,'logout'])->name('website.auth.logout');
+});
 
 
 /* ------------------------------- Views -> Alok ------------------------------------ */
