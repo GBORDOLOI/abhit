@@ -16,10 +16,9 @@
                     <div class="knowledge-forum-profile-top"><img src="{{asset('asset_website/img/knowladge-forum/bg.png')}}" class="w100"></div>
                     <div class="knowledge-forum-profile-bottom1">
                         <div class="knowledge-pic"><img src="{{asset('asset_website/img/knowladge-forum/image1.png')}}" class="w100"></div>
-                        <div class="knowledge-desc">
-                            <h4 class="small-heading-black text-center mb0">Himadri Shekhar Das</h4>
+                        <div class="knowledge-desc mt-2">
+                            <h4 class="small-heading-black text-center mb0">{{Auth::user()->name}}</h4>
                             <p class="text-center">M.Sc Student</p>
-
                         </div>
                     </div>
 
@@ -55,30 +54,38 @@
                                 <div class="col-lg-6 col-6">
                                     <h4 class="small-heading-black">Profile</h4>
                                 </div>
-                                <div class="col-lg-6 col-6 text-right"><a href="#">Edit Profile</a></div>
+                                <div class="col-lg-6 col-6 text-right ">
+                                    <a class="btn btn-default edit-btn" href="#">Edit Profile</a>
+                                </div>
                                 <div class="form-group col-lg-6 pr10">
                                     <label>First Name</label>
-                                    <input type="text" class="form-control" placeholder="Himadri Shekhar" id="name3">
+                                    <input type="text" class="form-control" name="fname" placeholder="Himadri Shekhar" id="name3">
                                 </div>
                                 <div class="form-group col-lg-6 pl10">
                                     <label>Last Name</label>
-                                    <input type="text" class="form-control" placeholder="Das" id="p_number3">
+                                    <input type="text" class="form-control" name="lname" placeholder="Das" id="p_number3">
                                 </div>
                                 <div class="form-group col-lg-6 pr10">
                                     <label>Mobile number</label>
-                                    <input type="email" class="form-control" placeholder="9801234567" id="email3">
+                                    <input type="number" class="form-control" name="phone" placeholder="9801234567" id="phone">
                                 </div>
                                 <div class="form-group col-lg-6 pl10">
                                     <label>Education</label>
-                                    <input type="email" class="form-control" placeholder="M.Sc" id="email3">
+                                    <input type="text" class="form-control" name="education" placeholder="M.Sc" id="education">
                                 </div>
                                 <div class="form-group col-lg-6 pr10">
                                     <label>Email ID</label>
-                                    <input type="email" class="form-control" placeholder="abx@gmail.com" id="email3">
+                                    <input type="email" class="form-control" name="email" placeholder="abx@gmail.com" id="email">
                                 </div>
                                 <div class="form-group col-lg-6 pl10">
                                     <label>Gender</label>
-                                    <input type="email" class="form-control" placeholder="Male" id="email3">
+                                    <select name="gender" id="gender" class="form-control">
+                                        <option value="">- select gender -</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    {{-- <input type="te" class="form-control" placeholder="Male" id="email3"> --}}
                                 </div>
                                 <div class="form-group col-lg-12">
                                     <div class="button-div"><button type="submit" class="btn btn-block knowledge-link">Save</button></div>
