@@ -27,17 +27,24 @@
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                    <form class="row" action="">
+                                    <form class="row" action="{{route('website.auth.login')}}" method="POST" id="loginForm">
+                                        @csrf
                                         <div class="form-group col-lg-12">
-                                            <input type="text" class="form-control" placeholder="Name" id="name1">
+                                            <input type="email"name="email"  class="form-control" placeholder="Email" id="email" required>
+                                            <span class="text-danger">@error('email'){{$message}}@enderror</span>
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <input type="text" class="form-control" placeholder="Phone Number"
-                                                id="p_number1">
+                                            <input type="password" name="password" class="form-control" placeholder="password"
+                                                id="password" required>
+                                            <span class="text-danger">@error('password'){{$message}}@enderror</span>
                                         </div>
-
+                                        <span class="text-danger">
+                                            @if($errors->any())
+                                                {{$errors->first()}}
+                                            @endif
+                                        </span>
                                         <div class="form-group mb0 col-lg-12">
-                                            <button type="submit" class="btn btn-block login-btn">Login</button>
+                                            <button type="submit" class="btn btn-block login-btn" id="loginBtn">Login</button>
                                         </div>
                                         <div class="col-lg-12 forgot-div"><a href="{{ route('website.forgot.password') }}"
                                                 class="text-center">Forgot Password</a></div>
@@ -54,24 +61,32 @@
                                 </div>
 
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    <form class="row" action="">
+                                    <form class="row" id="signupForm">
+                                        @csrf
                                         <div class="form-group col-lg-12">
-                                            <input type="text" class="form-control" placeholder="Full Name" id="name1">
+                                            <input type="text" class="form-control" name="fullname" placeholder="Full Name" id="name1" required>
+                                            <span class="text-danger">@error('fullname'){{$message}}@enderror</span>
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <input type="text" class="form-control" placeholder="Email" id="p_number1">
+                                            <input type="text" name="email" class="form-control" placeholder="Email" id="p_number1" required>
+                                            <span class="text-danger">@error('email'){{$message}}@enderror</span>
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <input type="password" class="form-control" placeholder="Password" id="pass">
+                                            <input type="password" name="password" class="form-control" placeholder="Password" id="pass" required>
+                                            <span class="text-danger">@error('password'){{$message}}@enderror</span>
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <input type="password" class="form-control" placeholder="Confirm Password"
-                                                id="pass_new">
+                                            <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password"
+                                                id="pass_new" required>
                                         </div>
                                         <div class="form-group mb0 col-lg-12">
-                                            <button type="submit" class="btn btn-block sign-btn">Sign up</button>
+                                            <button type="submit" class="btn btn-block sign-btn" id="signupBtn">Sign up</button>
                                         </div>
                                     </form>
+                                    <div class="alert alert-secondary mt-2" id="success-alert">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <p id="messageDiv"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -83,6 +98,57 @@
 @endsection
 
 @section('script')
+   
+    <script>
+        $('.alert').hide();
+        $('#signupForm').on('submit',function(e){
+            e.preventDefault();
+
+            $('#signupBtn').text('Please wait...');
+            $.ajax({
+                url:"{{route('website.auth.signup')}}",
+                type:"POST",
+                data:$('#signupForm').serialize(),
+                success:function(data){
+                    if(data.status == 422 || data.status == 500){
+                        $('.alert').show();
+                        $('#messageDiv').text(data.message);
+                        $('#messageDiv').css('color','red');
+                    }else if(data.status == 201){
+                        $('.alert').show();
+                        $('#messageDiv').text(data.message);
+                        $('#messageDiv').css('color','green');
+                    }
+                    else{
+                        $('.alert').show();
+                        $('#messageDiv').text(data.message);
+                        $('#messageDiv').css('color','red');
+                    }
+                    $('#signupForm')['0'].reset();
+                    $('#signupBtn').text('Sign up');
+                   
+                    setTimeout(function() {
+                        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                            $(this).remove(); 
+                        });
+                    }, 2000);
+                },
+                error: function(xhr, status, error) {
+                    $('.alert').show();
+                    $('#messageDiv').text(xhr.statusText);
+                    $('#messageDiv').css('color','red');
+                    setTimeout(function() {
+                        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                            $(this).remove(); 
+                        });
+                    }, 2000);
+                    $('#signupForm')['0'].reset();
+                    $('#signupBtn').text('Sign up');
+                }
+
+            });
+        })
+    </script>
 @endsection
 
 
