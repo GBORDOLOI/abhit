@@ -1,7 +1,7 @@
 <div class="top-header">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-2 col-8">HELPING CREATE SUCCESS</div>
+            <div class="col-lg-3 col-8">HELPING CREATE SUCCESS</div>
             <div class="col-lg-5 col-4">
                 <ul class="list-inline header-social  mb0">
                     <li><a href="#"><span class="icon-facebook-07 header-social-icon"></span></a></li>
