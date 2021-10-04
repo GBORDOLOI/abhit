@@ -61,7 +61,7 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div>
-                    <span class="knowledge-profile"><img src="assets/img/knowladge-forum/image4.png"></span>
+                    <span class="knowledge-profile"><img src="{{asset('asset_website/img/knowladge-forum/image4.png')}}"></span>
                     <h6 class="knowledge-text">Himadri Shekhar Das</h6>
                 </div>
                 <div class="question-modal">
