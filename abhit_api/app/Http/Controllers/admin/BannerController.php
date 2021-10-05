@@ -18,6 +18,17 @@ class BannerController extends Controller
     protected function create(Request $request)
     {
 
+        $this->validate($request,[
+            'name' => 'required',
+            'description' => 'required',
+            'pic' => 'required',
+
+        ],[
+            'name.required' => 'Course name is required',
+            'description.required' => 'Description is required',
+            'pic.required' => 'Picture required',
+        ]);
+
         $document = $request->pic;
         if (isset($document) && !empty($document)) {
             $new_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();

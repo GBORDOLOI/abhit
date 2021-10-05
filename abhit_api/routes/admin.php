@@ -58,6 +58,8 @@ Route::prefix('master')->group(function () {
         Route::view('create', 'admin.master.subjects.create')->name('admin.create.subject');
         Route::post('creating',[SubjectController::class,'create'])->name('admin.creating.subject');
         Route::post('active',[SubjectController::class,'active'])->name('admin.active.subject');
+        Route::get('edit/{id}',[SubjectController::class,'editSubject'])->name('admin.edit.subject');
+        Route::post('editing',[SubjectController::class,'edit'])->name('admin.editing.subject');
 
     });
 
@@ -85,7 +87,9 @@ Route::prefix('master')->group(function () {
         Route::get('',[GalleryController::class,'index'])->name('admin.get.gallery');
         Route::view('create','admin.master.gallery.create')->name('admin.create.gallery');
         Route::post('creating',[GalleryController::class,'create'])->name('admin.creating.gallery');
-        // Route::post('ckeditorImage',[BlogController::class,'ckeditorImage'])->name('upload');
+        Route::post('active',[GalleryController::class,'active'])->name('admin.active.gallery');
+        Route::get('edit/{id}',[GalleryController::class,'editGallery'])->name('admin.edit.gallery');
+        Route::post('editing',[GalleryController::class,'edit'])->name('admin.editing.gallery');
     });
 
 });

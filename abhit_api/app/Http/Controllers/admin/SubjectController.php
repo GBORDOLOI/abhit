@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Subject;
-
+use Illuminate\Support\Facades\Validator;
 class SubjectController extends Controller
 {
     //
@@ -17,6 +17,14 @@ class SubjectController extends Controller
 
     protected function create(Request $request){
 
+        $validate = Validator::make($request->all(),[
+            'name' => 'required',
+        ],['name.required'=>'Subject Name is required']);
+        if ($validate->fails()) {
+            return redirect()->back()
+                        ->withErrors($validate)
+                        ->withInput();
+        }
         Subject::create([
             'name' => $request->name
         ]);
@@ -28,5 +36,21 @@ class SubjectController extends Controller
         $subjects = Subject::find($request->catId);
         $subjects->is_activate = $request->active;
         $subjects->save();
+    }
+
+    protected function editSubject(Request $request) {
+        $subject_id = \Crypt::decrypt($request->id);
+        $subject = Subject::find($subject_id);
+
+        return view('admin.master.subjects.edit', \compact('subject'));
+    }
+
+    protected function edit(Request $request){
+        $subject_id = \Crypt::decrypt($request->id);
+        $subject = Subject::find($subject_id);
+        $subject->name = $request->name;
+        $subject->save();
+
+        return redirect()->back();
     }
 }
