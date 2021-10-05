@@ -30,3 +30,8 @@
 
 
 @endsection
+
+
+{{-- scripts --}}
+@section('scripts')
+@endsection

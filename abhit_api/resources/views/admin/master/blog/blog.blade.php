@@ -34,7 +34,7 @@
                             </label>
 
                             {{-- Edit --}}
-                            <a href="{{route('admin.read.blog')}}"
+                            <a href="#"
                                 class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded float-right mb-3">
                                 <i class="mdi mdi-pencil-outline"></i>
                             </a>
@@ -46,7 +46,7 @@
                         {{-- Small description --}}
                         <p class="mt-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                            <span><a href="#">Read more...</a></span>
+                            <span><a href="{{route('admin.read.blog')}}">Read more...</a></span>
                         </p>
                     </div>
                 </div>
@@ -56,5 +56,8 @@
         </div>
     </div>
 
+@endsection
 
+{{-- scripts --}}
+@section('scripts')
 @endsection
