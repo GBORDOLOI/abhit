@@ -460,6 +460,8 @@
     /******************  For Profile Section ******************/    
         $('#gender').attr("disabled", true); 
         $('.profile-save-btn').attr("disabled", true); 
+        $('.profile-save-btn').addClass('knowledge-link-old');
+        $('.profile-save-btn').removeClass('knowledge-link');
         $('#profileForm input').attr('readonly', 'readonly');
         $('.cancel-edit-btn').hide();
         toastr.options = {
@@ -474,6 +476,8 @@
             $('#profileForm input').attr('readonly', false);
             $('.edit-btn').hide();
             $('.cancel-edit-btn').show();
+            $('.profile-save-btn').addClass('knowledge-link');
+            $('.profile-save-btn').removeClass('knowledge-link-old');
         });
 
         $('.cancel-edit-btn').on('click',function(){
@@ -482,6 +486,8 @@
             $('#gender').attr("disabled", true); 
             $('.profile-save-btn').attr("disabled", true); 
             $('#profileForm input').attr('readonly', 'readonly');
+            $('.profile-save-btn').addClass('knowledge-link-old');
+            $('.profile-save-btn').removeClass('knowledge-link');
         });
 
 
