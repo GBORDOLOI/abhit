@@ -36,6 +36,17 @@ class BlogController extends Controller
 
     protected function create(Request $request){
 
+        $this->validate($request,[
+            'name' => 'required',
+            'data' => 'required',
+            'pic' => 'required',
+
+        ],[
+            'name.required' => 'Blog name is required',
+            'data.required' => 'Description is required',
+            'pic.required' => 'Picture required',
+        ]);
+
         $blog = $request->data;
         $document = $request->pic;
         if (isset($document) && !empty($document)) {
