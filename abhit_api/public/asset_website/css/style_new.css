@@ -57,3 +57,8 @@
     display: flex;
     justify-content: center;
 }
+
+.course-select .selectBtn{
+    width: 100px;
+    float: right;
+}
