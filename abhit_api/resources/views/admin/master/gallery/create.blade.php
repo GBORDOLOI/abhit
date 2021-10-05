@@ -28,12 +28,14 @@ $course = Course::where('is_activate', Activation::Activate)->get();
                         <label for="exampleInputName1">Name</label>
                         <input type="text" class="form-control" id="banner_name" name="name"
                             placeholder="Enter Gallery Name">
-                    </div>
+                            <span class="text-danger" id="name_error"></span>
+                        </div>
 
                     <div class="form-group">
                         <label>File upload</label>
                         <input type="file" class="filepond" name="pic" id="banner_pic" data-max-file-size="1MB"
                             data-max-files="1" />
+                            <span class="text-danger" id="pic_error"></span>
                     </div>
 
                     <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
@@ -91,6 +93,9 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
             e.preventDefault(); // avoid to execute the actual submit of the form.
 
+            $("#name_error").empty();
+            $("#pic_error").empty();
+
             var formdata = new FormData(this);
 
             pondFiles = pond.getFiles();
@@ -111,9 +116,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
                 statusCode: {
                     422: function(data) {
                         var errors = $.parseJSON(data.responseText);
-                        $.each(errors.errors, function(key, val) {
-                            $("#" + key + "_error").empty();
-                        });
+
                         $.each(errors.errors, function(key, val) {
                             $("#" + key + "_error").text(val[0]);
                         });

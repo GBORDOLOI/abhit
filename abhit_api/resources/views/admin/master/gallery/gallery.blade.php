@@ -35,12 +35,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($course as $key => $item)
+                        @foreach ($gallerries as $key => $item)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $item->name }}</td>
                             <td>
-                                <img src="{{ asset($item->course_pic) }}" alt="" srcset="">
+                                <img src="{{ asset($item->gallery) }}" alt="" srcset="">
                             </td>
                             <td>
                                 @if ($item->is_activate == 1)
@@ -55,30 +55,46 @@
                                     </label>
                                 @endif
                             </td>
-                            <td>
-                                {{\Carbon\Carbon::parse($item->publish_date)->format('Y-m-d H:i:s')}}
-                            </td>
+
                             <td class="d-flex">
 
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Edit Course" class="btn mr-2 btn-gradient-primary btn-rounded btn-icon anchor_rounded">
+                                <a href="{{route('admin.edit.gallery',['id'=>\Crypt::encrypt($item->id)])}}" data-toggle="tooltip" data-placement="top" title="Add Chapter" class="btn mr-2 btn-gradient-primary btn-rounded btn-icon anchor_rounded">
                                     <i class="mdi mdi-pencil-outline"></i>
-                                </a>
-
-                                <a href="{{route('admin.get.chapter',['id'=>\Crypt::encrypt($item->id)])}}" data-toggle="tooltip" data-placement="top" title="Add Chapter" class="btn mr-2 btn-gradient-primary btn-rounded btn-icon anchor_rounded">
-                                    <i class="mdi mdi-plus-outline"></i>
-                                </a>
-
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="View Details of Course" class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
-                                    <i class="mdi mdi-eye-outline"></i>
                                 </a>
 
                             </td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
 
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document.body).on('change', '#testingUpdate', function() {
+        var status = $(this).prop('checked') == true ? 1 : 0;
+        var user_id = $(this).data('id');
+        // console.log(status);
+        var formDat = {
+            catId: user_id,
+            active: status
+        }
+        // console.log(formDat);
+        $.ajax({
+            type: "post",
+
+            url: "{{ route('admin.active.gallery') }}",
+            data: formDat,
+
+            success: function(data) {
+                console.log(data)
+            }
+        });
+    });
+</script>
+
 @endsection

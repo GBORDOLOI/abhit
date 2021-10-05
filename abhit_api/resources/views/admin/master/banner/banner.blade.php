@@ -29,7 +29,7 @@
                     <thead>
                         <tr>
                             <th> # </th>
-                            <th> Subject name </th>
+                            <th> Banner name </th>
                             <th>Banner</th>
                             <th> Status </th>
                             <th> Description </th>
@@ -57,7 +57,7 @@
                                         </label>
                                     @endif
                                 </td>
-                                <td>{{ $item->description }}</td>
+                                <td>{!! $item->description !!}</td>
                                 <td>
                                     <a href="{{route('admin.edit.banner',['id'=>\Crypt::encrypt($item->id)])}}"  class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
                                         <i class="mdi mdi-pencil-outline"></i>

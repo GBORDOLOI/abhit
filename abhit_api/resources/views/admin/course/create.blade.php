@@ -35,6 +35,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                     <div class="form-group">
                         <label for="exampleInputName1">Name</label>
                         <input type="text" class="form-control" name="name" placeholder="Name">
+                        <span class="text-danger" id="name_error"></span>
                     </div>
 
                     <div class="form-group">
@@ -45,28 +46,34 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
+                        <span class="text-danger" id="subject_id_error"></span>
                     </div>
 
                     <div class="form-group">
                         <label>File upload</label>
                         <input type="file" class="filepond" name="pic" id="course_pic" data-max-file-size="1MB"
                             data-max-files="1" />
+                        <span class="text-danger" id="pic_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputCity1">Publish Date</label>
                         <input type="text" class="form-control" name="publish_date" id="publish_date" autocomplete="off"
                             placeholder="Publish Date">
+                        <span class="text-danger" id="publish_date_error"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputCity1">Publish Time</label>
                         <input type="text" class="form-control" name="publish_time" id="publish_time" autocomplete="off"
                             placeholder="Publish Time">
+                        <span class="text-danger" id="publish_time_error"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleTextarea1">Description</label>
                         <textarea class="form-control" id="editor" name="description" rows="4"></textarea>
+                        <span class="text-danger" id="data_error"></span>
+
                     </div>
 
 
@@ -134,6 +141,13 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 
             e.preventDefault(); // avoid to execute the actual submit of the form.
 
+            $("#name_error").empty();
+            $("#subject_id_error").empty();
+            $("#pic_error").empty();
+            $("#publish_date_error").empty();
+            $("#publish_time_error").empty();
+            $("#data_error").empty();
+
             var formdata = new FormData(this);
             var data = CKEDITOR.instances.editor.getData();
 
@@ -143,6 +157,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                 formdata.append('pic', pondFiles[i].file);
             }
             formdata.append('data', data);
+
 
 
             $.ajax({
@@ -160,9 +175,6 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                 statusCode: {
                     422: function(data) {
                         var errors = $.parseJSON(data.responseText);
-                        $.each(errors.errors, function(key, val) {
-                            $("#" + key + "_error").empty();
-                        });
                         $.each(errors.errors, function(key, val) {
                             $("#" + key + "_error").text(val[0]);
                         });

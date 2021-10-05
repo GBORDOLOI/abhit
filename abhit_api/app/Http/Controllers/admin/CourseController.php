@@ -21,6 +21,23 @@ class CourseController extends Controller
     protected function create(Request $request)
     {
         # code...
+        $this->validate($request,[
+            'name' => 'required',
+            'subject_id' => 'required',
+            'pic' => 'required',
+            'publish_date' => 'required',
+            'publish_time' => 'required',
+            'data' => 'required',
+
+        ],[
+            'name.required' => 'Course name is required',
+            'subject_id.required' => 'Select subject',
+            'pic.required' => 'Picture required',
+            'publish_date.required' => 'Publish date is required',
+            'publish_time.required' => 'Publish time is required',
+            'data.required' => 'Description is required',
+        ]);
+
         if (Carbon::parse($request->publish_date)->format('Y-m-d') == Carbon::today()->format('Y-m-d')) {
             $publishTime = Carbon::parse($request->publish_time)->format('H:i');
             $presentTime = Carbon::now()->format('H:i');

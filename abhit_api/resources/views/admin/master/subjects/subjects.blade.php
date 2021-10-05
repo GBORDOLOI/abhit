@@ -51,7 +51,11 @@
                                         </label>
                                     @endif
                                 </td>
-                                <td> May 15, 2015 </td>
+                                <td>
+                                    <a href="{{route('admin.edit.subject',['id'=>\Crypt::encrypt($item->id)])}}"  class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
+                                        <i class="mdi mdi-pencil-outline"></i>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
 
