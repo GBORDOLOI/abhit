@@ -41,7 +41,7 @@
                         </div>
 
                         {{-- Blog image --}}
-                        <img src="{{ asset('asset_admin/images/faces/face1.jpg') }}" width="100%" alt="">
+                        <img src="{{ asset('asset_admin/images/faces/face1.jpg') }}" width="100%" height="200" alt="" style="object-fit:cover">
 
                         {{-- Small description --}}
                         <p class="mt-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
