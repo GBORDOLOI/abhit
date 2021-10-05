@@ -15,10 +15,21 @@
                 <div class="knowledge-forum-right1">
                     <div class="knowledge-forum-profile-top"><img src="{{asset('asset_website/img/knowladge-forum/bg.png')}}" class="w100"></div>
                     <div class="knowledge-forum-profile-bottom1">
-                        <div class="knowledge-pic"><img src="{{asset('asset_website/img/knowladge-forum/image1.png')}}" class="w100"></div>
+                        <div class="knowledge-pic">
+                            @if($user_details != null)
+                                <img src="{{asset('/files/profile/'.$user_details->image)}}" onerror="this.onerror=null;this.src='{{asset('asset_website/img/noimage.png')}}';"  class="rounded-circle w100">
+                                
+                            @else
+                                <img src="{{asset('asset_website/img/knowladge-forum/image1.png')}}" class="w100">
+                            @endif
+                        </div>
                         <div class="knowledge-desc mt-2">
-                            <h4 class="small-heading-black text-center mb0">{{Auth::user()->name}}</h4>
-                            <p class="text-center">M.Sc Student</p>
+                            <h4 class="small-heading-black text-center mb0">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</h4>
+                            @if($user_details != null)
+                                <p class="text-center">{{$user_details->education}}</p>
+                            @else
+                                <p class="text-center">Msc</p>
+                            @endif
                         </div>
                     </div>
 
@@ -50,51 +61,85 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="profile" role="tabpanel">
                         <div class="profile-form">
-                            <form class="row" action="">
+                            <form class="row" id="profileForm">
+                                @csrf
                                 <div class="col-lg-6 col-6">
                                     <h4 class="small-heading-black">Profile</h4>
                                 </div>
                                 <div class="col-lg-6 col-6 text-right ">
-                                    <a class="btn btn-default edit-btn" href="#">Edit Profile</a>
+                                    <a class="btn btn-default edit-btn" href="#">Edit Profile</a>&nbsp;
+                                    <a class="btn btn-warning cancel-edit-btn" href="#">Cancel Edit</a>
                                 </div>
-                                <div class="form-group col-lg-6 pr10">
-                                    <label>First Name</label>
-                                    <input type="text" class="form-control" name="fname" placeholder="Himadri Shekhar" id="name3">
-                                </div>
-                                <div class="form-group col-lg-6 pl10">
-                                    <label>Last Name</label>
-                                    <input type="text" class="form-control" name="lname" placeholder="Das" id="p_number3">
-                                </div>
-                                <div class="form-group col-lg-6 pr10">
-                                    <label>Mobile number</label>
-                                    <input type="number" class="form-control" name="phone" placeholder="9801234567" id="phone">
-                                </div>
-                                <div class="form-group col-lg-6 pl10">
-                                    <label>Education</label>
-                                    <input type="text" class="form-control" name="education" placeholder="M.Sc" id="education">
-                                </div>
-                                <div class="form-group col-lg-6 pr10">
-                                    <label>Email ID</label>
-                                    <input type="email" class="form-control" name="email" placeholder="abx@gmail.com" id="email">
-                                </div>
-                                <div class="form-group col-lg-6 pl10">
-                                    <label>Gender</label>
-                                    <select name="gender" id="gender" class="form-control">
-                                        <option value="">- select gender -</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                    {{-- <input type="te" class="form-control" placeholder="Male" id="email3"> --}}
-                                </div>
+                                @if($user_details != null)
+                                    <div class="form-group col-lg-6 pr10">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" name="fname" placeholder="Himadri Shekhar" id="name3" value="{{Auth::user()->firstname}}">
+                                    </div>
+                                    <div class="form-group col-lg-6 pl10">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" name="lname" placeholder="Das" id="p_number3" value="{{Auth::user()->lastname}}">
+                                    </div>
+                                    <div class="form-group col-lg-6 pr10">
+                                        <label>Email ID</label>
+                                        <input type="email" class="form-control" name="email" placeholder="abx@gmail.com" id="email" value="{{Auth::user()->email}}">
+                                    </div>
+                                    <div class="form-group col-lg-6 pr10">
+                                        <label>Mobile number</label>
+                                        <input type="number" class="form-control" name="phone" placeholder="9801234567" id="phone" value="{{$user_details->phone}}">
+                                    </div>
+                                    <div class="form-group col-lg-6 pl10">
+                                        <label>Education</label>
+                                        <input type="text" class="form-control" name="education" placeholder="M.Sc" id="education" value="{{$user_details->education}}">
+                                    </div>
+                                    <div class="form-group col-lg-6 pl10">
+                                        <label>Gender</label>
+                                        <select name="gender" id="gender" class="form-control">
+                                            <option value="{{$user_details->gender}}">{{$user_details->gender}}</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                @else
+                                    <div class="form-group col-lg-6 pr10">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" name="fname" placeholder="Himadri Shekhar" id="name3" value="{{Auth::user()->firstname}}">
+                                    </div>
+                                    <div class="form-group col-lg-6 pl10">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" name="lname" placeholder="Das" id="p_number3" value="{{Auth::user()->lastname}}">
+                                    </div>
+                                    <div class="form-group col-lg-6 pr10">
+                                        <label>Email ID</label>
+                                        <input type="email" class="form-control" name="email" placeholder="abx@gmail.com" id="email" value="{{Auth::user()->email}}">
+                                    </div>
+                                    <div class="form-group col-lg-6 pr10">
+                                        <label>Mobile number</label>
+                                        <input type="number" class="form-control" name="phone" placeholder="9801234567" id="phone">
+                                    </div>
+                                    <div class="form-group col-lg-6 pl10">
+                                        <label>Education</label>
+                                        <input type="text" class="form-control" name="education" placeholder="M.Sc" id="education">
+                                    </div>
+                                    <div class="form-group col-lg-6 pl10">
+                                        <label>Gender</label>
+                                        <select name="gender" id="gender" class="form-control">
+                                            <option value="">- select gender -</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                @endif
                                 <div class="form-group col-lg-12">
-                                    <div class="button-div"><button type="submit" class="btn btn-block knowledge-link">Save</button></div>
+                                    <div class="button-div"><button type="submit" class="btn btn-block knowledge-link profile-save-btn">Save</button></div>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="tab-pane" id="photo" role="tabpanel">
-                        <form class="row">
+                        <form class="row" enctype="multipart/form-data" id="photoUploadForm">
+                            @csrf
                             <div class="col-lg-12 col-12">
                                 <h4 class="small-heading-black">Photo</h4>
                             </div>
@@ -102,9 +147,12 @@
                                 <div class="avatar-upload">
                                     <div class="avatar-edit">
                                         <p class="heading-form">Add / Change Image</p>
-                                        <input type='file' id="imageUpload" class="" accept=".png, .jpg, .jpeg" />
+                                        <input type='file' id="imageUpload" name="image" accept=".png, .jpg, .jpeg" required>
                                         <label for="imageUpload"></label>
-                                        <div class="btn-div2"><button type="submit" class="btn knowledge-link-old">Save</button></div>
+                                        <div class="btn-div2"><button type="submit" class="btn btn-md knowledge-link upload-photo-btn">Save</button></div>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
                                     </div>
                                     <div class="avatar-preview">
                                         <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
@@ -116,22 +164,23 @@
                     </div>
                     <div class="tab-pane" id="account" role="tabpanel">
                         <div class="account-form">
-                            <form class="row" action="">
+                            <form class="row" id="updatePasswordForm">
+                                @csrf
                                 <div class="col-lg-12 col-6">
                                     <h4 class="small-heading-black">Password</h4>
                                 </div>
 
                                 <div class="form-group col-lg-12">
-                                    <input type="text" class="form-control" placeholder="Enter Current Password" id="name3">
+                                    <input type="password" class="form-control" name="currentPassword"  placeholder="Enter Current Password" id="currentPassword" required>
                                 </div>
                                 <div class="form-group col-lg-12">
-                                    <input type="text" class="form-control" placeholder="Enter New Password" id="p_number3">
+                                    <input type="password" class="form-control" name="newPassword" placeholder="Enter New Password" id="newPassword" required>
                                 </div>
                                 <div class="form-group col-lg-12">
-                                    <input type="text" class="form-control" placeholder="Confirm Password" id="email3">
+                                    <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" id="confirmPassword" required>
                                 </div>
                                 <div class="form-group col-lg-12">
-                                    <div class="button-div1"><button type="submit" class="btn btn-block knowledge-link-old">Change Password</button></div>
+                                    <div class="button-div1"><button type="submit" class="btn btn-block knowledge-link change-password-btn">Change Password</button></div>
                                 </div>
                             </form>
                         </div>
@@ -405,4 +454,131 @@
 @endsection
 
 @section('scripts')
+
+    <script>
+
+    /******************  For Profile Section ******************/    
+        $('#gender').attr("disabled", true); 
+        $('.profile-save-btn').attr("disabled", true); 
+        $('#profileForm input').attr('readonly', 'readonly');
+        $('.cancel-edit-btn').hide();
+        toastr.options = {
+          "closeButton": true,
+          "newestOnTop": true,
+          "positionClass": "toast-top-right"
+        };
+
+        $('.edit-btn').on('click',function(){
+            $('#gender').attr("disabled", false); 
+            $('.profile-save-btn').attr("disabled", false); 
+            $('#profileForm input').attr('readonly', false);
+            $('.edit-btn').hide();
+            $('.cancel-edit-btn').show();
+        });
+
+        $('.cancel-edit-btn').on('click',function(){
+            $('.edit-btn').show();
+            $('.cancel-edit-btn').hide();
+            $('#gender').attr("disabled", true); 
+            $('.profile-save-btn').attr("disabled", true); 
+            $('#profileForm input').attr('readonly', 'readonly');
+        });
+
+
+        $('#profileForm').on('submit',function(e){
+            e.preventDefault();
+
+            $('.profile-save-btn').text('saving...');
+
+            $.ajax({
+                url:"{{route('website.user.details')}}",
+                type:"POST",
+                data:$('#profileForm').serialize(),
+                
+                success:function(data){
+                    toastr.success(data.message);
+                    $('#gender').attr("disabled", true); 
+                    $('.profile-save-btn').attr("disabled", true); 
+                    $('#profileForm input').attr('readonly', 'readonly');
+                    $('.profile-save-btn').text('save');
+                    $('.cancel-edit-btn').hide();
+                    $('.edit-btn').show();
+                },
+                error:function(xhr, status, error){
+                    if(xhr.status == 500 || xhr.status == 422){
+                        toastr.error('Oops! Something went wrong while saving.');
+                    }
+                    $('.cancel-edit-btn').hide();
+                    $('.edit-btn').show();
+                    $('.profile-save-btn').text('save');
+                }
+            });
+        });
+
+
+
+        /*******************************User Photo Upload*****************************/
+        $('#photoUploadForm').on('submit',function(e){
+            e.preventDefault();
+
+            let formData = new FormData(this);
+            $('.upload-photo-btn').text('uploading...');
+
+            $.ajax({
+                url:"{{route('website.user.upload.photo')}}",
+                type:"POST",
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
+                cache: false,
+                data:formData,
+                success:function(data){
+                    toastr.success(data.message);
+                    $('#photoUploadForm')[0].reset();
+                    $('.upload-photo-btn').text('save');
+                },
+                error:function(xhr, status, error){
+                    if(xhr.status == 500 || xhr.status == 422){
+                        toastr.error('Oops! Something went wrong while saving.');
+                    }
+                    $('#photoUploadForm')[0].reset();
+                    $('.upload-photo-btn').text('save');
+                }
+            });
+        });
+
+    /**************************** Update Password Section **************************/    
+        $('#updatePasswordForm').on('submit',function(e){
+            e.preventDefault();
+            $('.change-password-btn').text('please wait...')
+
+            let newPwd = $('#newPassword').val();
+            let confPwd = $('#confirmPassword').val();
+
+            if(newPwd != confPwd){
+                toastr.error('Oops! password not matched');
+                $('#updatePasswordForm')[0].reset();
+                $('.change-password-btn').text('Change Password');
+            }else{
+                $.ajax({
+                    url:"{{route('website.update.password')}}",
+                    type:"POST",
+                    data:$('#updatePasswordForm').serialize(),
+                    success:function(data){
+                        console.log(data.message);
+                        toastr.success(data.message);
+                        $('#updatePasswordForm')[0].reset();
+                        $('.change-password-btn').text('Change Password');
+                    },
+                    error:function(xhr, status, error){
+                        if(xhr.status == 500 || xhr.status == 422){
+                            toastr.error('Oops! Something went wrong while saving.');
+                        }
+                        $('#updatePasswordForm')[0].reset();
+                        $('.change-password-btn').text('Change Password');
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

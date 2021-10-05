@@ -17,7 +17,8 @@ class UserDbSeedr extends Seeder
     {
         //
         User::create([
-            'name' => 'Admin',
+            'firstname' => 'Admin',
+            'lastname' => 'Admin',
             'email' => 'admin@abhit.com',
             'password' => Hash::make('P@55w0rd123') ,
             'role_id' => 1,

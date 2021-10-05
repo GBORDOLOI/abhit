@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-use validator;
 use App\Common\Role;
 use App\Common\Activation;
 
@@ -16,14 +15,16 @@ class WebsiteAuthController extends Controller
 {
     public function signup(Request $request){
 
-        $fullname = $request->fullname;
+        $fname = $request->fname;
+        $lname = $request->lname;
         $email = $request->email;
         $password = $request->password;
         $confirm_pwd = $request->confirm_pwd;
 
 
         $request->validate([
-            'fullname' => 'required',
+            'fname' => 'required',
+            'lname' => 'required',
             'email' => 'required',
             'password' => 'required | min:5 | confirmed',
         ]);
@@ -34,7 +35,8 @@ class WebsiteAuthController extends Controller
         }else{
 
             $create = User::create([
-                'name' => $fullname,
+                'firstname' => $fname,
+                'lastname' => $lname,
                 'email' => $email,
                 'role_id' => Role::User,
                 'password' => Hash::make($password)

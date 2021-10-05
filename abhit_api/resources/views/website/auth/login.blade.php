@@ -64,8 +64,12 @@
                                     <form class="row" id="signupForm">
                                         @csrf
                                         <div class="form-group col-lg-12">
-                                            <input type="text" class="form-control" name="fullname" placeholder="Full Name" id="name1" required>
-                                            <span class="text-danger">@error('fullname'){{$message}}@enderror</span>
+                                            <input type="text" class="form-control" name="fname" placeholder="First Name" id="fname" required>
+                                            <span class="text-danger">@error('fname'){{$message}}@enderror</span>
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" class="form-control" name="lname" placeholder="Last Name" id="lname" required>
+                                            <span class="text-danger">@error('lname'){{$message}}@enderror</span>
                                         </div>
                                         <div class="form-group col-lg-12">
                                             <input type="text" name="email" class="form-control" placeholder="Email" id="p_number1" required>
@@ -83,10 +87,6 @@
                                             <button type="submit" class="btn btn-block sign-btn" id="signupBtn">Sign up</button>
                                         </div>
                                     </form>
-                                    <div class="alert alert-secondary mt-2" id="success-alert">
-                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                        <p id="messageDiv"></p>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -100,48 +100,25 @@
 @section('script')
    
     <script>
-        $('.alert').hide();
         $('#signupForm').on('submit',function(e){
             e.preventDefault();
 
             $('#signupBtn').text('Please wait...');
+
             $.ajax({
                 url:"{{route('website.auth.signup')}}",
                 type:"POST",
                 data:$('#signupForm').serialize(),
                 success:function(data){
-                    if(data.status == 422 || data.status == 500){
-                        $('.alert').show();
-                        $('#messageDiv').text(data.message);
-                        $('#messageDiv').css('color','red');
-                    }else if(data.status == 201){
-                        $('.alert').show();
-                        $('#messageDiv').text(data.message);
-                        $('#messageDiv').css('color','green');
-                    }
-                    else{
-                        $('.alert').show();
-                        $('#messageDiv').text(data.message);
-                        $('#messageDiv').css('color','red');
-                    }
+                    toastr.success(data.message);
                     $('#signupForm')['0'].reset();
                     $('#signupBtn').text('Sign up');
                    
-                    setTimeout(function() {
-                        $(".alert").fadeTo(500, 0).slideUp(500, function(){
-                            $(this).remove(); 
-                        });
-                    }, 2000);
                 },
                 error: function(xhr, status, error) {
-                    $('.alert').show();
-                    $('#messageDiv').text(xhr.statusText);
-                    $('#messageDiv').css('color','red');
-                    setTimeout(function() {
-                        $(".alert").fadeTo(500, 0).slideUp(500, function(){
-                            $(this).remove(); 
-                        });
-                    }, 2000);
+                    if(xhr.status == 500 || xhr.status == 422){
+                        toastr.error('Oops! something went wrong');
+                    }
                     $('#signupForm')['0'].reset();
                     $('#signupBtn').text('Sign up');
                 }

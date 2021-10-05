@@ -14,9 +14,9 @@
             <div class="col-lg-4  col-12">
                 <ul class="list-inline login-details">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle login-text" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="icon-user-08 login-details-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>{{Auth::user()->name}}<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle login-text" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="icon-user-08 login-details-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>{{Auth::user()->firstname}}<span class="caret"></span></a>
                         <ul class="dropdown-menu account-list">
-                            <li class="ac-list"><a href="my-account.html" class="login-text1">My Account</a></li>
+                            <li class="ac-list"><a href="{{route('website.user.account')}}" class="login-text1">My Account</a></li>
                             <li class="ac-list">
                                 <form action="{{route('website.auth.logout')}}" method="POST">
                                     @csrf

@@ -3179,3 +3179,7 @@ input {
     background-color: #fdfdfd;
     box-shadow: 0 5px 10px #f5f3f3;
 }
+
+::placeholder{
+    color:aliceblue;
+}

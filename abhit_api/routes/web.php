@@ -7,6 +7,7 @@ use App\Http\Controllers\website\BlogController;
 use App\Http\Controllers\website\GalleryController;
 use App\Http\Controllers\website\CourseController;
 use App\Http\Controllers\website\WebsiteAuthController;
+use App\Http\Controllers\website\UserDetailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,10 @@ Route::prefix('auth')->group(function(){
     Route::post('logout', [WebsiteAuthController::class,'logout'])->name('website.auth.logout');
 });
 
+Route::get('my-account',[UserDetailsController::class,'myAccount'])->name('website.user.account');
+Route::post('user-details',[UserDetailsController::class,'userDetails'])->name('website.user.details');
+Route::post('user-photo',[UserDetailsController::class,'uploadPhoto'])->name('website.user.upload.photo');
+Route::post('update-password',[UserDetailsController::class,'updatePassword'])->name('website.update.password');
 
 /* ------------------------------- Views -> Alok ------------------------------------ */
 Route::view('about-us','website.about.about')->name('website.about');
@@ -66,6 +71,6 @@ Route::view('checkout','website.cart.checkout')->name('website.checkout');
 Route::view('website/login','website.auth.login')->name('website.login');
 Route::view('website/forgot-password','website.auth.forgot')->name('website.forgot.password');
 Route::view('website/new-password','website.auth.newpassword')->name('website.new.password');
-Route::view('my-account','website.my_account.my_account')->name('website.user.account');
+// Route::view('my-account','website.my_account.my_account')->name('website.user.account');
 
 
