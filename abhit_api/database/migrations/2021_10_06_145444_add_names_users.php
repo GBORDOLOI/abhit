@@ -13,12 +13,12 @@ class AddNamesUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->string('firstname')->after('name')->nullable();
-            $table->string('lastname')->after('firstname')->nullable();
+        // Schema::table('users', function (Blueprint $table) {
+        //     //
+        //     $table->string('firstname')->after('name')->nullable();
+        //     $table->string('lastname')->after('firstname')->nullable();
 
-        });
+        // });
     }
 
     /**
@@ -28,11 +28,11 @@ class AddNamesUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->dropColumn('firstname');
-            $table->dropColumn('lastname');
+        // Schema::table('users', function (Blueprint $table) {
+        //     //
+        //     $table->dropColumn('firstname');
+        //     $table->dropColumn('lastname');
 
-        });
+        // });
     }
 }

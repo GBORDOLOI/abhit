@@ -26,7 +26,10 @@
                 <div class="question-modal">
                     <form class="row">
                         <div class="form-group col-lg-12 mb-2">
-                            <textarea class="form-control" rows="1" id="editorQuestion" placeholder="Type your question with “What”, “How”, “Why”, etc."></textarea>
+                            <input type="text" class="form-control" rows="1" placeholder="Type your question with “What”, “How”, “Why”, etc.">
+                        </div>
+                        <div class="form-group col-lg-12 mb-2">
+                            <textarea class="form-control" rows="1" id="editorQuestion" ></textarea>
                         </div>
                         <div class="form-group col-lg-12">
                             <input class="form-control link-input" type="url" id="example-url-input" placeholder="&#xf0c1; Include a link that gives context">
@@ -76,7 +79,7 @@
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                                 <form class="row" action="{{route('website.auth.login')}}" method="POST" id="loginForm">
-                                                    {{-- <input type="hidden" name="current_route" value="{{Request::path()}}"> --}}
+                                                    <input type="hidden" name="current_route" value="{{Request::path()}}">
                                                     @csrf
                                                     <div class="form-group col-lg-12">
                                                         <input type="email"name="email"  class="form-control" placeholder="Email" id="email" required>
