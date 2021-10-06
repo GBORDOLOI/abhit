@@ -43,7 +43,7 @@
                                     <h6 class="knowledge-text1 ">Himadri Shekhar Das</h6>
                                     <form class="comment-form mt20" role="search" method="GET" action="">
                                         <div class="input-group add-on">
-                                            <input class="form-control comment-form-control" placeholder="Add your Answer" name="comment" id="comment" type="text">
+                                            <textarea class="form-control comment-form-control" placeholder="Add your Answer" name="comment" id="comment" rows="3"></textarea>
                                             <div class="input-group-btn">
                                                 <button id="btn_comment" class="btn-comment" type="button">Post</button>
                                             </div>                                                   

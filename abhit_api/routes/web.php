@@ -73,5 +73,6 @@ Route::view('website/forgot-password','website.auth.forgot')->name('website.forg
 Route::view('website/new-password','website.auth.newpassword')->name('website.new.password');
 // Route::view('my-account','website.my_account.my_account')->name('website.user.account');
 Route::view('admin/master/blog/read','admin.master.blog.read')->name('admin.read.blog');
+Route::view('admin/course/view','admin.course.view')->name('admin.course.view');
 
 
