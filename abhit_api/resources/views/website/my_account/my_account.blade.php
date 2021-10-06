@@ -141,13 +141,13 @@
                         <form class="row" enctype="multipart/form-data" id="photoUploadForm">
                             @csrf
                             <div class="col-lg-12 col-12">
-                                <h4 class="small-heading-black">Photo</h4>
+                                <h4 class="small-heading-black">Preview Photo</h4>
                             </div>
                             <div class="form-group col-lg-12">
                                 <div class="avatar-upload">
                                     <div class="avatar-edit">
                                         <p class="heading-form">Add / Change Image</p>
-                                        <input type='file' id="imageUpload" name="image" accept=".png, .jpg, .jpeg" required>
+                                        <input type='file' id="imageUpload" name="image" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" required>
                                         <label for="imageUpload"></label>
                                         <div class="btn-div2"><button type="submit" class="btn btn-md knowledge-link upload-photo-btn">Save</button></div>
                                         @foreach ($errors->all() as $error)
@@ -155,8 +155,9 @@
                                         @endforeach
                                     </div>
                                     <div class="avatar-preview">
-                                        <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
-                                        </div>
+                                        <img id="outputImage" src="{{asset('/asset_website/img/imgPreview.png')}}" alt="" >
+                                        {{-- <div id="outputImage" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -456,6 +457,18 @@
 @section('scripts')
 
     <script>
+
+        function previewImage(event){
+            let reader = new FileReader();
+            reader.onload = function(){
+                let output = document.getElementById('outputImage');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+        
+
+
 
     /******************  For Profile Section ******************/    
         $('#gender').attr("disabled", true); 
