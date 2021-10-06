@@ -11,7 +11,8 @@ class BlogController extends Controller
     //
     protected function index()
     {
-        return view('admin.master.blog.blog');
+        $blogs = Blog::paginate(10);
+        return view('admin.master.blog.blog', \compact('blogs'));
     }
 
     protected function ckeditorImage(Request $request)
@@ -63,5 +64,57 @@ class BlogController extends Controller
         ]);
 
         return \response()->json(['status'=>1]);
+    }
+
+    protected function active(Request $request) {
+        $blog = Blog::find($request->catId);
+        $blog->is_activate = $request->active;
+        $blog->save();
+
+        return \response()->json(['status'=>1]);
+    }
+
+    protected function viewBlog(Request $request)
+    {
+        # code...
+        $blog_id = \Crypt::decrypt($request->id);
+        $blog = Blog::find($blog_id);
+
+        return view('admin.master.blog.read', \compact('blog'));
+    }
+
+    protected function editBlog(Request $request){
+        $main_id = \Crypt::decrypt($request->id);
+
+        $blog = Blog::find($main_id);
+
+        return view('admin.master.blog.edit',\compact('blog'));
+
+    }
+
+    protected function edit(Request $request){
+
+        $blog_id = \Crypt::decrypt($request->id);
+        $document = $request->pic;
+        $blog = Blog::where('id', $blog_id)->first();
+
+        if ($document->getClientOriginalName() == 'blob') {
+            $blog->name = $request->name;
+            $blog->blog = $request->data;
+            $blog->save();
+        } else {
+            if (isset($document) && !empty($document)) {
+                $new_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
+                // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
+                $document->move(public_path('/files/blog/image/'), $new_name);
+                $file = 'files/blog/image/' . $new_name;
+            }
+            $blog->name = $request->name;
+            $blog->blog_image = $file;
+            $blog->blog = $request->data;
+            $blog->save();
+        }
+
+        return response()->json(['status'=>1]);
     }
 }

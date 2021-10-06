@@ -38,7 +38,7 @@
                                                 id="password" required>
                                             <span class="text-danger">@error('password'){{$message}}@enderror</span>
                                         </div>
-                                        <span class="text-danger">
+                                        <span class="text-danger ml-2">
                                             @if($errors->any())
                                                 {{$errors->first()}}
                                             @endif
