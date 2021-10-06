@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use Carbon\Carbon;
+use App\Models\Chapter;
+use App\Common\Activation;
 
 class CourseController extends Controller
 {
@@ -150,5 +152,20 @@ class CourseController extends Controller
         $course = Course::find($request->catId);
         $course->is_activate = $request->active;
         $course->save();
+    }
+
+    protected function chapterPrice(Request $request)
+    {
+        # code...
+        $course_id = \Crypt::decrypt($request->id);
+        $Total_price = Course::where([['is_activate',Activation::Activate],['id',$course_id]])->with('priceList')->first();
+        // dd($Total_price['priceList']);
+        $price = [];
+        foreach ($Total_price['priceList'] as $key => $value) {
+            # code...
+            $price [] = $value->price;
+        }
+        $final_price = array_sum($price);
+        return view('admin.course.view', \compact('Total_price','final_price'));
     }
 }

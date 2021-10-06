@@ -36,6 +36,7 @@ Route::prefix('course')->group(function () {
     Route::get('edit/{id}',[CourseController::class,'editCourse'])->name('admin.edit.course');
     Route::post('editing',[CourseController::class,'edit'])->name('admin.editing.course');
     Route::post('active',[CourseController::class,'active'])->name('admin.active.course');
+    Route::get('price/{id}',[CourseController::class,'chapterPrice'])->name('admin.price.course');
 
 });
 
