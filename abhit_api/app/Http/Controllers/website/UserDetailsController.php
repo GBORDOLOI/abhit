@@ -44,7 +44,7 @@ class UserDetailsController extends Controller
                 'gender' => $gender
             ]);
         }
-        User::where('email', Auth::user()->email)->update(['email' => $email]);
+        User::where('email', Auth::user()->email)->update(['firstname' => $firstname,'lastname' => $lastname,'email' => $email]);
 
         return response()->json(['message' => 'Profile details updated']);
     }
