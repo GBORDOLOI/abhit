@@ -42,7 +42,7 @@
                                 @endif
 
                                 {{-- Edit --}}
-                                <a href="#"
+                                <a href="{{ route('admin.edit.blog',['id'=>\Crypt::encrypt($item->id)]) }}"
                                     class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded float-right mb-3">
                                     <i class="mdi mdi-pencil-outline"></i>
                                 </a>

@@ -70,7 +70,7 @@
                                         <i class="mdi mdi-plus-outline"></i>
                                     </a>
 
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="View Details of Course" class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
+                                    <a href="{{route('admin.price.course',['id'=>\Crypt::encrypt($item->id)])}}" data-toggle="tooltip" data-placement="top" title="View Details of Course" class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
                                         <i class="mdi mdi-eye-outline"></i>
                                     </a>
 

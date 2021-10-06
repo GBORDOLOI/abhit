@@ -36,6 +36,7 @@ Route::prefix('course')->group(function () {
     Route::get('edit/{id}',[CourseController::class,'editCourse'])->name('admin.edit.course');
     Route::post('editing',[CourseController::class,'edit'])->name('admin.editing.course');
     Route::post('active',[CourseController::class,'active'])->name('admin.active.course');
+    Route::get('price/{id}',[CourseController::class,'chapterPrice'])->name('admin.price.course');
 
 });
 
@@ -81,7 +82,8 @@ Route::prefix('master')->group(function () {
         Route::post('creating',[BlogController::class,'create'])->name('admin.creating.blog');
         Route::post('ckeditorImage',[BlogController::class,'ckeditorImage'])->name('upload');
         Route::post('active',[BlogController::class,'active'])->name('admin.active.blog');
-        // Route::view('admin/master/blog/read','admin.master.blog.read')->name('admin.read.blog');
+        Route::get('edit/{id}',[BlogController::class,'editBlog'])->name('admin.edit.blog');
+        Route::post('editing',[BlogController::class,'edit'])->name('admin.editing.blog');
         Route::get('view/{id}',[BlogController::class,'viewBlog'])->name('admin.read.blog');
     });
 

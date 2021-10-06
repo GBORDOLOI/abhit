@@ -18,10 +18,10 @@
                 <h4 class="card-title">Edit Blog</h4>
                 <form class="forms-sample" id="bannerForm" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="id" value="{{\Crypt::encrypt($blog->id)}}">
                     <div class="form-group">
                         <label for="exampleInputName1">Name</label>
-                        <input type="text" class="form-control" id="name" name="name"
+                        <input type="text" class="form-control" id="name" name="name" value="{{$blog->name}}"
                             placeholder="Enter Blog Name">
                         <span class="text-danger" id="name_error"></span>
                     </div>
@@ -36,7 +36,7 @@
 
                     <div class="form-group">
                         <label for="exampleTextarea1">Description</label>
-                        <textarea class="form-control" id="editor" name="description"></textarea>
+                        <textarea class="form-control" id="editor" name="description">{{$blog->blog}}</textarea>
                         <span class="text-danger" id="data_error"></span>
                     </div>
 
@@ -87,6 +87,9 @@
                 instantUpload: false,
                 imagePreviewHeight: 135,
                 labelIdle: '<div style="width:100%;height:100%;"><p> Drag &amp; Drop your files or <span class="filepond--label-action" tabindex="0">Browse</span><br> Maximum number of image is 1 :</p> </div>',
+                files: [{
+                    source: "{{ asset($blog->blog_image) }}",
+                }]
             }
         );
 
@@ -116,7 +119,7 @@
             $.ajax({
 
                 type: "POST",
-                url: "{{ route('admin.creating.blog') }}",
+                url: "{{ route('admin.editing.blog') }}",
                 // data: form.serialize(), // serializes the form's elements.
                 data: formdata,
                 processData: false,

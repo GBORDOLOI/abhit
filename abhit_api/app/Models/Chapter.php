@@ -12,4 +12,8 @@ class Chapter extends Model
     protected $table = 'chapters';
     protected $guarded = [];
     protected $dates = ['deleted_at'];
+
+    // protected function getCourse(){
+    //     return $this->belongsTo(Course::class,'course_id','id');
+    // }
 }
