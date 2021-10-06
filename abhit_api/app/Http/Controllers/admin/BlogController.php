@@ -11,7 +11,8 @@ class BlogController extends Controller
     //
     protected function index()
     {
-        return view('admin.master.blog.blog');
+        $blogs = Blog::paginate(10);
+        return view('admin.master.blog.blog', \compact('blogs'));
     }
 
     protected function ckeditorImage(Request $request)
@@ -63,5 +64,30 @@ class BlogController extends Controller
         ]);
 
         return \response()->json(['status'=>1]);
+    }
+
+    protected function active(Request $request) {
+        $blog = Blog::find($request->catId);
+        $blog->is_activate = $request->active;
+        $blog->save();
+
+        return \response()->json(['status'=>1]);
+    }
+
+    protected function viewBlog(Request $request)
+    {
+        # code...
+        $blog_id = \Crypt::decrypt($request->id);
+        $blog = Blog::find($blog_id);
+
+        return view('admin.master.blog.read', \compact('blog'));
+    }
+
+    protected function editBlog(Request $request){
+
+    }
+
+    protected function edit(Request $request){
+
     }
 }
