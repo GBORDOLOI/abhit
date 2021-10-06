@@ -61,9 +61,14 @@ class WebsiteAuthController extends Controller
             'email' => 'required',
             'password' => 'required'
         ]);
-
+       
         if (Auth::attempt(['email' => $request->email,  'password' => $request->password, 'role_id' => Role::User, 'is_activate'=> Activation::Activate ])) {
             return redirect()->route('website.dashboard');
+            // if($request->current_route == 'knowledge-forum'){
+            //     return redirect()->route('website.knowledge.forum');
+            // }else{
+            //     return redirect()->route('website.dashboard');
+            // }   
         } else {
             return redirect()->back()->withErrors(['Credentials doesn\'t match with our record'])->withInput($request->input());
         }

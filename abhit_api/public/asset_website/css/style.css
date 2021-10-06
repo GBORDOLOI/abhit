@@ -2745,7 +2745,7 @@ input {
 
 #add-question-modal .modal-body,
 #add-post-modal .modal-body {
-    height: 400px;
+    height: 600px;
     padding: 40px 20px;
 }
 

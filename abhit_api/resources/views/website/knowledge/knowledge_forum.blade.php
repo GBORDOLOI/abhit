@@ -19,6 +19,7 @@
             <div class="col-lg-8">
                 <div class="knowledge-forum-left">
                     <ul class="list-inline answer-list">
+                        @auth
                         <li>
                             <a data-toggle="modal" data-target="#add-question-modal">
                                 <span class="icon-user-08 admin-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
@@ -26,6 +27,16 @@
                                 <h4 class="small-heading-grey mb0">What is your question?</h4>
                             </a>
                         </li>
+                        @endauth
+                        @guest
+                            <li>
+                                <a data-toggle="modal" data-target="#login-modal">
+                                    <span class="icon-user-08 admin-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+                                    <p class="small-text-heading mb0">Himadri Shekhar Das</p>
+                                    <h4 class="small-heading-grey mb0">What is your question?</h4>
+                                </a>
+                            </li>
+                        @endguest
                         <li>
                             <p class="small-text-heading">26 min ago, Poted by: Ramjan Ali Anik, Math Teacher</p>
                             <a href="#" target="_blank" class="small-heading-black">How to Reduce Workplace Stress and Boost Mental Health?</a>
@@ -85,6 +96,7 @@
                 </div>
             </div>
             <div class="col-lg-4">
+                @auth
                 <div class="knowledge-forum-right1">
                     <div class="knowledge-forum-profile-top"><img src="{{asset('asset_website/img/knowladge-forum/bg.png')}}" class="w100"></div>
                     <div class="knowledge-forum-profile-bottom">
@@ -102,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-
+                @endauth
                 <div class="knowledge-forum-right2">
                     <h4 class="small-heading-grey">Today’s top Topics</h4>
                     <ul class="list-inline todays-topic-list">
