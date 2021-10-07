@@ -64,24 +64,24 @@
                                     <form class="row" id="signupForm">
                                         @csrf
                                         <div class="form-group col-lg-12">
-                                            <input type="text" class="form-control" name="fname" placeholder="First Name" id="fname" required>
+                                            <input type="text" class="form-control" name="fname" placeholder="First Name" id="fname" value="{{old('fname')}}" required>
                                             <span class="text-danger">@error('fname'){{$message}}@enderror</span>
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <input type="text" class="form-control" name="lname" placeholder="Last Name" id="lname" required>
+                                            <input type="text" class="form-control" name="lname" placeholder="Last Name" id="lname" value="{{old('lname')}}" required>
                                             <span class="text-danger">@error('lname'){{$message}}@enderror</span>
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <input type="text" name="email" class="form-control" placeholder="Email" id="p_number1" required>
+                                            <input type="text" name="email" class="form-control" placeholder="Email" id="p_number1" value="{{old('email')}}" required>
                                             <span class="text-danger">@error('email'){{$message}}@enderror</span>
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <input type="password" name="password" class="form-control" placeholder="Password" id="pass" required>
+                                            <input type="password" name="password" class="form-control" placeholder="Password" id="pwd" required>
                                             <span class="text-danger">@error('password'){{$message}}@enderror</span>
                                         </div>
                                         <div class="form-group col-lg-12">
                                             <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password"
-                                                id="pass_new" required>
+                                                id="confPwd" required>
                                         </div>
                                         <div class="form-group mb0 col-lg-12">
                                             <button type="submit" class="btn btn-block sign-btn" id="signupBtn">Sign up</button>
@@ -105,25 +105,36 @@
 
             $('#signupBtn').text('Please wait...');
 
-            $.ajax({
-                url:"{{route('website.auth.signup')}}",
-                type:"POST",
-                data:$('#signupForm').serialize(),
-                success:function(data){
-                    toastr.success(data.message);
-                    $('#signupForm')['0'].reset();
-                    $('#signupBtn').text('Sign up');
-                   
-                },
-                error: function(xhr, status, error) {
-                    if(xhr.status == 500 || xhr.status == 422){
-                        toastr.error('Oops! something went wrong');
-                    }
-                    $('#signupForm')['0'].reset();
-                    $('#signupBtn').text('Sign up');
-                }
+            let pass = $('#pwd').val();
+            let confirm_pass = $('#confPwd').val();
 
-            });
+            if(pass != confirm_pass){
+                toastr.error('Oops! password not matched');
+                $('#signupBtn').text('Sign up');
+            }else if(pass.length < 5 ){
+                toastr.error('Oops! password must be 5 characters long');
+                $('#signupBtn').text('Sign up');
+            }else{
+                $.ajax({
+                    url:"{{route('website.auth.signup')}}",
+                    type:"POST",
+                    data:$('#signupForm').serialize(),
+                    success:function(data){
+                        toastr.success(data.message);
+                        $('#signupForm')['0'].reset();
+                        $('#signupBtn').text('Sign up');
+                    
+                    },
+                    error: function(xhr, status, error) {
+                        if(xhr.status == 500 || xhr.status == 422){
+                            toastr.error('Oops! something went wrong');
+                        }
+                        $('#signupForm')['0'].reset();
+                        $('#signupBtn').text('Sign up');
+                    }
+
+                });
+            }
         })
     </script>
 @endsection

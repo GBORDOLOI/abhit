@@ -18,9 +18,14 @@ class CreateKnowledgeForumPostsTable extends Migration
             $table->text('question');
             $table->text('description');
             $table->text('links')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->boolean('is_activate');
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
+
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
 
         });
     }

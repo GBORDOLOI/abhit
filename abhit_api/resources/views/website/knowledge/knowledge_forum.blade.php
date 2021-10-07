@@ -23,7 +23,7 @@
                         <li>
                             <a data-toggle="modal" data-target="#add-question-modal">
                                 <span class="icon-user-08 admin-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
-                                <p class="small-text-heading mb0">Himadri Shekhar Das</p>
+                                <p class="small-text-heading mb0">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</p>
                                 <h4 class="small-heading-grey mb0">What is your question?</h4>
                             </a>
                         </li>
@@ -32,67 +32,28 @@
                             <li>
                                 <a data-toggle="modal" data-target="#login-modal">
                                     <span class="icon-user-08 admin-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
-                                    <p class="small-text-heading mb0">Himadri Shekhar Das</p>
+                                    {{-- <p class="small-text-heading mb0">Himadri Shekhar Das</p> --}}
                                     <h4 class="small-heading-grey mb0">What is your question?</h4>
                                 </a>
                             </li>
                         @endguest
-                        <li>
-                            <p class="small-text-heading">26 min ago, Poted by: Ramjan Ali Anik, Math Teacher</p>
-                            <a href="#" target="_blank" class="small-heading-black">How to Reduce Workplace Stress and Boost Mental Health?</a>
-                            <p class="block-ellipsis6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                                et dolore magna aliqua...</p>
-                            <div class="answer-btn-box">
-                                <ul class="list-inline answer-btn-list">
-                                    <li><a href="{{route('website.knowledge.details.post')}}">14 Comment</a></li>
-                                    <li><a href="{{route('website.knowledge.details.post')}}">14 Views</a></li>
-                                    <li><a href="{{route('website.knowledge.details.post')}}">Add Comment</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li>
-                            <p class="small-text-heading">26 min ago, Poted by: Ramjan Ali Anik, Math Teacher</p>
-                            <a href="#" target="_blank" class="small-heading-black">How to Reduce Workplace Stress and Boost Mental Health?</a>
-                            <p class="block-ellipsis6">I do want to get a detailed information with some example.</p>
-                            <div><a href="#" class="post-link">https://bagcradio.com/</a></div>
-                            <div class="answer-btn-box">
-                                <ul class="list-inline answer-btn-list">
-                                    <li><a href="{{route('website.knowledge.details.post')}}">14 Comment</a></li>
-                                    <li><a href="{{route('website.knowledge.details.post')}}">14 Views</a></li>
-                                    <li><a href="{{route('website.knowledge.details.post')}}">Add Comment</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li>
-                            <p class="small-text-heading">26 min ago, Poted by: Ramjan Ali Anik, Math Teacher</p>
-                            <a href="#" target="_blank" class="small-heading-black">How to Reduce Workplace Stress and Boost Mental Health?</a>
-                            <p class="block-ellipsis6">I do want to get a detailed information with some example.</p>
-                            <div><a href="#" class="post-link">https://bagcradio.com/</a></div>
-                            <div class="answer-btn-box">
-                                <ul class="list-inline answer-btn-list">
-                                    <li><a href="#">14 Comment</a></li>
-                                    <li><a href="#">14 Views</a></li>
-                                    <li><a href="#">Add Comment</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li>
-                            <p class="small-text-heading">26 min ago, Poted by: Ramjan Ali Anik, Math Teacher</p>
-                            <a href="#" target="_blank" class="small-heading-black">How to Reduce Workplace Stress and Boost Mental Health?</a>
-                            <p class="block-ellipsis6">I do want to get a detailed information with some example.</p>
-                            <div><a href="#" class="post-link">https://bagcradio.com/</a></div>
-                            <div class="answer-btn-box">
-                                <ul class="list-inline answer-btn-list">
-                                    <li><a href="#">14 Comment</a></li>
-                                    <li><a href="#">14 Views</a></li>
-                                    <li><a href="{{route('website.knowledge.details.post')}}">Add Comment</a></li>
-                                </ul>
-                            </div>
-                        </li>
+                        @foreach( $knowledge_post as $post)
+                            <li>
+                                <p class="small-text-heading">{{$post->created_at->diffForHumans()}}, &nbsp;Poted by: {{$post->user->firstname}} {{$post->user->lastname}}</p>
+                                <a href="#" target="_blank" class="small-heading-black">{{$post->question}}</a>
+                                <p class="block-ellipsis6">{{$post->description}}</p>
+                                <div class="answer-btn-box">
+                                @php $enc_id = Crypt::encryptString($post->id)@endphp
+                                    <ul class="list-inline answer-btn-list">
+                                        <li><a href="{{route('website.knowledge.details.post',['id' =>  $enc_id])}}">14 Comment</a></li>
+                                        <li><a href="{{route('website.knowledge.details.post',['id' =>  $enc_id])}}">14 Views</a></li>
+                                        <li><a href="{{route('website.knowledge.details.post',['id' =>  $enc_id])}}">Add Comment</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
+                    {{ $knowledge_post->links() }}
                 </div>
             </div>
             <div class="col-lg-4">
@@ -102,11 +63,11 @@
                     <div class="knowledge-forum-profile-bottom">
                         <div class="knowledge-pic"><img src="{{asset('asset_website/img/knowladge-forum/image1.png')}}" class="w100"></div>
                         <div class="knowledge-desc">
-                            <h4 class="small-heading-black text-center mb0">Himadri Shekhar Das</h4>
+                            <h4 class="small-heading-black text-center mt-2 mb0">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</h4>
                             <p class="text-center">M.Sc Student</p>
                             <div class="question-box">
                                 <ul class="list-inline question-point-list">
-                                    <li><a href="knowledge-tab.html#question">Questions Asked<span class="question-no">10</span></a></li>
+                                    <li><a href="knowledge-tab.html#question">Questions Asked<span class="question-no">{{$total_questions}}</span></a></li>
                                     <li><a href="knowledge-tab.html#answer">Answered<span class="question-no">10</span></a></li>
                                     <li><a href="knowledge-tab.html#post">Post<span class="question-no">10</span></a></li>
                                 </ul>
@@ -118,7 +79,13 @@
                 <div class="knowledge-forum-right2">
                     <h4 class="small-heading-grey">Today’s top Topics</h4>
                     <ul class="list-inline todays-topic-list">
-                        <li>
+                        @foreach( $top_knowledge_post as $top_post)
+                            <li>
+                                <p class="small-text-heading">{{$top_post->created_at->diffForHumans()}}, &nbsp;Poted by: {{$top_post->user->firstname}} {{$top_post->user->lastname}}</p>
+                                <a href="#" target="_blank" class="small-heading-black">{{$top_post->question}}</a>
+                            </li>
+                        @endforeach
+                        {{-- <li>
                             <p class="small-text-heading">26 min ago, Poted by: Ramjan Ali Anik, Math Teacher</p>
                             <a href="#" target="_blank" class="small-heading-black">How to Reduce Workplace Stress
                                 and Boost Mental Health?</a>
@@ -132,7 +99,7 @@
                             <p class="small-text-heading">26 min ago, Poted by: Ramjan Ali Anik, Math Teacher</p>
                             <a href="#" target="_blank" class="small-heading-black">How to Reduce Workplace Stress
                                 and Boost Mental Health?</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>

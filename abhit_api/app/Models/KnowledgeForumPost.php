@@ -12,5 +12,10 @@ class KnowledgeForumPost extends Model
     use SoftDeletes;
 
     protected $table="knowledge_forum_posts";
-    protected $fillable=[ 'question', 'description', 'links', 'is_activate', ];
+    protected $fillable=[ 'question', 'description', 'links', 'user_id', 'is_activate', ];
+
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
 }

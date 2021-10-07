@@ -2657,7 +2657,7 @@ top: 0px;}
 
 .todays-topic-list li {
     border-bottom: 1px solid #ddd;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding-bottom: 10px;
 }
 
@@ -2669,7 +2669,7 @@ top: 0px;}
 .small-heading-grey {
     color: #666;
     font-size: 18px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     font-weight: 700;
 }
 
@@ -2745,7 +2745,7 @@ input {
 
 #add-question-modal .modal-body,
 #add-post-modal .modal-body {
-    height: 650px;
+    height: 710px;
     padding: 40px 20px;
 }
 
@@ -2767,6 +2767,7 @@ input {
 }
 
 .btn-box {
+    width:100%;
     border-top: 1px solid #ddd;
     padding: 10px 20px;
 }

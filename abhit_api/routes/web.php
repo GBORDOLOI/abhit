@@ -8,6 +8,8 @@ use App\Http\Controllers\website\GalleryController;
 use App\Http\Controllers\website\CourseController;
 use App\Http\Controllers\website\WebsiteAuthController;
 use App\Http\Controllers\website\UserDetailsController;
+use App\Http\Controllers\website\KnowledgeForumPostController;
+use App\Http\Controllers\website\KnowledgeForumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,10 +62,18 @@ Route::post('user-details',[UserDetailsController::class,'userDetails'])->name('
 Route::post('user-photo',[UserDetailsController::class,'uploadPhoto'])->name('website.user.upload.photo');
 Route::post('update-password',[UserDetailsController::class,'updatePassword'])->name('website.update.password');
 
+// knowladge
+Route::get('knowledge-forum',[KnowledgeForumController::class,'index'])->name('website.knowledge.forum');
+Route::post('add-knowledge-question',[KnowledgeForumPostController::class,'addKnowledgeQuestion'])->name('website.add.knowledge.question');
+Route::get('knowledge-details-post/{id}',[KnowledgeForumController::class,'knowledgeDetailPost'])->name('website.knowledge.details.post');
+
+
+
+
+
 /* ------------------------------- Views -> Alok ------------------------------------ */
 Route::view('about-us','website.about.about')->name('website.about');
-Route::view('knowledge-forum','website.knowledge.knowledge_forum')->name('website.knowledge.forum');
-Route::view('knowledge-details-post','website.knowledge.knowledge_details_post')->name('website.knowledge.details.post');
+
 Route::view('knowledge-tab','website.knowledge.knowledge_tab')->name('website.knowledge.tab');
 Route::view('contact','website.contact.contact')->name('website.contact');
 Route::view('cart','website.cart.cart')->name('website.cart');

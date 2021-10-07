@@ -21,31 +21,37 @@
                 </div>
                 <div>
                     <span class="knowledge-profile"><img src="{{asset('asset_website/img/knowladge-forum/image4.png')}}"></span>
-                    <h6 class="knowledge-text">Himadri Shekhar Das</h6>
+                    @auth
+                        <h6 class="knowledge-text">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</h6>
+                    @endauth
                 </div>
                 <div class="question-modal">
-                    <form class="row">
+                    <form class="row" id="knowledgeQuestionForm">
+                        @csrf
                         <div class="form-group col-lg-12 mb-2">
-                            <input type="text" class="form-control" rows="1" placeholder="Type your question with “What”, “How”, “Why”, etc.">
+                            <input type="text" class="form-control" name="question" id="question" placeholder="Type your question with “What”, “How”, “Why”, etc." required>
                         </div>
                         <div class="form-group col-lg-12 mb-2">
-                            <textarea class="form-control" rows="1" id="editorQuestion" ></textarea>
+                            <textarea class="form-control" rows="1" id="editorQuestion" name="description" placeholder="Please describe here..." required></textarea>
                         </div>
                         <div class="form-group col-lg-12">
-                            <input class="form-control link-input" type="url" id="example-url-input" placeholder="&#xf0c1; Include a link that gives context">
+                            <input class="form-control link-input" type="url" id="questionLink" name="questionLink" placeholder="&#xf0c1; Include a link that gives context">
                         </div>
-                        <!--                            <button type="submit" class="btn btn-block knowledge-link">Send</button>                      -->
+                        <div class="btn-box">
+                            <ul class="list-inline modal-btn">
+                                <li> <button type="button" data-dismiss="modal" class="btn btn-block cancel-question" id="cancelAddQuestionBtn">Cancel</button></li>
+                                <li> <button type="submit" class="btn btn-block add-question" id="addQuestionBtn">Add Question</button> </li>
+                            </ul>
+                        </div>
                     </form>
                 </div>
             </div>
-            <div class="btn-box">
+            {{-- <div class="btn-box">
                 <ul class="list-inline modal-btn">
-                    <li> <button type="button" data-dismiss="modal" class="btn btn-block cancel-question">Cancel</button></li>
-                    <li> <button type="submit" class="btn btn-block add-question">Add Question</button> </li>
+                    <li> <button type="button" data-dismiss="modal" class="btn btn-block cancel-question" id="cancelAddQuestionBtn">Cancel</button></li>
+                    <li> <button type="submit" class="btn btn-block add-question" id="addQuestionBtn">Add Question</button> </li>
                 </ul>
-            </div>
-
-
+            </div> --}}
         </div>
     </div>
 </div>
@@ -60,10 +66,6 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="login-div" style="width:auto;">
-                                    {{-- <div class="login-logo"><img src="{{ asset('asset_website/img/home/logo.png') }}"
-                                            class="w100"></div>
-            
-                                    <a onclick="goBack()" class="page-close"><span class="icon-cancel-30"></span></a> --}}
                                     <div class="login-cover">
                                         <ul class="nav nav-tabs login-tabs" id="myTab" role="tablist">
                                             <li class="nav-item">
@@ -128,12 +130,12 @@
                                                         <span class="text-danger">@error('email'){{$message}}@enderror</span>
                                                     </div>
                                                     <div class="form-group col-lg-12">
-                                                        <input type="password" name="password" class="form-control" placeholder="Password" id="pass" required>
+                                                        <input type="password" name="password" class="form-control" placeholder="Password" id="pwd" required>
                                                         <span class="text-danger">@error('password'){{$message}}@enderror</span>
                                                     </div>
                                                     <div class="form-group col-lg-12">
                                                         <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password"
-                                                            id="pass_new" required>
+                                                            id="confPwd" required>
                                                     </div>
                                                     <div class="form-group mb0 col-lg-12">
                                                         <button type="submit" class="btn btn-block sign-btn" id="signupBtn">Sign up</button>
@@ -171,6 +173,7 @@
                 </div>
                 <div class="question-modal">
                     <form class="row">
+                        @csrf
                         <div class="form-group col-lg-12 mb0">
                             <textarea class="form-control" rows="1" placeholder="Type your question with “What”, “How”, “Why”, etc." id="Message3"></textarea>
                         </div>
@@ -195,7 +198,7 @@
 
 @section('scripts')
     <script>
-        CKEDITOR.replace( 'editorQuestion' );
+        CKEDITOR.replace( 'editorQuestion');
 
 
         $('#signupForm').on('submit',function(e){
@@ -203,25 +206,85 @@
 
             $('#signupBtn').text('Please wait...');
 
-            $.ajax({
-                url:"{{route('website.auth.signup')}}",
-                type:"POST",
-                data:$('#signupForm').serialize(),
-                success:function(data){
-                    toastr.success(data.message);
-                    $('#signupForm')['0'].reset();
-                    $('#signupBtn').text('Sign up');
-                   
-                },
-                error: function(xhr, status, error) {
-                    if(xhr.status == 500 || xhr.status == 422){
-                        toastr.error('Oops! something went wrong');
-                    }
-                    $('#signupForm')['0'].reset();
-                    $('#signupBtn').text('Sign up');
-                }
+            let pass = $('#pwd').val();
+            let confirm_pass = $('#confPwd').val();
 
-            });
+            if(pass != confirm_pass){
+                toastr.error('Oops! password not matched');
+                $('#signupBtn').text('Sign up');
+            }else if(pass.length < 5 ){
+                toastr.error('Oops! password must be 5 characters long');
+                $('#signupBtn').text('Sign up');
+            }else{
+                $.ajax({
+                    url:"{{route('website.auth.signup')}}",
+                    type:"POST",
+                    data:$('#signupForm').serialize(),
+                    success:function(data){
+                        toastr.success(data.message);
+                        $('#signupForm')['0'].reset();
+                        $('#signupBtn').text('Sign up');
+                    
+                    },
+                    error: function(xhr, status, error) {
+                        if(xhr.status == 500 || xhr.status == 422){
+                            toastr.error('Oops! something went wrong');
+                        }
+                        $('#signupForm')['0'].reset();
+                        $('#signupBtn').text('Sign up');
+                    }
+
+                });
+            }
+            
         })
+
+    /********************** Knowledge Form Submit ************************/
+
+        $('#knowledgeQuestionForm').on('submit',function(e){
+            e.preventDefault();
+            
+            let question = $('#question').val();
+            let editorQuestion = CKEDITOR.instances.editorQuestion.document.getBody().getText();
+            let questionLink = $('#questionLink').val();
+
+            $('#addQuestionBtn').text('Please wait...');
+
+            if(editorQuestion.length <= 1){
+                toastr.error('Description is required');
+                $('#addQuestionBtn').text('Add Question');
+            }else{
+                $.ajax({
+                    url:"{{route('website.add.knowledge.question')}}",
+                    type:"POST",
+                    data:{
+                        "_token": "{{ csrf_token() }}",
+                        'question' : question,
+                        'description' : editorQuestion,
+                        'link' : questionLink,
+                    },
+                    success:function(data){
+                        toastr.success(data.message);
+                        $('#knowledgeQuestionForm')[0].reset();
+                        CKEDITOR.instances.editorQuestion.setData('');
+                        $('#addQuestionBtn').text('Add Question');
+                        $('#add-question-modal').modal('hide');
+                        
+                    },
+                    error:function(xhr, status, error){
+                        if(xhr.status == 500 || xhr.status == 422){
+                            toastr.error('Oops! something went wrong');
+                        }
+                        $('#addQuestionBtn').text('Add Question');
+                    }
+                });
+            }
+
+        });
+
+        $('#cancelAddQuestionBtn').on('click',function(){
+            $('#knowledgeQuestionForm')[0].reset();
+            CKEDITOR.instances.editorQuestion.setData('');
+        });
     </script>
 @endsection
