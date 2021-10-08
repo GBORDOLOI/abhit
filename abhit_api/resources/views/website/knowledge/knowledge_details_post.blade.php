@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="knowledge-forum-left-new">
-                    <ul class="list-inline answer-list1">
+                    <ul class="list-inline">
                         <li>
                             <div class="answer-profile">
                                 <div class="answer-profile-pic"><img src="{{asset('asset_website/img/knowladge-forum/image2.png')}}" class="w100"></div>
@@ -34,39 +34,47 @@
                                 <a href="{{$knowledge_post->links}}" class="post-link">{{$knowledge_post->links}}</a>
                                 <div class="answer-btn-box">
                                     <ul class="list-inline answer-btn-list">
-                                        <li><a href="#">14 Comment</a></li>
-                                        <li><a href="#">14 Views</a></li>
+                                        <span>Comment </span>&nbsp;
+                                        <span>Views {{$total_knowledge_post_views}}</span>
                                     </ul>
                                 </div>
-                                <div class="mt20">
-                                    <span class="knowledge-profile"><img src="{{asset('asset_website/img/knowladge-forum/image4.png')}}"></span>
-                                    <h6 class="knowledge-text1 ">Himadri Shekhar Das</h6>
-                                    <form class="comment-form mt20" role="search" method="GET" action="">
-                                        <div class="input-group add-on">
-                                            <textarea class="form-control comment-form-control" placeholder="Add your Answer" name="comment" id="comment" rows="3"></textarea>
-                                            <div class="input-group-btn">
-                                                <button id="btn_comment" class="btn-comment" type="button">Post</button>
-                                            </div>                                                   
-                                        </div>
-                                    </form>
-                                </div>
+                                @auth
+                                    <div class="mt20 mb-4">
+                                        <span class="knowledge-profile"><img src="{{asset('asset_website/img/knowladge-forum/image4.png')}}"></span>
+                                        <h6 class="knowledge-text ">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</h6>
+                                        <form action="{{route('website.knowledge.comment')}}" method="POST" >
+                                            @csrf
+                                            <input type="hidden" name="commented_by" value={{Auth::user()->id}}>
+                                            <input type="hidden" name="post_id" value="{{$knowledge_post->id}}">
+                                            <textarea name="comment" class="form-control" id="comment" placeholder="Add answer here" required></textarea>
+                                            <button class="btn knowledge-link-post-btn mt-1" style="float:right">Post</button>
+                                        </form>
+                                    </div>
+                                @endauth
                                 <div>
                                     <h4 class="small-heading-black mt20 mb0">Answers</h4>
+                                    @if(!$knowledge_comment->isEmpty())
                                     <ul class="list-inline comment-list">
+                                        @foreach($knowledge_comment as $comment)
                                         <li>
                                             <div class="answer-profile1">
                                                 <div class="answer-profile-pic1"><img src="{{asset('asset_website/img/knowladge-forum/image2.png')}}" class="w100"></div>
                                                 <div class="answer-profile-desc1">
-                                                    <h4 class="small-heading-black1 mb0">Rajdeep das</h4>
+                                                    <h4 class="small-heading-black1 mb0">{{$comment->user->firstname}} {{$comment->user->lastname}}</h4>
                                                     <p class="small-comment">M.Sc Student</p>
-                                                    <p class="text-justify">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                                        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                                                        beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur</p>
+                                                    <p class="text-justify">{{$comment->comments}}</p>
                                                 </div>
-                                                <span class="answer-span1">May12, 2021 at 10:32 PM</span>
+                                                <span class="answer-span1">{{$comment->created_at->diffForHumans()}}</span>
                                             </div>
                                         </li>
+                                        @endforeach
                                     </ul>
+                                    {{$knowledge_comment->links()}}
+                                    @else 
+                                        <div class="text-center">
+                                            <p>No answers to show</p>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </li>
@@ -86,8 +94,8 @@
                                 <ul class="list-inline question-point-list">
                                   <ul class="list-inline question-point-list">
                                     <li><a href="{{route('website.knowledge.tab')}}">Questions Asked<span class="question-no">{{$total_questions}}</span></a></li>
-                                    <li><a href="{{route('website.knowledge.tab')}}">Answered<span class="question-no">10</span></a></li>
-                                    <li><a href="{{route('website.knowledge.tab')}}">Post<span class="question-no">10</span></a></li>
+                                    <li><a href="{{route('website.knowledge.tab')}}">Answered<span class="question-no">{{$total_post_commented_by_one_user}}</span></a></li>
+                                    {{-- <li><a href="{{route('website.knowledge.tab')}}">Post<span class="question-no">{{$total_knowledge_post}}</span></a></li> --}}
                                 </ul>
                                 </ul>
                             </div>
@@ -104,4 +112,7 @@
 @endsection
 
 @section('scripts')
+
+
+
 @endsection

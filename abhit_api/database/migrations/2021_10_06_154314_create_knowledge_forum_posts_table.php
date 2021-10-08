@@ -18,6 +18,8 @@ class CreateKnowledgeForumPostsTable extends Migration
             $table->text('question');
             $table->text('description');
             $table->text('links')->nullable();
+            $table->unsignedBigInteger('total_comments')->default(0);
+            $table->unsignedBigInteger('total_views')->default(0);
             $table->unsignedBigInteger('user_id');
             $table->boolean('is_activate');
             $table->timestamps();

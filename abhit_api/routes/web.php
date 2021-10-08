@@ -10,6 +10,7 @@ use App\Http\Controllers\website\WebsiteAuthController;
 use App\Http\Controllers\website\UserDetailsController;
 use App\Http\Controllers\website\KnowledgeForumPostController;
 use App\Http\Controllers\website\KnowledgeForumController;
+use App\Http\Controllers\website\KnowledgeForumCommentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,7 @@ Route::post('update-password',[UserDetailsController::class,'updatePassword'])->
 Route::get('knowledge-forum',[KnowledgeForumController::class,'index'])->name('website.knowledge.forum');
 Route::post('add-knowledge-question',[KnowledgeForumPostController::class,'addKnowledgeQuestion'])->name('website.add.knowledge.question');
 Route::get('knowledge-details-post/{id}',[KnowledgeForumController::class,'knowledgeDetailPost'])->name('website.knowledge.details.post');
+Route::post('knowledge-comment',[KnowledgeForumCommentsController::class,'knowledgeComment'])->name('website.knowledge.comment');
 
 
 

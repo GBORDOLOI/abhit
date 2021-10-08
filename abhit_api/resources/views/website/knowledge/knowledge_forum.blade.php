@@ -38,15 +38,15 @@
                             </li>
                         @endguest
                         @foreach( $knowledge_post as $post)
+                            @php $enc_id = Crypt::encryptString($post->id)@endphp
                             <li>
-                                <p class="small-text-heading">{{$post->created_at->diffForHumans()}}, &nbsp;Poted by: {{$post->user->firstname}} {{$post->user->lastname}}</p>
-                                <a href="#" target="_blank" class="small-heading-black">{{$post->question}}</a>
+                                <p class="small-text-heading">{{$post->created_at->diffForHumans()}}, &nbsp;Posted by: {{$post->user->firstname}} {{$post->user->lastname}}</p>
+                                <a href="{{route('website.knowledge.details.post',['id' =>  $enc_id])}}" target="_blank" class="small-heading-black">{{$post->question}}</a>
                                 <p class="block-ellipsis6">{{$post->description}}</p>
                                 <div class="answer-btn-box">
-                                @php $enc_id = Crypt::encryptString($post->id)@endphp
                                     <ul class="list-inline answer-btn-list">
-                                        <li><a href="{{route('website.knowledge.details.post',['id' =>  $enc_id])}}">14 Comment</a></li>
-                                        <li><a href="{{route('website.knowledge.details.post',['id' =>  $enc_id])}}">14 Views</a></li>
+                                        <li><a href="javascript:void(0);">{{ $total_post_commented_overall}} Comment</a></li>
+                                        <li><a href="javascript:void(0);">&nbsp;{{$post->total_views}} views </a></li>
                                         <li><a href="{{route('website.knowledge.details.post',['id' =>  $enc_id])}}">Add Comment</a></li>
                                     </ul>
                                 </div>
@@ -68,8 +68,8 @@
                             <div class="question-box">
                                 <ul class="list-inline question-point-list">
                                     <li><a href="knowledge-tab.html#question">Questions Asked<span class="question-no">{{$total_questions}}</span></a></li>
-                                    <li><a href="knowledge-tab.html#answer">Answered<span class="question-no">10</span></a></li>
-                                    <li><a href="knowledge-tab.html#post">Post<span class="question-no">10</span></a></li>
+                                    <li><a href="knowledge-tab.html#answer">Answered<span class="question-no">{{$total_knowledge_post_commented_by_one_user}}</span></a></li>
+                                    {{-- <li><a href="knowledge-tab.html#post">Post<span class="question-no">10</span></a></li> --}}
                                 </ul>
                             </div>
                         </div>
@@ -80,26 +80,12 @@
                     <h4 class="small-heading-grey">Today’s top Topics</h4>
                     <ul class="list-inline todays-topic-list">
                         @foreach( $top_knowledge_post as $top_post)
+                            @php $encrypted_id = Crypt::encryptString($top_post->id)@endphp
                             <li>
                                 <p class="small-text-heading">{{$top_post->created_at->diffForHumans()}}, &nbsp;Poted by: {{$top_post->user->firstname}} {{$top_post->user->lastname}}</p>
-                                <a href="#" target="_blank" class="small-heading-black">{{$top_post->question}}</a>
+                                <a href="{{route('website.knowledge.details.post',['id' =>  $encrypted_id])}}" target="_blank" class="small-heading-black">{{$top_post->question}}</a>
                             </li>
                         @endforeach
-                        {{-- <li>
-                            <p class="small-text-heading">26 min ago, Poted by: Ramjan Ali Anik, Math Teacher</p>
-                            <a href="#" target="_blank" class="small-heading-black">How to Reduce Workplace Stress
-                                and Boost Mental Health?</a>
-                        </li>
-                        <li>
-                            <p class="small-text-heading">26 min ago, Poted by: Ramjan Ali Anik, Math Teacher</p>
-                            <a href="#" target="_blank" class="small-heading-black">How to Reduce Workplace Stress
-                                and Boost Mental Health?</a>
-                        </li>
-                        <li>
-                            <p class="small-text-heading">26 min ago, Poted by: Ramjan Ali Anik, Math Teacher</p>
-                            <a href="#" target="_blank" class="small-heading-black">How to Reduce Workplace Stress
-                                and Boost Mental Health?</a>
-                        </li> --}}
                     </ul>
                 </div>
             </div>

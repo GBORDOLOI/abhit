@@ -17,12 +17,13 @@ class CreateKnowledgeForumCommentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('knowledge_forum_post_id');
             $table->text('comments');
-            $table->bigInteger('commented_by');
+            $table->unsignedBigInteger('user_id');
             $table->boolean('is_activate');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('knowledge_forum_post_id')->references('id')->on('knowledge_forum_posts')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
