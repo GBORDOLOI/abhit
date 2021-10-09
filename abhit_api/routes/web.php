@@ -63,11 +63,13 @@ Route::post('user-details',[UserDetailsController::class,'userDetails'])->name('
 Route::post('user-photo',[UserDetailsController::class,'uploadPhoto'])->name('website.user.upload.photo');
 Route::post('update-password',[UserDetailsController::class,'updatePassword'])->name('website.update.password');
 
-// knowladge
+// knowledge
 Route::get('knowledge-forum',[KnowledgeForumController::class,'index'])->name('website.knowledge.forum');
 Route::post('add-knowledge-question',[KnowledgeForumPostController::class,'addKnowledgeQuestion'])->name('website.add.knowledge.question');
 Route::get('knowledge-details-post/{id}',[KnowledgeForumController::class,'knowledgeDetailPost'])->name('website.knowledge.details.post');
 Route::post('knowledge-comment',[KnowledgeForumCommentsController::class,'knowledgeComment'])->name('website.knowledge.comment');
+Route::get('knowledge-tab', [KnowledgeForumController::class,'knowledgeTab'])->name('website.knowledge.tab');
+
 
 
 
@@ -76,7 +78,6 @@ Route::post('knowledge-comment',[KnowledgeForumCommentsController::class,'knowle
 /* ------------------------------- Views -> Alok ------------------------------------ */
 Route::view('about-us','website.about.about')->name('website.about');
 
-Route::view('knowledge-tab','website.knowledge.knowledge_tab')->name('website.knowledge.tab');
 Route::view('contact','website.contact.contact')->name('website.contact');
 Route::view('cart','website.cart.cart')->name('website.cart');
 Route::view('checkout','website.cart.checkout')->name('website.checkout');

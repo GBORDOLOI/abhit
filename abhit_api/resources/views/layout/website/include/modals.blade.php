@@ -46,12 +46,6 @@
                     </form>
                 </div>
             </div>
-            {{-- <div class="btn-box">
-                <ul class="list-inline modal-btn">
-                    <li> <button type="button" data-dismiss="modal" class="btn btn-block cancel-question" id="cancelAddQuestionBtn">Cancel</button></li>
-                    <li> <button type="submit" class="btn btn-block add-question" id="addQuestionBtn">Add Question</button> </li>
-                </ul>
-            </div> --}}
         </div>
     </div>
 </div>

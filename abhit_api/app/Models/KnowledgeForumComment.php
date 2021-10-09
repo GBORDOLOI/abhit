@@ -17,4 +17,8 @@ class KnowledgeForumComment extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+
+    public function knowledgeForumPost(){
+        return $this->belongsTo('App\Models\KnowledgeForumPost');
+    }
 }

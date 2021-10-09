@@ -34,7 +34,7 @@
                                 <a href="{{$knowledge_post->links}}" class="post-link">{{$knowledge_post->links}}</a>
                                 <div class="answer-btn-box">
                                     <ul class="list-inline answer-btn-list">
-                                        <span>Comment </span>&nbsp;
+                                        <span>Comment {{$knowledge_post->total_comments}}</span>&nbsp;
                                         <span>Views {{$total_knowledge_post_views}}</span>
                                     </ul>
                                 </div>
@@ -86,10 +86,18 @@
                 <div class="knowledge-forum-right1">
                     <div class="knowledge-forum-profile-top"><img src="{{asset('asset_website/img/knowladge-forum/bg.png')}}" class="w100"></div>
                     <div class="knowledge-forum-profile-bottom">
-                        <div class="knowledge-pic"><img src="{{asset('asset_website/img/knowladge-forum/image1.png')}}" class="w100"></div>
+                        @if(!empty($user_details))
+                            <div class="knowledge-pic"><img src="{{asset('/files/profile/'.$user_details->image)}}" onerror="this.onerror=null;this.src='{{asset('asset_website/img/noimage.png')}}';" class="rounded-circle w100" style="border:4px solid white;"></div>
+                        @else
+                            <div class="knowledge-pic"><img src="{{asset('asset_website/img/knowladge-forum/image1.png')}}" class="w100"></div>
+                        @endif
                         <div class="knowledge-desc">
                             <h4 class="small-heading-black text-center mt-2 mb0">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</h4>
-                            <p class="text-center">M.Sc Student</p>
+                            @if(!empty($user_details))
+                                <p class="text-center">{{$user_details->education}}</p>
+                            @else
+                                <p class="text-center">education</p>
+                            @endif
                             <div class="question-box">
                                 <ul class="list-inline question-point-list">
                                   <ul class="list-inline question-point-list">
