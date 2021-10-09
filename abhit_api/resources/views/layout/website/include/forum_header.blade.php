@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-5 p0">
-                <div class="knowledge-logo"><img src="{{asset('asset_website/img/home/logo.png')}}" class="w100"></div>
+                <div class="knowledge-logo"><a href="{{route('website.dashboard')}}"><img src="{{asset('asset_website/img/home/logo.png')}}" class="w100"></a></div>
             </div>
             @guest
             <div class="col-lg-7 p0">
