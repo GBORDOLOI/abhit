@@ -62,3 +62,11 @@
     width: 100px;
     float: right;
 }
+
+.centered {
+    width: 100%;
+}
+
+.centered li {
+    position: unset;
+}
