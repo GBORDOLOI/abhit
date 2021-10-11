@@ -73,7 +73,6 @@
                                 <span class="checkmark"></span>
                             </label>
                             <h5 class="small-heading-black mt15 mb20">Select Lesson</h5>
-
                             <ul class="list-inline centered">
                                 @foreach ($chapters as $key => $item)
                                     <li>
@@ -81,7 +80,7 @@
                                             data-price="{{ $item->price }}" type="checkbox"
                                             value="value{{ $key + 1 }}">
                                         <label for="styled-checkbox-{{ $key + 1 }}">{{ $item->name }}</label>
-                                        <span class="course-price"><i class="fa fa-inr"
+                                        <span class="course-price mr-2"><i class="fa fa-inr"
                                                 aria-hidden="true"></i>{{ $item->price }}</span>
                                     </li>
                                 @endforeach
@@ -89,7 +88,7 @@
 
                             <div class="total">
                                 <p class=""><b>Total</b></p>
-                                <span class=" course-price1"
+                                <span class=" course-price1 mr-2"
                                     id="total_price"><i class="fa fa-inr" aria-hidden="true"></i>0.00</span>
                             </div>
                             <div class="total-cart">
