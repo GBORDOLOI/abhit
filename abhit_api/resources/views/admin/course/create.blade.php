@@ -56,6 +56,11 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                         <span class="text-danger" id="pic_error"></span>
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputName1">Duration</label>
+                        <input type="text" class="form-control" name="duration" placeholder="Enter Duration">
+                        <span class="text-danger" id="duration_error"></span>
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputCity1">Publish Date</label>
                         <input type="text" class="form-control" name="publish_date" id="publish_date" autocomplete="off"
                             placeholder="Publish Date">
