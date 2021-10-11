@@ -61,7 +61,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="profile" role="tabpanel">
                         <div class="profile-form">
-                            <form class="row"  id="myAccountUserForm">
+                            <form class="row" id="profileForm">
                                 @csrf
                                 <div class="col-lg-6 col-6">
                                     <h4 class="small-heading-black">Profile</h4>
@@ -454,15 +454,27 @@
 @endsection
 
 @section('scripts')
-    @include('layout.website.include.modal_scripts')
+
     <script>
+
+        function previewImage(event){
+            let reader = new FileReader();
+            reader.onload = function(){
+                let output = document.getElementById('outputImage');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+        
+
+
 
     /******************  For Profile Section ******************/    
         $('#gender').attr("disabled", true); 
         $('.profile-save-btn').attr("disabled", true); 
         $('.profile-save-btn').addClass('knowledge-link-old');
         $('.profile-save-btn').removeClass('knowledge-link');
-        $('#myAccountUserForm input').attr('readonly', 'readonly');
+        $('#profileForm input').attr('readonly', 'readonly');
         $('.cancel-edit-btn').hide();
         toastr.options = {
           "closeButton": true,
@@ -473,7 +485,7 @@
         $('.edit-btn').on('click',function(){
             $('#gender').attr("disabled", false); 
             $('.profile-save-btn').attr("disabled", false); 
-            $('#myAccountUserForm input').attr('readonly', false);
+            $('#profileForm input').attr('readonly', false);
             $('.edit-btn').hide();
             $('.cancel-edit-btn').show();
             $('.profile-save-btn').addClass('knowledge-link');
@@ -490,31 +502,25 @@
             $('.profile-save-btn').removeClass('knowledge-link');
         });
 
-        
-        
-        
-     
-        $('#myAccountUserForm').on('submit',function(e){
+
+        $('#profileForm').on('submit',function(e){
             e.preventDefault();
 
             $('.profile-save-btn').text('saving...');
-          
 
             $.ajax({
                 url:"{{route('website.user.details')}}",
                 type:"POST",
-                data:$('#myAccountUserForm').serialize(),
+                data:$('#profileForm').serialize(),
                 
                 success:function(data){
-                    console.log(data.message)
                     toastr.success(data.message);
                     $('#gender').attr("disabled", true); 
                     $('.profile-save-btn').attr("disabled", true); 
-                    $('#myAccountUserForm input').attr('readonly', 'readonly');
+                    $('#profileForm input').attr('readonly', 'readonly');
                     $('.profile-save-btn').text('save');
                     $('.cancel-edit-btn').hide();
                     $('.edit-btn').show();
-                    location.reload();
                 },
                 error:function(xhr, status, error){
                     if(xhr.status == 500 || xhr.status == 422){
@@ -530,17 +536,6 @@
 
 
         /*******************************User Photo Upload*****************************/
-
-        function previewImage(event){
-            let reader = new FileReader();
-            reader.onload = function(){
-                let output = document.getElementById('outputImage');
-                output.src = reader.result;
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        }
-
-
         $('#photoUploadForm').on('submit',function(e){
             e.preventDefault();
 
@@ -559,7 +554,6 @@
                     toastr.success(data.message);
                     $('#photoUploadForm')[0].reset();
                     $('.upload-photo-btn').text('save');
-                    location.reload();
                 },
                 error:function(xhr, status, error){
                     if(xhr.status == 500 || xhr.status == 422){
@@ -604,7 +598,5 @@
                 });
             }
         });
-
-
     </script>
 @endsection
