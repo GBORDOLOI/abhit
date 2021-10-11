@@ -45,8 +45,8 @@ class UserDetailsController extends Controller
             ]);
         }
         User::where('email', Auth::user()->email)->update(['firstname' => $firstname,'lastname' => $lastname,'email' => $email]);
-        return back()->with(['message' => 'Profile details updated']);
-        // return response()->json(['message' => 'Profile details updated']);
+        
+        return response()->json(['message' => 'Profile details updated']);
     }
 
     public function uploadPhoto(Request $request){
