@@ -190,7 +190,3 @@
     </div>
 </div>
 
-
-@section('scripts')
-  
-@endsection

@@ -450,11 +450,11 @@
     </div>
 </section>
 
-{{-- @include('layout.website.include.modals') --}}
+@include('layout.website.include.modals')
 @endsection
 
 @section('scripts')
-    {{-- @include('layout.website.include.modal_scripts') --}}
+    @include('layout.website.include.modal_scripts')
     <script>
 
     /******************  For Profile Section ******************/    
@@ -494,32 +494,31 @@
         $('#myAccountUserForm').on('submit',function(e){
             e.preventDefault();
 
-            alert('Hello');
             $('.profile-save-btn').text('saving...');
 
-            $.ajax({
-                url:"{{route('website.user.details')}}",
-                type:"POST",
-                data:$('#profileForm').serialize(),
+            // $.ajax({
+            //     url:"{{route('website.user.details')}}",
+            //     type:"POST",
+            //     data:$('#profileForm').serialize(),
                 
-                success:function(data){
-                    toastr.success(data.message);
-                    $('#gender').attr("disabled", true); 
-                    $('.profile-save-btn').attr("disabled", true); 
-                    $('#profileForm input').attr('readonly', 'readonly');
-                    $('.profile-save-btn').text('save');
-                    $('.cancel-edit-btn').hide();
-                    $('.edit-btn').show();
-                },
-                error:function(xhr, status, error){
-                    if(xhr.status == 500 || xhr.status == 422){
-                        toastr.error('Oops! Something went wrong while saving.');
-                    }
-                    $('.cancel-edit-btn').hide();
-                    $('.edit-btn').show();
-                    $('.profile-save-btn').text('save');
-                }
-            });
+            //     success:function(data){
+            //         toastr.success(data.message);
+            //         $('#gender').attr("disabled", true); 
+            //         $('.profile-save-btn').attr("disabled", true); 
+            //         $('#profileForm input').attr('readonly', 'readonly');
+            //         $('.profile-save-btn').text('save');
+            //         $('.cancel-edit-btn').hide();
+            //         $('.edit-btn').show();
+            //     },
+            //     error:function(xhr, status, error){
+            //         if(xhr.status == 500 || xhr.status == 422){
+            //             toastr.error('Oops! Something went wrong while saving.');
+            //         }
+            //         $('.cancel-edit-btn').hide();
+            //         $('.edit-btn').show();
+            //         $('.profile-save-btn').text('save');
+            //     }
+            // });
         });
 
 

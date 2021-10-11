@@ -36,7 +36,9 @@
                                     <ul class="list-inline answer-btn-list">
                                         <span>Comment {{$knowledge_post->total_comments}}</span>&nbsp;
                                         <span>Views {{$total_knowledge_post_views}}</span>&nbsp;
-                                        <span><a data-toggle="modal" data-target="#add-question-modal">Add Comment</a></span>
+                                        @guest
+                                            <span><a data-toggle="modal" data-target="#login-modal" style="cursor: pointer;">Add Comment</a></span>
+                                        @endguest
                                     </ul>
                                 </div>
                                 @auth
@@ -121,7 +123,5 @@
 @endsection
 
 @section('scripts')
-
-
-
+    @include('layout.website.include.modal_scripts')
 @endsection
