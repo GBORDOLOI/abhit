@@ -1,4 +1,12 @@
 <!-- The Modal -->
+@php
+    use App\Models\UserDetails;
+    $user_details = '';
+    if(Auth::check()){
+        $user_details = UserDetails::where('email',Auth::user()->email)->first();
+    }
+@endphp
+
 
 <div class="modal" id="add-question-modal">
     <div class="modal-dialog modal-lg">
@@ -20,7 +28,11 @@
                     </ul>
                 </div>
                 <div>
-                    <span class="knowledge-profile"><img src="{{asset('asset_website/img/knowladge-forum/image4.png')}}"></span>
+                    @if($user_details != null)
+                        <span class="knowledge-profile"><img src="{{asset('/files/profile/'.$user_details->image)}}" onerror="this.onerror=null;this.src='{{asset('asset_website/img/noimage.png')}}';"  height="30px" class="rounded-circle"></span> 
+                    @else
+                        <span class="knowledge-profile"><img src="{{asset('asset_website/img/knowladge-forum/image4.png')}}"></span>
+                    @endif
                     @auth
                         <h6 class="knowledge-text">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</h6>
                     @endauth

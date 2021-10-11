@@ -21,7 +21,8 @@
                     <ul class="list-inline">
                         <li>
                             <div class="answer-profile">
-                                <div class="answer-profile-pic"><img src="{{asset('asset_website/img/knowladge-forum/image2.png')}}" class="w100"></div>
+                                 <div class="answer-profile-pic"><img src="{{asset('asset_website/img/knowladge-forum/image2.png')}}" class="w100"></div>
+                                
                                 <div class="answer-profile-desc">
                                     <h4 class="small-heading-black mb0">{{$knowledge_post->user->firstname}} {{$knowledge_post->user->lastname}}</h4>
                                     <p class="mb0">M.Sc Student</p>
@@ -43,7 +44,11 @@
                                 </div>
                                 @auth
                                     <div class="mt20 mb-4">
-                                        <span class="knowledge-profile"><img src="{{asset('asset_website/img/knowladge-forum/image4.png')}}"></span>
+                                        @if($user_details != null)
+                                            <div class="answer-profile-pic"><img src="{{asset('/files/profile/'.$user_details->image)}}" onerror="this.onerror=null;this.src='{{asset('asset_website/img/noimage.png')}}';" height="30px" class="rounded-circle"></div>
+                                        @else
+                                            <div class="answer-profile-pic"><img src="{{asset('asset_website/img/knowladge-forum/image2.png')}}" class="w100"></div>
+                                        @endif
                                         <h6 class="knowledge-text ">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</h6>
                                         <form action="{{route('website.knowledge.comment')}}" method="POST" >
                                             @csrf

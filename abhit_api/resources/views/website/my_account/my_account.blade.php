@@ -61,7 +61,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="profile" role="tabpanel">
                         <div class="profile-form">
-                            <form class="row"  id="myAccountUserForm">
+                            <form class="row"  action="{{route('website.user.details')}}" method="Post" id="myAccountUserForm">
                                 @csrf
                                 <div class="col-lg-6 col-6">
                                     <h4 class="small-heading-black">Profile</h4>
@@ -490,36 +490,39 @@
             $('.profile-save-btn').removeClass('knowledge-link');
         });
 
+        
+        
+        
      
-        $('#myAccountUserForm').on('submit',function(e){
-            e.preventDefault();
+        // $('#myAccountUserForm').on('submit',function(e){
+        //     e.preventDefault();
 
-            $('.profile-save-btn').text('saving...');
+        //     $('.profile-save-btn').text('saving...');
 
-            // $.ajax({
-            //     url:"{{route('website.user.details')}}",
-            //     type:"POST",
-            //     data:$('#profileForm').serialize(),
+        //     $.ajax({
+        //         url:"{{route('website.user.details')}}",
+        //         type:"POST",
+        //         data:$('#profileForm').serialize(),
                 
-            //     success:function(data){
-            //         toastr.success(data.message);
-            //         $('#gender').attr("disabled", true); 
-            //         $('.profile-save-btn').attr("disabled", true); 
-            //         $('#profileForm input').attr('readonly', 'readonly');
-            //         $('.profile-save-btn').text('save');
-            //         $('.cancel-edit-btn').hide();
-            //         $('.edit-btn').show();
-            //     },
-            //     error:function(xhr, status, error){
-            //         if(xhr.status == 500 || xhr.status == 422){
-            //             toastr.error('Oops! Something went wrong while saving.');
-            //         }
-            //         $('.cancel-edit-btn').hide();
-            //         $('.edit-btn').show();
-            //         $('.profile-save-btn').text('save');
-            //     }
-            // });
-        });
+        //         success:function(data){
+        //             toastr.success(data.message);
+        //             $('#gender').attr("disabled", true); 
+        //             $('.profile-save-btn').attr("disabled", true); 
+        //             $('#profileForm input').attr('readonly', 'readonly');
+        //             $('.profile-save-btn').text('save');
+        //             $('.cancel-edit-btn').hide();
+        //             $('.edit-btn').show();
+        //         },
+        //         error:function(xhr, status, error){
+        //             if(xhr.status == 500 || xhr.status == 422){
+        //                 toastr.error('Oops! Something went wrong while saving.');
+        //             }
+        //             $('.cancel-edit-btn').hide();
+        //             $('.edit-btn').show();
+        //             $('.profile-save-btn').text('save');
+        //         }
+        //     });
+        // });
 
 
 
