@@ -462,7 +462,7 @@
         $('.profile-save-btn').attr("disabled", true); 
         $('.profile-save-btn').addClass('knowledge-link-old');
         $('.profile-save-btn').removeClass('knowledge-link');
-        $('#profileForm input').attr('readonly', 'readonly');
+        $('#myAccountUserForm input').attr('readonly', 'readonly');
         $('.cancel-edit-btn').hide();
         toastr.options = {
           "closeButton": true,
@@ -473,7 +473,7 @@
         $('.edit-btn').on('click',function(){
             $('#gender').attr("disabled", false); 
             $('.profile-save-btn').attr("disabled", false); 
-            $('#profileForm input').attr('readonly', false);
+            $('#myAccountUserForm input').attr('readonly', false);
             $('.edit-btn').hide();
             $('.cancel-edit-btn').show();
             $('.profile-save-btn').addClass('knowledge-link');
@@ -510,7 +510,7 @@
                     toastr.success(data.message);
                     $('#gender').attr("disabled", true); 
                     $('.profile-save-btn').attr("disabled", true); 
-                    $('#profileForm input').attr('readonly', 'readonly');
+                    $('#myAccountUserForm input').attr('readonly', 'readonly');
                     $('.profile-save-btn').text('save');
                     $('.cancel-edit-btn').hide();
                     $('.edit-btn').show();
