@@ -11,5 +11,14 @@ class UserDetails extends Model
 
     protected $table = 'user_details';
 
-    protected $fillable = ['firstname','lastname','email','phone','education','gender','image'];
+    protected $fillable = ['firstname','lastname','email','phone','education','gender','image','user_id'];
+
+
+    public function user(){
+        return $this->belongsTo('App\Models\User', 'user_id',  'id');
+    }
+
+    public function forumPost(){
+        return $this->hasMany('App\Models\KnowledgeForumPost');
+    }
 }

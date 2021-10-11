@@ -12,7 +12,7 @@ class KnowledgeForumComment extends Model
     use SoftDeletes;
 
     protected $table="knowledge_forum_comments";
-    protected $fillable = [ 'knowledge_forum_post_id', 'comments', 'user_id', 'is_activate', ];
+    protected $fillable = [ 'knowledge_forum_post_id', 'comments', 'user_id','user_detail_id', 'is_activate', ];
 
     public function user(){
         return $this->belongsTo('App\Models\User');
@@ -20,5 +20,9 @@ class KnowledgeForumComment extends Model
 
     public function knowledgeForumPost(){
         return $this->belongsTo('App\Models\KnowledgeForumPost');
+    }
+
+    public function userDetailComment(){
+        return $this->belongsTo('App\Models\UserDetails','user_detail_id','id');
     }
 }

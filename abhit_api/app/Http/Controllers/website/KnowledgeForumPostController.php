@@ -5,6 +5,7 @@ namespace App\Http\Controllers\website;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\KnowledgeForumPost;
+use App\Models\UserDetails;
 use Illuminate\Support\Facades\Auth;
 use App\Common\Activation;
 
@@ -21,12 +22,14 @@ class KnowledgeForumPostController extends Controller
             'description' => 'required',
         ]);
 
+        $user_detail = UserDetails::where('user_id', Auth::user()->id)->first();
         
         $create = KnowledgeForumPost::create([
             'question' => $question,
             'description' => $description,
             'links' => $link,
             'user_id' => Auth::user()->id,
+            'user_detail_id' => $user_detail->id,
             'is_activate' => Activation::Activate,
         ]);
 

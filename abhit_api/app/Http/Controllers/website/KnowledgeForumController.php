@@ -29,13 +29,13 @@ class KnowledgeForumController extends Controller
     public function knowledgeDetailPost(Request $request, $id){
         $post_id =  \Crypt::decryptString($id);
 
-        $knowledge_post = KnowledgeForumPost::where('id',$post_id)->with('user')->first();
+        $knowledge_post = KnowledgeForumPost::where('id',$post_id)->with('user','userDetail')->first();
         $increment_views = ($knowledge_post->total_views + 1);
         KnowledgeForumPost::where('id',$post_id)->update(['total_views' => $increment_views ]);
         $total_knowledge_post_views =  KnowledgeForumPost::where('id',$post_id)->first();
 
 
-        $knowledge_comment = KnowledgeForumComment::with('user')->where('knowledge_forum_post_id',$post_id)->orderBy('created_at', 'desc')->simplePaginate(3);
+        $knowledge_comment = KnowledgeForumComment::with('user','userDetailComment')->where('knowledge_forum_post_id',$post_id)->orderBy('created_at', 'desc')->simplePaginate(3);
         $total_post_commented_by_one_user = '';
         $total_knowledge_post = '';
         $total_questions = '';
@@ -45,7 +45,7 @@ class KnowledgeForumController extends Controller
             $total_questions = KnowledgeForumPost::where('user_id',Auth::user()->id)->count();
             $total_post_commented_by_one_user = KnowledgeForumComment::where('user_id' , Auth::user()->id)->count();
             $total_knowledge_post = KnowledgeForumPost::where('user_id' , Auth::user()->id)->sum('user_id');
-            $user_details = UserDetails::where('email', Auth::user()->email)->first();
+            $user_details = UserDetails::with('user')->where('email', Auth::user()->email)->first();
         }
         return view('website.knowledge.knowledge_details_post')->with(['knowledge_post' => $knowledge_post, 'total_questions' => $total_questions, 'knowledge_comment' => $knowledge_comment, 'total_knowledge_post_views' => $total_knowledge_post_views->total_views, 'total_post_commented_by_one_user' => $total_post_commented_by_one_user, 'total_knowledge_post' => $total_knowledge_post, 'user_details' => $user_details]);
     }
