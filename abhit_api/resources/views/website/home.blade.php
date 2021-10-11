@@ -125,7 +125,7 @@
                                         class="w100"></div>
                                 <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>{{$item['duration']. 'Weeks'}}</span>
                                     <h4 class="small-heading-black">{{ $item['name'] }}</h4>
-                                    <span><i class="fa fa-inr" aria-hidden="true"></i>3399</span>
+                                    <span><i class="fa fa-inr" aria-hidden="true"></i>{{$item['final_price']}}</span>
                                     <a href="{{route('website.course.details',['id'=>\Crypt::encrypt($item['id'])])}}" class="enroll" target="_blank">Enroll now</a>
                                 </div>
                             </li>
