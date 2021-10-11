@@ -169,9 +169,9 @@
                                     <div class="upcoming-image"><img src="{{ asset($item['course_pic']) }}"
                                             class="w100"></div>
                                     <div class="upcoming-desc"><span class="icon-clock-09 clock-icon1"></span>
-                                        <span>10-15 Weeks</span>
+                                        <span>{{$item['duration']}}</span>
                                         <h4 class="small-heading-white">{{ $item['name'] }}</h4>
-                                        <span><i class="fa fa-inr" aria-hidden="true"></i>3399</span>
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i>{{$item['final_price']}}</span>
                                     </div>
                                 </div>
                                 @if ($key + 1 >= 5)
@@ -179,16 +179,6 @@
                                 @endif
 
                             @endforeach
-
-                            {{-- <div class="item">
-                            <div class="upcoming-image"><img src="{{asset('asset_website/img/home/image7.jpg')}}" class="w100"></div>
-                            <div class="upcoming-desc"><span class="icon-clock-09 clock-icon1"></span>
-                                <span>10-15 Weeks</span>
-                                <h4 class="small-heading-white">Competitive Strategy law for all
-                                    students</h4>
-                                <span><i class="fa fa-inr" aria-hidden="true"></i>3399</span>
-                            </div>
-                        </div> --}}
 
                         </div>
                     </div>

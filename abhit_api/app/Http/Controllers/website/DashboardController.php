@@ -64,19 +64,33 @@ class DashboardController extends Controller
                     $published['publish_date']=$value->publish_date;
                     $publishCourse[] = $published;
                 } else {
+                    $chapters = Chapter::where([['course_id', $value->id],['is_activate',Activation::Activate]])->get();
+                    foreach ($chapters as $key => $value2) {
+                        # code...
+                        $price [] = $value2->price;
+                    }
+                    $final_price = array_sum($price);
+                    $upcoming['final_price']=$final_price;
                     $upcoming['id']=$value->id;
                     $upcoming['name']=$value->name;
                     $upcoming['course_pic']=$value->course_pic;
-                    $published['duration']=$value->durations;
+                    $upcoming['duration']=$value->durations;
                     $upcoming['publish_date']=$value->publish_date;
                     $upComingCourse[] = $upcoming;
                 }
             } elseif ($publishDate > $Today) {
                 // dd('GRATER Today', $value->publish_date);
+                $chapters = Chapter::where([['course_id', $value->id],['is_activate',Activation::Activate]])->get();
+                foreach ($chapters as $key => $value2) {
+                    # code...
+                    $price [] = $value2->price;
+                }
+                $final_price = array_sum($price);
+                $upcoming['final_price']=$final_price;
                 $upcoming['id']=$value->id;
                 $upcoming['name']=$value->name;
                 $upcoming['course_pic']=$value->course_pic;
-                $published['duration']=$value->durations;
+                $upcoming['duration']=$value->durations;
                 $upcoming['publish_date']=$value->publish_date;
                 $upComingCourse[] = $upcoming;
             }
