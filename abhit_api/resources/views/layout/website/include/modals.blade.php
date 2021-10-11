@@ -53,8 +53,8 @@
 <!-- Login Modal -->
 <div class="modal" id="login-modal">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
+        <div class="modal-content border-0">
+            <div class="modal-body p-0">
                 <section class="login-section" style="height:auto;">
                     <div class="container-fluid">
                         <div class="row">
