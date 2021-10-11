@@ -29,7 +29,7 @@
                     <form class="row" id="knowledgeQuestionForm">
                         @csrf
                         <div class="form-group col-lg-12 mb-2">
-                            <input type="text" class="form-control" name="question" id="question" placeholder="Type your question with “What”, “How”, “Why”, etc." required>
+                            <input type="text" class="form-control" name="question" id="questionAsk" placeholder="Type your question with “What”, “How”, “Why”, etc." required>
                         </div>
                         <div class="form-group col-lg-12 mb-2">
                             <textarea class="form-control" rows="1" id="editorQuestion" name="description" placeholder="Please describe here..." required></textarea>
@@ -70,7 +70,7 @@
                                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                                     aria-controls="profile" aria-selected="false">Sign Up</a>
                                             </li>
-            
+
                                         </ul>
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -97,7 +97,7 @@
                                                     <div class="col-lg-12 forgot-div"><a href="{{ route('website.forgot.password') }}"
                                                             class="text-center">Forgot Password</a></div>
                                                 </form>
-            
+
                                                 <div class="google-div"><a href="#" class="google-btn"><span
                                                             class="icon-google-30 google-icon"><span class="path1"></span><span
                                                                 class="path2"></span><span class="path3"></span><span
@@ -107,7 +107,7 @@
                                                             class="icon-facebook-07 facebook-icon"></span>Continue with Facebook</a>
                                                 </div>
                                             </div>
-            
+
                                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                                 <form class="row" id="signupForm">
                                                     @csrf
@@ -218,7 +218,7 @@
                         toastr.success(data.message);
                         $('#signupForm')['0'].reset();
                         $('#signupBtn').text('Sign up');
-                    
+
                     },
                     error: function(xhr, status, error) {
                         if(xhr.status == 500 || xhr.status == 422){
@@ -230,15 +230,15 @@
 
                 });
             }
-            
+
         })
 
     /********************** Knowledge Form Submit ************************/
 
         $('#knowledgeQuestionForm').on('submit',function(e){
             e.preventDefault();
-            
-            let question = $('#question').val();
+
+            let question = $('#questionAsk').val();
             let editorQuestion = CKEDITOR.instances.editorQuestion.document.getBody().getText();
             let questionLink = $('#questionLink').val();
 
@@ -263,7 +263,7 @@
                         CKEDITOR.instances.editorQuestion.setData('');
                         $('#addQuestionBtn').text('Add Question');
                         $('#add-question-modal').modal('hide');
-                        
+
                     },
                     error:function(xhr, status, error){
                         if(xhr.status == 500 || xhr.status == 422){
