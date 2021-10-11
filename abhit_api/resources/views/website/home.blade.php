@@ -123,8 +123,7 @@
 
                                 <div class="course-pic"><img src="{{ asset($item['course_pic']) }}"
                                         class="w100"></div>
-                                <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>10-15
-                                        Weeks</span>
+                                <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>{{$item['duration']. 'Weeks'}}</span>
                                     <h4 class="small-heading-black">{{ $item['name'] }}</h4>
                                     <span><i class="fa fa-inr" aria-hidden="true"></i>3399</span>
                                     <a href="{{route('website.course.details',['id'=>\Crypt::encrypt($item['id'])])}}" class="enroll" target="_blank">Enroll now</a>
