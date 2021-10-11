@@ -140,4 +140,5 @@
 @endsection
 
 @section('scripts')
+    @include('layout.website.include.modal_scripts')
 @endsection

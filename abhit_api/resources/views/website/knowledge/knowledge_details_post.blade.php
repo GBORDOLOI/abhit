@@ -35,7 +35,8 @@
                                 <div class="answer-btn-box">
                                     <ul class="list-inline answer-btn-list">
                                         <span>Comment {{$knowledge_post->total_comments}}</span>&nbsp;
-                                        <span>Views {{$total_knowledge_post_views}}</span>
+                                        <span>Views {{$total_knowledge_post_views}}</span>&nbsp;
+                                        <span><a data-toggle="modal" data-target="#add-question-modal">Add Comment</a></span>
                                     </ul>
                                 </div>
                                 @auth

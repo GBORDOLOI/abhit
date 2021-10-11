@@ -47,7 +47,12 @@
                                     <ul class="list-inline answer-btn-list">
                                         <li><a href="javascript:void(0);">{{ $post->total_comments}} Comment</a></li>
                                         <li><a href="javascript:void(0);">&nbsp;{{$post->total_views}} views </a></li>
-                                        <li><a href="{{route('website.knowledge.details.post',['id' =>  $enc_id])}}">Add Comment</a></li>
+                                        @auth
+                                            <li><a href="{{route('website.knowledge.details.post',['id' =>  $enc_id])}}">Add Comment</a></li>
+                                        @endauth
+                                        @guest
+                                            <li><a data-toggle="modal" data-target="#login-modal" style="cursor: pointer;">Add Comment</a></li>
+                                        @endguest
                                     </ul>
                                 </div>
                             </li>
