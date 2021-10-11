@@ -27,6 +27,7 @@ class CourseController extends Controller
             'name' => 'required',
             'subject_id' => 'required',
             'pic' => 'required',
+            'duration' => 'required',
             'publish_date' => 'required',
             'publish_time' => 'required',
             'data' => 'required',
@@ -35,6 +36,7 @@ class CourseController extends Controller
             'name.required' => 'Course name is required',
             'subject_id.required' => 'Select subject',
             'pic.required' => 'Picture required',
+            'duration.required' => 'Duration is required',
             'publish_date.required' => 'Publish date is required',
             'publish_time.required' => 'Publish time is required',
             'data.required' => 'Description is required',
@@ -58,6 +60,7 @@ class CourseController extends Controller
                     'name' => $request->name,
                     'subject_id' => $request->subject_id,
                     'course_pic' => $file,
+                    'durations' => $request->duration,
                     'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
                     'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
                     'description' => $request->data,
@@ -77,6 +80,7 @@ class CourseController extends Controller
                 'name' => $request->name,
                 'subject_id' => $request->subject_id,
                 'course_pic' => $file,
+                'durations' => $request->duration,
                 'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
                 'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
                 'description' => $request->data,
@@ -124,6 +128,7 @@ class CourseController extends Controller
         if ($document->getClientOriginalName() == 'blob') {
             $course->name = $request->name;
             $course->subject_id = $request->subject_id;
+            $course->durations=  $request->duration;
             $course->publish_date = Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s');
             $course->time = Carbon::parse($request->publish_time)->format('H:i:s');
             $course->description = $request->data;
@@ -137,6 +142,7 @@ class CourseController extends Controller
             }
             $course->name = $request->name;
             $course->subject_id = $request->subject_id;
+            $course->durations=  $request->duration;
             $course->course_pic = $file;
             $course->publish_date = Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s');
             $course->time = Carbon::parse($request->publish_time)->format('H:i:s');

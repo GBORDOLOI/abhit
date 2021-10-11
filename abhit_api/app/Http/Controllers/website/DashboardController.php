@@ -33,6 +33,7 @@ class DashboardController extends Controller
                 $published['id']=$value->id;
                 $published['name']=$value->name;
                 $published['course_pic']=$value->course_pic;
+                $published['duration']=$value->durations;
                 $published['publish_date']=$value->publish_date;
                 $publishCourse[] = $published;
             } elseif ($publishDate == $Today) {
@@ -43,12 +44,14 @@ class DashboardController extends Controller
                     $published['id']=$value->id;
                     $published['name']=$value->name;
                     $published['course_pic']=$value->course_pic;
+                    $published['duration']=$value->durations;
                     $published['publish_date']=$value->publish_date;
                     $publishCourse[] = $published;
                 } else {
                     $upcoming['id']=$value->id;
                     $upcoming['name']=$value->name;
                     $upcoming['course_pic']=$value->course_pic;
+                    $published['duration']=$value->durations;
                     $upcoming['publish_date']=$value->publish_date;
                     $upComingCourse[] = $upcoming;
                 }
@@ -57,6 +60,7 @@ class DashboardController extends Controller
                 $upcoming['id']=$value->id;
                 $upcoming['name']=$value->name;
                 $upcoming['course_pic']=$value->course_pic;
+                $published['duration']=$value->durations;
                 $upcoming['publish_date']=$value->publish_date;
                 $upComingCourse[] = $upcoming;
             }

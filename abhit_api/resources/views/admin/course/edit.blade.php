@@ -54,7 +54,11 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                         <input type="file" class="filepond" name="pic" id="banner_pic" data-max-file-size="1MB"
                             data-max-files="1" />
                     </div>
-
+                    <div class="form-group">
+                        <label for="exampleInputName1">Duration</label>
+                        <input type="text" class="form-control" name="duration" placeholder="Enter Duration" value="{{$course->durations}}">
+                        <span class="text-danger" id="duration_error"></span>
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputCity1">Publish Date</label>
                         <input type="text" class="form-control" name="publish_date" id="publish_date" autocomplete="off" value="{{\Carbon\Carbon::parse($course->publish_date)->format('Y-m-d')}}"
