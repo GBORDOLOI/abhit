@@ -58,7 +58,7 @@
             </div>
             <div class="col-lg-4">
                 @auth
-                <div class="knowledge-forum-right1">
+                <div class="knowledge-forum-right1 mb-2">
                     <div class="knowledge-forum-profile-top"><img src="{{asset('asset_website/img/knowladge-forum/bg.png')}}" class="w100"></div>
                     <div class="knowledge-forum-profile-bottom">
                         @if(!empty($user_details))
