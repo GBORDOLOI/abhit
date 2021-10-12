@@ -359,6 +359,7 @@
 
     <script>
         jQuery("#carousel").owlCarousel({
+            loop:true,
             autoplay: true,
             rewind: true,
             /* use rewind if you don't want loop */
@@ -388,6 +389,7 @@
         });
 
         jQuery("#carousel-testimonial").owlCarousel({
+            loop:true,
             autoplay: true,
             rewind: true,
             /* use rewind if you don't want loop */
@@ -417,6 +419,7 @@
         });
 
         jQuery("#carousel-banner").owlCarousel({
+            loop:true,
             autoplay: true,
             rewind: true,
             /* use rewind if you don't want loop */

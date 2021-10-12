@@ -40,7 +40,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-12  p0">
+            <div class="col-lg-12 p-0">
                 <ul class="list-inline courses-list">
                     @foreach ($publishCourse as $item)
                     <li>

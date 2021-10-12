@@ -654,7 +654,7 @@ main {
 
 .courses-list {
     list-style-type: none;
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 .courses-list li {
