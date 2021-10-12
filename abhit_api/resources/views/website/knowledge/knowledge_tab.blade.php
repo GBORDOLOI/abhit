@@ -105,7 +105,7 @@
                                                 <div class="answer-describtion">
                                                     <p class="small-text-heading">
                                                         {{ $answer->knowledgeForumPost->created_at->diffForHumans() }},
-                                                        Asked by: Ramjan Ali Anik, Math Teacher</p>
+                                                        </p>
                                                     <h4 class="small-heading-black">
                                                         {{ $answer->knowledgeForumPost->question }}</h4>
                                                     <p class="text-justify">
