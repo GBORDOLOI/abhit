@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\KnowledgeForumComment;
 use App\Models\KnowledgeForumPost;
 use App\Models\User;
+use App\Models\UserDetails;
+use Illuminate\Support\Facades\Auth;
 
 class KnowledgeForumCommentsController extends Controller
 {
@@ -19,10 +21,13 @@ class KnowledgeForumCommentsController extends Controller
         ]);
         $is_activate = User::where('id',$request->commented_by)->first();
 
+        $userDetails = UserDetails::where('user_id', Auth::user()->id)->first();
+
         $create = KnowledgeForumComment::create([
             'knowledge_forum_post_id' => $request->post_id,
             'comments' => $comment,
             'user_id' => $request->commented_by,
+            'user_detail_id' => $userDetails->id,
             'is_activate' => $is_activate->is_activate,
         ]);
 

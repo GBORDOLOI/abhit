@@ -17,7 +17,7 @@
                     <div class="knowledge-forum-profile-bottom1">
                         <div class="knowledge-pic">
                             @if($user_details != null)
-                                <img src="{{asset('/files/profile/'.$user_details->image)}}" onerror="this.onerror=null;this.src='{{asset('asset_website/img/noimage.png')}}';"  class="rounded-circle w100">
+                                <img src="{{asset('/files/profile/'.$user_details->image)}}" onerror="this.onerror=null;this.src='{{asset('asset_website/img/noimage.png')}}';" style="border:3px solid white;"  height="110px" width="110px" class="rounded-circle">
                                 
                             @else
                                 <img src="{{asset('asset_website/img/knowladge-forum/image1.png')}}" class="w100">
@@ -497,7 +497,7 @@
             $('.cancel-edit-btn').hide();
             $('#gender').attr("disabled", true); 
             $('.profile-save-btn').attr("disabled", true); 
-            $('#profileForm input').attr('readonly', 'readonly');
+            $('#myAccountUserForm input').attr('readonly', 'readonly');
             $('.profile-save-btn').addClass('knowledge-link-old');
             $('.profile-save-btn').removeClass('knowledge-link');
         });

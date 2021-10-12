@@ -5,6 +5,7 @@ namespace App\Http\Controllers\website;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserDetails;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,7 +43,16 @@ class WebsiteAuthController extends Controller
                 'password' => Hash::make($password)
             ]);
 
-            if($create){
+            $user = User::where('email',$email)->first();
+
+            $userDetails = UserDetails::create([
+                'firstname' => $fname,
+                'lastname' => $lname,
+                'email' => $email,
+                'user_id' => $user->id,
+            ]);
+
+            if($create && $userDetails){
                 return response()->json(['message'=> 'Signup Successful', 'status' => 201]);
             }else{
                 return response()->json(['message'=> 'Oops! Something went wrong', 'status' => 500]);

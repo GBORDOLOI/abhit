@@ -55,4 +55,8 @@ class User extends Authenticatable
     public function knowledgeForumComment(){
         return $this->hasMany('App\Models\KnowledgeForumComment');
     }
+
+    public function userDetail(){
+        return $this->hasOne('App\Models\UserDetail');
+    }
 }

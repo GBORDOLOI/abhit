@@ -12,7 +12,6 @@
 
 @section('content')
 @include('layout.website.include.forum_header')
-
 <section class="knowledge-forum">
     <div class="container-fluid">
         <div class="row">
@@ -21,11 +20,12 @@
                     <ul class="list-inline">
                         <li>
                             <div class="answer-profile">
-                                 <div class="answer-profile-pic"><img src="{{asset('asset_website/img/knowladge-forum/image2.png')}}" class="w100"></div>
-                                
+                                <div class="answer-profile-pic">
+                                    <img src="{{asset('/files/profile/'.$knowledge_post->userDetail->image)}}" onerror="this.onerror=null;this.src='{{asset('asset_website/img/noimage.png')}}';" height="45px" width="45px" class="rounded-circle">
+                                </div>
                                 <div class="answer-profile-desc">
                                     <h4 class="small-heading-black mb0">{{$knowledge_post->user->firstname}} {{$knowledge_post->user->lastname}}</h4>
-                                    <p class="mb0">M.Sc Student</p>
+                                    <p class="mb0">{{$knowledge_post->user->education}}</p>
                                 </div>
                                 <span class="answer-span">{{$knowledge_post->created_at->diffForHumans()}}</span>
                             </div>
@@ -66,10 +66,12 @@
                                         @foreach($knowledge_comment as $comment)
                                         <li>
                                             <div class="answer-profile1">
-                                                <div class="answer-profile-pic1"><img src="{{asset('asset_website/img/knowladge-forum/image2.png')}}" class="w100"></div>
+                                                <div class="answer-profile-pic1">
+                                                    <img src="{{asset('/files/profile/'.$comment->userDetailComment->image)}}" onerror="this.onerror=null;this.src='{{asset('asset_website/img/noimage.png')}}';" height="30px" width="30px" class="rounded-circle">
+                                                </div>
                                                 <div class="answer-profile-desc1">
                                                     <h4 class="small-heading-black1 mb0">{{$comment->user->firstname}} {{$comment->user->lastname}}</h4>
-                                                    <p class="small-comment">M.Sc Student</p>
+                                                    <p class="small-comment">{{$comment->userDetailComment->education}}</p>
                                                     <p class="text-justify">{{$comment->comments}}</p>
                                                 </div>
                                                 <span class="answer-span1">{{$comment->created_at->diffForHumans()}}</span>

@@ -13,7 +13,10 @@ class UserDetailsController extends Controller
 {
 
     public function myAccount(Request $request){
-        $user_details = UserDetails::where('email',Auth::user()->email)->first();
+        $user_details = '';
+        if(Auth::check()){
+            $user_details = UserDetails::with('user')->where('email',Auth::user()->email)->first();
+        }
         return view('website.my_account.my_account')->with('user_details',$user_details);
     }
 
@@ -26,13 +29,14 @@ class UserDetailsController extends Controller
         $phone = $request->phone;
         $education = $request->education;
         $gender = $request->gender;
+        $user_id = Auth::user()->id;
 
-        $user_details = UserDetails::where('email',Auth::user()->email )->exists();
+        $user_details = UserDetails::where('user_id',Auth::user()->id )->exists();
 
         if($user_details == true){
-            UserDetails::where('email', Auth::user()->email)
+            UserDetails::where('user_id', Auth::user()->id)
                         ->update([
-                            'firstname' => $firstname,'lastname' => $lastname, 'email' => $email, 'phone' => $phone, 'education' => $education, 'gender' => $gender
+                            'firstname' => $firstname,'lastname' => $lastname, 'email' => $email, 'phone' => $phone, 'education' => $education, 'gender' => $gender,
                         ]);
         }else{
             UserDetails::create([
@@ -41,7 +45,8 @@ class UserDetailsController extends Controller
                 'email'  => $email,
                 'phone' => $phone,
                 'education' => $education,
-                'gender' => $gender
+                'gender' => $gender,
+                'user_id' => $user_id,
             ]);
         }
         User::where('email', Auth::user()->email)->update(['firstname' => $firstname,'lastname' => $lastname,'email' => $email]);
