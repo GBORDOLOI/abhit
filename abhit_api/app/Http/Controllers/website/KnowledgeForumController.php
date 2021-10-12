@@ -58,8 +58,14 @@ class KnowledgeForumController extends Controller
 
     public function knowledgeTab(Request $request){
         $questions_asked_by_user = KnowledgeForumPost::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->simplePaginate(3);
-        $user_details = UserDetails::where('email', Auth::user()->email)->first();
         $answered_by_user = KnowledgeForumComment::with('knowledgeForumPost')->where('user_id' , Auth::user()->id)->orderBy('created_at', 'desc')->simplePaginate(3);
+
+        if($request->ajax()){
+            $view = view('website.knowledge.post_asked_by_you',compact('questions_asked_by_user'))->render();
+            $answerView = view('website.knowledge.post_answer_by_you',compact('answered_by_user'))->render();
+            return response()->json(['posts' => $view, 'answerView' => $answerView]);
+        }
+        $user_details = UserDetails::where('email', Auth::user()->email)->first();
         return view('website.knowledge.knowledge_tab')->with(['questions_asked_by_user' => $questions_asked_by_user, 'user_details' => $user_details, 'answered_by_user' => $answered_by_user]);
     }
 }
