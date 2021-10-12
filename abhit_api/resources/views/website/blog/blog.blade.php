@@ -20,6 +20,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 p0">
+                    <button class="btn add-post float-right mr-3">Add Blog</button>
                     <ul class="list-inline blog-list-div">
                         @foreach ($blogs as $item)
                             <li>

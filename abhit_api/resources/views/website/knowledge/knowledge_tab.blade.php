@@ -1,6 +1,6 @@
 @extends('layout.website.website')
 
-@section('title', 'Knowledge Forum')
+@section('title', 'Knowledge tab')
 
 @section('head')
     <style>
