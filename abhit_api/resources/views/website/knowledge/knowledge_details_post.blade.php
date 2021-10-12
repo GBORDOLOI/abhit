@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="answer-profile-desc">
                                     <h4 class="small-heading-black mb0">{{$knowledge_post->user->firstname}} {{$knowledge_post->user->lastname}}</h4>
-                                    <p class="mb0">{{$knowledge_post->user->education}}</p>
+                                    <p class="mb0">{{$knowledge_post->userDetail->education}}</p>
                                 </div>
                                 <span class="answer-span">{{$knowledge_post->created_at->diffForHumans()}}</span>
                             </div>

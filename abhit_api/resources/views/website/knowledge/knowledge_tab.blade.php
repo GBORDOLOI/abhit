@@ -42,7 +42,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="knowledge-forum-right2">
+                    <div class="knowledge-forum-right2 mt-2">
                         <a data-toggle="modal" data-target="#add-question-modal" class="small-heading-grey">What is your
                             question?</a>
                     </div>
@@ -66,71 +66,35 @@
                         <div class="tab-pane active" id="question" role="tabpanel">
                             <div class="knowledge-forum-left-new">
                                 <ul class="list-inline answer-list2 ">
-                                    @forelse ($questions_asked_by_user as $question)
-                                        @php $enc_id = Crypt::encryptString($question->id)@endphp
-                                        <li>
-                                            <div class="answer-describtion">
-                                                <p class="small-text-heading">{{ $question->created_at->diffForHumans() }}
-                                                </p>
-                                                <h4 class="small-heading-black">{{ $question->question }}</h4>
-                                                <p class="text-justify">{{ $question->description }}</p>
-                                                <a href="#" class="post-link">{{ $question->links }}</a>
-                                                <div class="answer-btn-box">
-                                                    <ul class="list-inline answer-btn-list">
-                                                        <li><a
-                                                                href="{{ route('website.knowledge.details.post', ['id' => $enc_id]) }}">{{ $question->total_comments }}
-                                                                Comment</a></li>
-                                                        <li><a href="javascript:void(0)">{{ $question->total_views }}
-                                                                Views</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        @empty
-                                        <p class="p-4 mb-0">Nothing to show.</p>
-                                    @endforelse
+                                    <span id="postAskedByYou">
+                                        @include('website.knowledge.post_asked_by_you')
+                                    </span>
                                 </ul>
                             </div>
                             <div class="mt-2">
-                                {{ $questions_asked_by_user->links() }}
+                                <div class="ajax-loading" style="display:none;">
+                                    <p>
+                                        <img src="{{asset('asset_website/img/ajax-loader.gif')}}" alt="loading-gif">
+                                        Fetching Posts
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="answer" role="tabpanel">
                             <div class="knowledge-forum-left-new">
                                 <ul class="list-inline answer-list2">
-                                    @if (!$answered_by_user->isEmpty())
-                                        @foreach ($answered_by_user as $answer)
-                                            @php $encrypt_id = Crypt::encryptString($answer->knowledgeForumPost->id)@endphp
-                                            <li>
-                                                <div class="answer-describtion">
-                                                    <p class="small-text-heading">
-                                                        {{ $answer->knowledgeForumPost->created_at->diffForHumans() }},
-                                                        Asked by: Ramjan Ali Anik, Math Teacher</p>
-                                                    <h4 class="small-heading-black">
-                                                        {{ $answer->knowledgeForumPost->question }}</h4>
-                                                    <p class="text-justify">
-                                                        {{ $answer->knowledgeForumPost->description }}</p>
-                                                    <a href="#"
-                                                        class="post-link">{{ $answer->knowledgeForumPost->links }}</a>
-                                                    <div class="answer-btn-box">
-                                                        <ul class="list-inline answer-btn-list">
-                                                            <li><a
-                                                                    href="{{ route('website.knowledge.details.post', ['id' => $encrypt_id]) }}">{{ $answer->knowledgeForumPost->total_comments }}
-                                                                    Comment</a></li>
-                                                            <li><a href="javascript:void(0)">{{ $answer->knowledgeForumPost->total_views }}
-                                                                    Views</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    @else
-                                        <p class="p-4 mb-0">Nothing to show.</p>
-                                    @endif
+                                    <span id="postAnsweredByYou">
+                                        @include('website.knowledge.post_answer_by_you')
+                                    </span>
                                 </ul>
                             </div>
                             <div class="mt-2">
-                                {{ $answered_by_user->links() }}
+                                <div class="ajax-loading" style="display:none;">
+                                    <p>
+                                        <img src="{{asset('asset_website/img/ajax-loader.gif')}}" alt="loading-gif">
+                                        Fetching Posts
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="post" role="tabpanel">
@@ -167,4 +131,68 @@
 
 @section('scripts')
     @include('layout.website.include.modal_scripts')
+    <script>
+        function loadAskedByYou(page){
+            $.ajax({
+                url:'?page=' + page,
+                type:'get',
+                beforeSend: function(){
+                    $('.ajax-loading').show();
+                }
+            })
+            .done(function(data){
+                if(data.posts== ''){
+                    $('.ajax-loading').text('No post to show');
+                    return;
+                }else{
+                    $('.ajax-loading').hide();
+                    $('#postAskedByYou').append(data.posts);
+                }
+               
+            })
+            .fail(function(jqXHR,ajaxOptions,thrownError){
+                toastr.error('Oops!, Something went wrong');
+            })
+        }
+
+        let page = 1;
+        $(window).scroll(function(){
+            if($(window).scrollTop() + $(window).height() >= $(document).height()){
+                page ++;
+                loadAskedByYou(page);
+            }
+        });
+
+
+        function loadAnsweredByYou(answerPage){
+            $.ajax({
+                url:'?page=' + answerPage,
+                type:'get',
+                beforeSend: function(){
+                    $('.ajax-loading').show();
+                }
+            })
+            .done(function(data){
+                if(data.answerView== ''){
+                    $('.ajax-loading').text('No post to show');
+                    return;
+                }else{
+                    $('.ajax-loading').hide();
+                    $('#postAnsweredByYou').append(data.answerView);
+                }
+               
+            })
+            .fail(function(jqXHR,ajaxOptions,thrownError){
+                toastr.error('Oops!, Something went wrong');
+            })
+        }
+
+        let answerPage = 1;
+        $(window).scroll(function(){
+            if($(window).scrollTop() + $(window).height() >= $(document).height()){
+                answerPage ++;
+                loadAnsweredByYou(answerPage);
+            }
+        });
+    </script>
 @endsection

@@ -20,7 +20,6 @@ class CreateCourseTable extends Migration
             $table->bigInteger('subject_id')->nullable();
             $table->text('course_pic')->nullable();
             $table->text('description')->nullable();
-            $table->string('duration');
             $table->timestamp('publish_date')->nullable();
             $table->time('time')->nullable();
             $table->boolean('is_activate')->default(1);

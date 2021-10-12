@@ -37,28 +37,11 @@
                                 </a>
                             </li>
                         @endguest
-                        @foreach( $knowledge_post as $post)
-                            @php $enc_id = Crypt::encryptString($post->id)@endphp
-                            <li>
-                                <p class="small-text-heading">{{$post->created_at->diffForHumans()}}, &nbsp;Posted by: {{$post->user->firstname}} {{$post->user->lastname}}</p>
-                                <a href="{{route('website.knowledge.details.post',['id' =>  $enc_id])}}" target="_blank" class="small-heading-black">{{$post->question}}</a>
-                                <p class="block-ellipsis6">{{$post->description}}</p>
-                                <div class="answer-btn-box">
-                                    <ul class="list-inline answer-btn-list">
-                                        <li><a href="javascript:void(0);">{{ $post->total_comments}} Comment</a></li>
-                                        <li><a href="javascript:void(0);">&nbsp;{{$post->total_views}} views </a></li>
-                                        @auth
-                                            <li><a href="{{route('website.knowledge.details.post',['id' =>  $enc_id])}}">Add Comment</a></li>
-                                        @endauth
-                                        @guest
-                                            <li><a data-toggle="modal" data-target="#login-modal" style="cursor: pointer;">Add Comment</a></li>
-                                        @endguest
-                                    </ul>
-                                </div>
-                            </li>
-                        @endforeach
+                        <span id="allKnowledgePost">
+                            @include('website.knowledge.knowledge_post')
+                        </span>
                     </ul>
-                    {{ $knowledge_post->links() }}
+                    {{-- {{ $knowledge_post->links() }} --}}
                 </div>
             </div>
             <div class="col-lg-4">
@@ -103,6 +86,13 @@
                 </div>
             </div>
         </div>
+
+        <div class="ajax-loading" style="display:none;">
+            <p>
+                <img src="{{asset('asset_website/img/ajax-loader.gif')}}" alt="loading-gif">
+                Fetching Posts
+            </p>
+        </div>
     </div>
 </section>
 
@@ -114,4 +104,36 @@
 
 @section('scripts')
     @include('layout.website.include.modal_scripts')
+    <script>
+        function loadMorePost(page){
+            $.ajax({
+                url:'?page=' + page,
+                type:'get',
+                beforeSend: function(){
+                    $('.ajax-loading').show();
+                }
+            })
+            .done(function(data){
+                if(data.knowledge_forum_post == ''){
+                    $('.ajax-loading').text('No post to show');
+                    return;
+                }else{
+                    $('.ajax-loading').hide();
+                    $('#allKnowledgePost').append(data.knowledge_forum_post);
+                }
+               
+            })
+            .fail(function(jqXHR,ajaxOptions,thrownError){
+                toastr.error('Oops!, Something went wrong');
+            })
+        }
+
+        let page = 1;
+        $(window).scroll(function(){
+            if($(window).scrollTop() + $(window).height() >= $(document).height()){
+                page ++;
+                loadMorePost(page);
+            }
+        });
+    </script>
 @endsection
