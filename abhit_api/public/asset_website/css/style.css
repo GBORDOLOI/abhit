@@ -3202,3 +3202,8 @@ input {
 ::placeholder{
     color:aliceblue;
 }
+
+.ajax-loading p{
+    position: absolute;
+    left: 34%;
+}

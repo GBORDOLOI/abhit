@@ -13,16 +13,21 @@ use App\Models\KnowledgeForumComment;
 class KnowledgeForumController extends Controller
 {
     public function index(Request $request){
-        $knowledge_post = KnowledgeForumPost::with('user')->orderBy('created_at', 'desc')->simplePaginate(3);
+        $top_knowledge_post =''; $total_post = ''; $total_post_commented_by_one_user = ''; $user_details = '';
+        $knowledge_post = KnowledgeForumPost::with('user')->orderBy('created_at', 'desc')->paginate(3);
+
+        if($request->ajax()){
+            $post = view('website.knowledge.knowledge_post', compact('knowledge_post'))->render();
+            return response()->json(['knowledge_forum_post' =>  $post]);
+        }    
         $top_knowledge_post = KnowledgeForumPost::with('user')->orderBy('created_at', 'desc')->limit(3)->get();
-        $total_post = '';
-        $total_post_commented_by_one_user = '';
-        $user_details = '';
         if(Auth::check()){
             $total_post = KnowledgeForumPost::where('user_id',Auth::user()->id)->count();
             $total_post_commented_by_one_user = KnowledgeForumComment::where('user_id' , Auth::user()->id)->count();
             $user_details = UserDetails::where('email', Auth::user()->email)->first();
         }
+        
+        
         return view('website.knowledge.knowledge_forum')->with(['knowledge_post' => $knowledge_post, 'top_knowledge_post' =>  $top_knowledge_post, 'total_questions' => $total_post, 'total_knowledge_post_commented_by_one_user' => $total_post_commented_by_one_user, 'user_details' => $user_details]);
     }
 
