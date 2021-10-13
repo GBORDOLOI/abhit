@@ -497,7 +497,7 @@
             $('.cancel-edit-btn').hide();
             $('#gender').attr("disabled", true); 
             $('.profile-save-btn').attr("disabled", true); 
-            $('#myAccountUserForm input').attr('readonly', 'readonly');
+            $('#profileForm input').attr('readonly', 'readonly');
             $('.profile-save-btn').addClass('knowledge-link-old');
             $('.profile-save-btn').removeClass('knowledge-link');
         });

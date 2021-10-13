@@ -202,3 +202,105 @@
     </div>
 </div>
 
+<div class="modal" id="sharePostModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Share Post</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            Modal body..
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Share Post Modal-->
+<div class="modal" id="sharePostModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Share Post</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            Modal body..
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Add Blog Modal -->
+<div class="modal" id="websiteAddBlogModal">
+    <div class="modal-dialog " >
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Create Blog</h4>
+                        <form class="forms-sample"  method="POST" enctype="multipart/form-data"  id="websiteBlogForm">
+                            @csrf
+                            <div class="form-group">
+                                <label for="exampleInputName1">Name</label>
+                                <input type="text" class="form-control" id="blogName" name="blogName" placeholder="Enter Blog Name" required>
+                                <span class="text-danger" id="name_error"></span>
+                            </div>
+        
+                            <div class="form-group">
+                                <label>File upload</label>
+                                <input type="file" class="filepond" name="pic" id="banner_pic" data-max-file-size="1MB" data-max-files="1" required>
+                                <span class="text-danger" id="pic_error"></span>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="exampleTextarea1">Description</label>
+                                <textarea class="form-control" id="websiteAddBlogEditor" name="blogDescription"></textarea>
+                                <span class="text-danger" id="data_error"></span>
+                            </div>
+                            <button type="submit" class="btn add-post float-right mr-3 websiteAddBlogBtn">Create</button>
+                            <button type="submit" class="btn btn-default float-right mr-3 websiteCancelBlogBtn">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Blog Confirmation Modal -->
+<div class="modal" id="websiteAddBlogConfirmationModal">
+    <div class="modal-dialog " >
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center">
+                    <h4 style="color:green;">Blog created successfully</h4>
+                    <p>
+                        Blog will display after it is approved by the admin.
+                    </p>
+                </div>
+                <button type="button" data-dismiss="modal" class="close">&times;</button>
+            </div>
+        </div>
+    </div>
+</div>

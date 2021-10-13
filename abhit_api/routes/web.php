@@ -35,6 +35,7 @@ Route::prefix('course')->group(function(){
 Route::prefix('blog')->group(function(){
     Route::get('', [BlogController::class,'getBlog'])->name('website.blog');
     Route::get('details/{id}',[BlogController::class,'details'])->name('website.blog.details');
+    Route::post('create-blog',[BlogController::class,'createBlog'])->name('website.blog.create');
 });
 
 

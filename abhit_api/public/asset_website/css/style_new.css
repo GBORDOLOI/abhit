@@ -1,3 +1,6 @@
+.filepond--root .filepond--credits[style] {
+    display: none;
+}
 .course-pic img {
     height: 250px;
     object-fit: cover;
