@@ -253,10 +253,10 @@
 
 <!-- Add Blog Modal -->
 <div class="modal" id="websiteAddBlogModal">
-    <div class="modal-dialog " >
+    <div class="modal-dialog mw-100 w-75 h-100 d-md-flex flex-column justify-content-center my-0">
         <div class="modal-content">
-            <div class="modal-body">
-                <div class="card">
+            <div class="modal-body p-0">
+                <div class="card border-0">
                     <div class="card-body">
                         <h4 class="card-title">Create Blog</h4>
                         <form class="forms-sample"  method="POST" enctype="multipart/form-data"  id="websiteBlogForm">

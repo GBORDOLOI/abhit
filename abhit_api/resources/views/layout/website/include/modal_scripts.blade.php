@@ -111,7 +111,7 @@
                 maxFiles: 5,
                 instantUpload: false,
                 imagePreviewHeight: 135,
-                labelIdle: '<div style="width:100%;height:100%;"><p> Drag &amp; Drop your files or <span class="filepond--label-action" tabindex="0">Browse</span><br> Maximum number of image is 1 :</p> </div>',
+                labelIdle: '<div style="width:100%;height:100%;margin-top:10px;"><p> Drag &amp; Drop your files or <span class="filepond--label-action" tabindex="0">Browse</span><br> Maximum number of image is 1 :</p> </div>',
             }
         );
 

@@ -50,6 +50,10 @@
     .course-select .selectBtn{
         width: 100px;
     }
+
+    #websiteAddBlogModal .w-75{
+        width: 90% !important;
+    }
 }
 
 
