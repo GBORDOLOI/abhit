@@ -1,6 +1,39 @@
 @extends('layout.website.website')
 
+@section('head')
+<style>
+    .add-blog-floating{
+        position: fixed;
+        bottom: 60px;
+        right: 20px;
+        z-index: 1000;
+        height: 70px;
+        width: 70px;
+        border-radius: 50%;
+        background-image: linear-gradient(to left, #076fef, #01b9f1);
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff !important;
+        filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+        transition: 0.2s ease-in-out;
+    }
+
+    .add-blog-floating:hover{
+        transform: translateY(2px);
+        color: #fff;
+    }
+</style>
+@endsection
+
 @section('content')
+{{-- Floating button --}}
+@auth
+    <a href="javascript:void(0)" class="btn add-blog-floating" data-toggle="modal" data-target="#websiteAddBlogModal"><p class="mt-2">Add Blog</p></a>    
+@endauth
+@guest
+    <a href="javascript:void(0)" class="btn add-blog-floating" data-toggle="modal" data-target="#login-modal"><p class="mt-2">Add Blog</p></a>    
+@endguest
+
     <section class="subheader">
         <div class="container-fluid">
             <div class="row">
@@ -19,12 +52,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 p0">
-                    @auth
-                        <a href="javascript:void(0)" class="btn add-post float-right mr-3" data-toggle="modal" data-target="#websiteAddBlogModal">Add Blog</a>
-                    @endauth
-                    @guest
-                        <a href="javascript:void(0)" class="btn add-post float-right mr-3" data-toggle="modal" data-target="#login-modal">Add Blog</a>
-                    @endguest
                     <ul class="list-inline blog-list-div">
                         @foreach ($blogs as $item)
                             <li>
