@@ -19,7 +19,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 p0">
-                    <a href="javascript:void(0)" class="btn add-post float-right mr-3" data-toggle="modal" data-target="#websiteAddBlogModal">Add Blog</a>
+                    @auth
+                        <a href="javascript:void(0)" class="btn add-post float-right mr-3" data-toggle="modal" data-target="#websiteAddBlogModal">Add Blog</a>
+                    @endauth
+                    @guest
+                    <a href="javascript:void(0)" class="btn add-post float-right mr-3" data-toggle="modal" data-target="#login-modal">Add Blog</a>
+                    @endguest
                     <ul class="list-inline blog-list-div">
                         @foreach ($blogs as $item)
                             <li>
