@@ -7,6 +7,11 @@
     #header{
         display: none;
     }
+
+    .sidebar {
+        position: sticky;
+        top: 150px;
+    }
 </style>
 @endsection
 
@@ -93,7 +98,7 @@
             </div>
             @auth
               <div class="col-lg-4">
-                <div class="knowledge-forum-right1">
+                <div class="knowledge-forum-right1 sidebar">
                     <div class="knowledge-forum-profile-top"><img src="{{asset('asset_website/img/knowladge-forum/bg.png')}}" class="w100"></div>
                     <div class="knowledge-forum-profile-bottom">
                         @if(!empty($user_details))
