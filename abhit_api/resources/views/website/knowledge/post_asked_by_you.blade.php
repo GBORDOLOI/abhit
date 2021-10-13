@@ -2,7 +2,7 @@
 <li>
     @php $enc_id = Crypt::encryptString($question->id)@endphp
     <div class="answer-describtion">
-        <p class="small-text-heading">{{ $question->created_at->diffForHumans() }}
+        <p class="small-text-heading">Posted: {{ $question->created_at->diffForHumans() }}
         </p>
         <h4 class="small-heading-black">{{ $question->question }}</h4>
         <p class="text-justify">{{ $question->description }}</p>

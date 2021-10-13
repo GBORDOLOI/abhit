@@ -3,7 +3,7 @@
     <li>
         <div class="answer-describtion">
             <p class="small-text-heading">
-                {{ $answer->knowledgeForumPost->created_at->diffForHumans() }},
+                Posted: {{ $answer->knowledgeForumPost->created_at->diffForHumans() }},
                 </p>
             <h4 class="small-heading-black">
                 {{ $answer->knowledgeForumPost->question }}</h4>

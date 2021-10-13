@@ -23,12 +23,22 @@
                         <a href="javascript:void(0)" class="btn add-post float-right mr-3" data-toggle="modal" data-target="#websiteAddBlogModal">Add Blog</a>
                     @endauth
                     @guest
-                    <a href="javascript:void(0)" class="btn add-post float-right mr-3" data-toggle="modal" data-target="#login-modal">Add Blog</a>
+                        <a href="javascript:void(0)" class="btn add-post float-right mr-3" data-toggle="modal" data-target="#login-modal">Add Blog</a>
                     @endguest
                     <ul class="list-inline blog-list-div">
                         @foreach ($blogs as $item)
                             <li>
                                 <a href="{{route('website.blog.details',['id'=>\Crypt::encrypt($item->id)])}}">
+                                    <div class="dropdown" style="float:right;">
+                                        <a type="button"  data-toggle="dropdown" ><i class="fa fa-ellipsis-v" aria-hidden="true" style="font-size:17px;"></i></a>
+                                        <div class="dropdown-menu">
+                                            @auth
+                                                <a href="javascript:void(0);" class="dropdown-item" style="float:right;font-size:12px;" ><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                                  &nbsp;  Report</a>
+                                            @endauth
+                                            <a href="javascript:void(0);" class="dropdown-item"  data-toggle="modal" data-target="#sharePostModal" style="font-size:12px;"><i class="fa fa-share" aria-hidden="true"></i> &nbsp; Share</a>
+                                        </div>
+                                    </div> 
                                     <div class="blog-box">
                                         <div class="blog-image"><img src="{{asset($item->blog_image)}}"
                                                 class="w100"></div>
