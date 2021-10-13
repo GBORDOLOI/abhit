@@ -6,8 +6,7 @@
 
 <script src="{{asset('asset_admin/ckeditor/ckeditor.js')}}"></script>
 
-    <link rel="stylesheet"
-        href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css">
+    <link rel="stylesheet"  href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css">
     <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css">
 @endsection
 
@@ -101,7 +100,7 @@
 
             var formdata = new FormData(this);
 
-            var data = CKEDITOR.instances.editor.getData();
+            var data = CKEDITOR.instances.editor.document.getBody().getText();
 
             pondFiles = pond.getFiles();
             for (var i = 0; i < pondFiles.length; i++) {

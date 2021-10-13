@@ -9,7 +9,6 @@
                             class="w100"></div>
                     <div class="subheader-image-desc">
                         <h2 class="heading-black">Blog</h2>
-
                     </div>
                 </div>
             </div>
@@ -20,7 +19,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 p0">
-                    <button class="btn add-post float-right mr-3">Add Blog</button>
+                    <a href="javascript:void(0)" class="btn add-post float-right mr-3" data-toggle="modal" data-target="#websiteAddBlogModal">Add Blog</a>
                     <ul class="list-inline blog-list-div">
                         @foreach ($blogs as $item)
                             <li>
@@ -44,143 +43,15 @@
                                     </div>
                                 </a>
                             </li>
-
                         @endforeach
-
-                        {{-- <li>
-                            <a href="blog-details.html">
-                                <div class="blog-box">
-                                    <div class="blog-image"><img src="assets/img/blog/image2.png"
-                                            class="w100"></div>
-                                    <div class="blog-desc">
-                                        <span class="icon-Calender-09 calendar-icon"></span><span>April 20, 2021</span>
-                                        <div class="block-ellipsis1">
-                                            <h4 class="small-heading-black">Integer congue magna at pretium
-                                                purus pretium</h4>
-                                        </div>
-                                        <p class="block-ellipsis2 ">Lorem ipsum dolor sit amet, consectetur sed do
-                                            eiusmod tempor incididunt ut labore et dolore
-                                            magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat</p>
-                                        <div>
-                                            <h6 class="mb0">Ramjan Ali Anik</h6>
-                                            <p class="mb0">Math Teacher</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                        </li>
-
-                        <li>
-                            <a href="blog-details.html">
-                                <div class="blog-box">
-                                    <div class="blog-image"><img src="assets/img/blog/image3.png"
-                                            class="w100"></div>
-                                    <div class="blog-desc">
-                                        <span class="icon-Calender-09 calendar-icon"></span><span>April 20, 2021</span>
-                                        <div class="block-ellipsis1">
-                                            <h4 class="small-heading-black">Integer congue magna at pretium
-                                                purus pretium Integer congue magna at pretium
-                                                purus pretium</h4>
-                                        </div>
-                                        <p class="block-ellipsis2 ">Lorem ipsum dolor sit amet, consectetur sed do
-                                            eiusmod tempor incididunt ut labore et dolore
-                                            magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat</p>
-                                        <div>
-                                            <h6 class="mb0">Ramjan Ali Anik</h6>
-                                            <p class="mb0">Math Teacher</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                        </li>
-
-                        <li>
-                            <a href="blog-details.html">
-                                <div class="blog-box">
-                                    <div class="blog-image"><img src="assets/img/blog/image4.png"
-                                            class="w100"></div>
-                                    <div class="blog-desc">
-                                        <span class="icon-Calender-09 calendar-icon"></span><span>April 20, 2021</span>
-                                        <div class="block-ellipsis1">
-                                            <h4 class="small-heading-black">Integer congue magna at pretium
-                                                purus pretium Integer congue magna at pretium
-                                                purus pretium</h4>
-                                        </div>
-                                        <p class="block-ellipsis2 ">Lorem ipsum dolor sit amet, consectetur sed do
-                                            eiusmod tempor incididunt ut labore et dolore
-                                            magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat</p>
-                                        <div>
-                                            <h6 class="mb0">Ramjan Ali Anik</h6>
-                                            <p class="mb0">Math Teacher</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                        </li>
-
-                        <li>
-                            <a href="blog-details.html">
-                                <div class="blog-box">
-                                    <div class="blog-image"><img src="assets/img/blog/image5.png"
-                                            class="w100"></div>
-                                    <div class="blog-desc">
-                                        <span class="icon-Calender-09 calendar-icon"></span><span>April 20, 2021</span>
-                                        <div class="block-ellipsis1">
-                                            <h4 class="small-heading-black">Integer congue magna at pretium
-                                                purus pretium Integer congue magna at pretium
-                                                purus pretium</h4>
-                                        </div>
-                                        <p class="block-ellipsis2 ">Lorem ipsum dolor sit amet, consectetur sed do
-                                            eiusmod tempor incididunt ut labore et dolore
-                                            magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat</p>
-                                        <div>
-                                            <h6 class="mb0">Ramjan Ali Anik</h6>
-                                            <p class="mb0">Math Teacher</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="blog-details.html">
-                                <div class="blog-box">
-                                    <div class="blog-image"><img src="assets/img/blog/image6.png"
-                                            class="w100"></div>
-                                    <div class="blog-desc">
-                                        <span class="icon-Calender-09 calendar-icon"></span><span>April 20, 2021</span>
-                                        <div class="block-ellipsis1">
-                                            <h4 class="small-heading-black">Integer congue magna at pretium
-                                                purus pretium Integer congue magna at pretium
-                                                purus pretium</h4>
-                                        </div>
-                                        <p class="block-ellipsis2 ">Lorem ipsum dolor sit amet, consectetur sed do
-                                            eiusmod tempor incididunt ut labore et dolore
-                                            magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat</p>
-                                        <div>
-                                            <h6 class="mb0">Ramjan Ali Anik</h6>
-                                            <p class="mb0">Math Teacher</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li> --}}
                     </ul>
                 </div>
             </div>
         </div>
     </section>
+    @include('layout.website.include.modals')
+@endsection
+
+@section('scripts')
+    @include('layout.website.include.modal_scripts')
 @endsection

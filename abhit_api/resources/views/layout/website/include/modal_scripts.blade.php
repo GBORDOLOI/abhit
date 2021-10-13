@@ -88,4 +88,81 @@
         $('#knowledgeQuestionForm')[0].reset();
         CKEDITOR.instances.editorQuestion.setData('');
     });
+
+
+    /********************* For Website Add BLog **********************/
+    CKEDITOR.replace('websiteAddBlogEditor');
+
+        FilePond.registerPlugin(
+
+            FilePondPluginFileEncode,
+
+            FilePondPluginFileValidateSize,
+
+            FilePondPluginImageExifOrientation,
+
+            FilePondPluginImagePreview
+        );
+
+        // Select the file input and use create() to turn it into a pond
+        pond = FilePond.create(
+            document.getElementById('banner_pic'), {
+                allowMultiple: true,
+                maxFiles: 5,
+                instantUpload: false,
+                imagePreviewHeight: 135,
+                labelIdle: '<div style="width:100%;height:100%;"><p> Drag &amp; Drop your files or <span class="filepond--label-action" tabindex="0">Browse</span><br> Maximum number of image is 1 :</p> </div>',
+            }
+        );
+
+        $('#websiteBlogForm').on('submit',function(e){
+            e.preventDefault();
+
+            $('.websiteAddBlogBtn').text('Please wait...');
+            let formdata = new FormData(this);
+
+            let websiteAddBlogEditor = CKEDITOR.instances.websiteAddBlogEditor.document.getBody().getText();
+
+            pondFiles = pond.getFiles();
+            for (var i = 0; i < pondFiles.length; i++) {
+                // append the blob file
+                formdata.append('pic', pondFiles[i].file);
+            }
+
+            formdata.append('description', websiteAddBlogEditor);
+
+            if(websiteAddBlogEditor.length <= 1){
+                toastr.error('Blog Description is required');
+                $('.websiteAddBlogBtn').text('Create');
+            }else{
+                $.ajax({
+                    url:"{{route('website.blog.create')}}",
+                    type:'POST',
+                    processData: false,
+                    contentType: false,
+                    data:formdata,
+                    success:function(result){
+                        console.log(result)
+                        toastr.success(result.blogMessage)
+                        $('#websiteBlogForm')[0].reset();
+                        CKEDITOR.instances.websiteAddBlogEditor.setData('');
+                        $('.websiteAddBlogBtn').text('Create');
+                        $('#websiteAddBlogModal').modal('hide');
+                        location.reload();
+                    },
+                    error:function(xhr, status, error){
+                        if(xhr.status == 500 || xhr.status == 422){
+                            toastr.error('Oops! Something went wrong while creating blog.');
+                            $('.websiteAddBlogBtn').text('Create');
+                        }
+                    }
+                });
+            }
+        });
+
+        $('.websiteCancelBlogBtn').on('click',function(){
+            $('#websiteBlogForm')[0].reset();
+            CKEDITOR.instances.websiteAddBlogEditor.setData('');
+            $('#websiteAddBlogModal').modal('hide');
+        });
 </script>
