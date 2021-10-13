@@ -148,7 +148,7 @@
                         CKEDITOR.instances.websiteAddBlogEditor.setData('');
                         $('.websiteAddBlogBtn').text('Create');
                         $('#websiteAddBlogModal').modal('hide');
-                        location.reload();
+                        $('#websiteAddBlogConfirmationModal').modal('show');
                     },
                     error:function(xhr, status, error){
                         if(xhr.status == 500 || xhr.status == 422){

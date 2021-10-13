@@ -287,3 +287,20 @@
         </div>
     </div>
 </div>
+
+<!-- Add Blog Confirmation Modal -->
+<div class="modal" id="websiteAddBlogConfirmationModal">
+    <div class="modal-dialog " >
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center">
+                    <h4 style="color:green;">Blog created successfully</h4>
+                    <p>
+                        Blog will display after it is approved by the admin.
+                    </p>
+                </div>
+                <button type="button" data-dismiss="modal" class="close">&times;</button>
+            </div>
+        </div>
+    </div>
+</div>

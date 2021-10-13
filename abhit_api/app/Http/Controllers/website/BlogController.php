@@ -47,7 +47,8 @@ class BlogController extends Controller
         $create = Blog::create([
             'name' => $blogName,
             'blog_image' => $file,
-            'blog' => $blogDescription
+            'blog' => $blogDescription,
+            'is_activate' => 0,
         ]);
 
         if($create){
