@@ -6,7 +6,7 @@
     <div class="page-header">
         <h3 class="page-title">
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                <i class="mdi mdi-book"></i>
+                <i class="mdi  mdi-alert menu-icon"></i>
             </span> Reported Posts
         </h3>
     </div>
@@ -14,7 +14,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Subjects List</h4>
+                {{-- <h4 class="card-title">Subjects List</h4> --}}
                 </p>
                 <table class="table table-bordered">
                     <thead>
@@ -33,7 +33,7 @@
                                 <td>{{ $item->report_count }}</td>
                                 <td>
                                     <div class="dropdown">
-                                        <a href="#" type="button"  data-toggle="dropdown"> <i class="mdi mdi-menu"></i></a>
+                                        <a href="#" type="button"  data-toggle="dropdown" style="font-size:18px;color:black;"> <i class="mdi mdi-menu"></i></a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item move-to-trash" href="#" style="font-size:15px;color:black;">Move To Trash</a>
                                             {{-- <a class="dropdown-item" href="#" style="font-size:15px;">Permanent Delete</a> --}}
