@@ -105,7 +105,7 @@
         );
 
         // Select the file input and use create() to turn it into a pond
-        pond = FilePond.create(
+        let pond = FilePond.create(
             document.getElementById('banner_pic'), {
                 allowMultiple: true,
                 maxFiles: 5,
@@ -149,6 +149,7 @@
                         $('.websiteAddBlogBtn').text('Create');
                         $('#websiteAddBlogModal').modal('hide');
                         $('#websiteAddBlogConfirmationModal').modal('show');
+                        pond.removeFile();
                     },
                     error:function(xhr, status, error){
                         if(xhr.status == 500 || xhr.status == 422){
@@ -164,5 +165,37 @@
             $('#websiteBlogForm')[0].reset();
             CKEDITOR.instances.websiteAddBlogEditor.setData('');
             $('#websiteAddBlogModal').modal('hide');
+            pond.removeFile();
         });
+
+
+
+        /***************************** Report Modal **************************/
+        $('.reportModalLink').click(function(){
+            let postId = $(this).data('id');
+            $('.reportPostButton').on('click',function(e){
+                e.preventDefault();
+                $.ajax({
+                    url:"{{route('website.report.knowledge.post')}}",
+                    type:'POST',
+                    data:{ '_token': '{{ csrf_token() }}','postId' : postId},
+                    success:function(result){
+                        console.log(result);
+                        if(result.warning){
+                            toastr.warning(result.warning);
+                            $('#ReportPostModal').modal('hide');
+                        }else{
+                            toastr.success(result.success);
+                            $('#ReportPostModal').modal('hide');
+                        }
+                    },
+                    error:function(xhr, status, error){
+                        if(xhr.status == 500 || xhr.status == 422){
+                            toastr.error('Oops! Something went wrong while reporting.');
+                        }
+                    }
+                });
+            });
+        });
+
 </script>

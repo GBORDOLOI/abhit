@@ -32,10 +32,24 @@
                                     <h4 class="small-heading-black mb0">{{$knowledge_post->user->firstname}} {{$knowledge_post->user->lastname}}</h4>
                                     <p class="mb0">{{$knowledge_post->userDetail->education}}</p>
                                 </div>
-                                <span class="answer-span">{{$knowledge_post->created_at->diffForHumans()}}</span>
+                                <span class="answer-span">posted : {{$knowledge_post->created_at->diffForHumans()}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                
+                                    <span class="dropdown" style="float:right;">
+                                        <a type="button"  data-toggle="dropdown"><i class="fa fa-ellipsis-v" aria-hidden="true" style="font-size:18px;" ></i></a>
+                                        <div class="dropdown-menu">
+                                            @auth
+                                                <a href="javascript:void(0);" data-id="{{$knowledge_post->id}}" data-toggle="modal" data-target="#ReportPostModal" class="dropdown-item reportModalLink" style="float:right;font-size:12px;" ><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                                  &nbsp;  Report</a>
+                                            @endauth
+                                            <a href="javascript:void(0);" class="dropdown-item"  data-toggle="modal" data-target="#sharePostModal" style="font-size:12px;"><i class="fa fa-share" aria-hidden="true"></i> &nbsp; Share</a>
+                                        </div>
+                                    </span> 
+                                </span>
+                                
                             </div>
                             <div class="answer-describtion">
                                 <h4 class="small-heading-black">Q: {{$knowledge_post->question}}</h4>
+                               
                                 <p class="text-justify">{{$knowledge_post->description}}</p>
                                 <a href="{{$knowledge_post->links}}" class="post-link">{{$knowledge_post->links}}</a>
                                 <div class="answer-btn-box">

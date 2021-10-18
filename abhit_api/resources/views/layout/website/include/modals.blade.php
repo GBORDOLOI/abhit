@@ -202,6 +202,8 @@
     </div>
 </div>
 
+
+<!-- Share Post/Blog Modal-->
 <div class="modal" id="sharePostModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -226,30 +228,26 @@
     </div>
 </div>
 
-<!-- Share Post Modal-->
-<div class="modal" id="sharePostModal">
+<!-- Report Blog/ Post Modal-->
+<div class="modal" id="ReportPostModal">
     <div class="modal-dialog">
         <div class="modal-content">
-
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h4 class="modal-title">Share Post</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-            Modal body..
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="text-center">
+                    <h5>Are you sure ?</h5>
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                </div>
+                <div style="float:right;" class="mt-3">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger reportPostButton">Yes, Report</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
 
 <!-- Add Blog Modal -->
 <div class="modal" id="websiteAddBlogModal">

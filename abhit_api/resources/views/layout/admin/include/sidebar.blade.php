@@ -30,18 +30,13 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
 
-                    <li class="nav-item"> <a class="nav-link"
-                        href="{{route('admin.get.banner')}}">Banner</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('admin.get.banner')}}">Banner</a></li>
 
-                    <li class="nav-item"> <a class="nav-link"
-                            href="{{route('admin.get.subject')}}">Subjects</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('admin.get.subject')}}">Subjects</a></li>
 
-                    <li class="nav-item"> <a class="nav-link"
-                                href="{{route('admin.get.blog')}}">Blog</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('admin.get.blog')}}">Blog</a></li>           
 
-                    <li class="nav-item"> <a class="nav-link"
-                                    href="{{route('admin.get.gallery')}}">Gallery</a></li>
-
+                    <li class="nav-item"> <a class="nav-link"  href="{{route('admin.get.gallery')}}">Gallery</a></li>
 
                 </ul>
             </div>
@@ -51,6 +46,10 @@
                 <span class="menu-title">Course</span>
                 <i class="mdi mdi-book menu-icon"></i>
             </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('website.get.report.knowledge.post')}}"><span class="menu-title">Reported Posts</span>
+                <i class="mdi  mdi-alert menu-icon"></i></a>
         </li>
     </ul>
 </nav>

@@ -11,6 +11,7 @@ use App\Http\Controllers\website\UserDetailsController;
 use App\Http\Controllers\website\KnowledgeForumPostController;
 use App\Http\Controllers\website\KnowledgeForumController;
 use App\Http\Controllers\website\KnowledgeForumCommentsController;
+use App\Http\Controllers\website\ReportPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +71,9 @@ Route::post('add-knowledge-question',[KnowledgeForumPostController::class,'addKn
 Route::get('knowledge-details-post/{id}',[KnowledgeForumController::class,'knowledgeDetailPost'])->name('website.knowledge.details.post');
 Route::post('knowledge-comment',[KnowledgeForumCommentsController::class,'knowledgeComment'])->name('website.knowledge.comment');
 Route::get('knowledge-tab', [KnowledgeForumController::class,'knowledgeTab'])->name('website.knowledge.tab');
+Route::get('get-report-knowledge-post',[ReportPostController::class,'getReportedPost'])->name('website.get.report.knowledge.post');
+Route::post('report-knowledge-post', [ReportPostController::class, 'reportPost'])->name('website.report.knowledge.post');
+Route::post('remove-reported-post',[ReportPostController::class, 'moveToTrash'])->name('website.remove.reported.post');
 
 
 
