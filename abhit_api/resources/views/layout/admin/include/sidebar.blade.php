@@ -51,5 +51,9 @@
             <a class="nav-link" href="{{route('website.get.report.knowledge.post')}}"><span class="menu-title">Reported Posts</span>
                 <i class="mdi  mdi-alert menu-icon"></i></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('website.blog.report.get')}}"><span class="menu-title">Reported Blogs</span>
+                <i class="mdi  mdi-alert menu-icon"></i></a>
+        </li>
     </ul>
 </nav>

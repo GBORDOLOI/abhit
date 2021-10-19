@@ -170,7 +170,7 @@
 
 
 
-        /***************************** Report Modal **************************/
+        /***************************** Report Post Modal **************************/
         $('.reportModalLink').click(function(){
             let postId = $(this).data('id');
             $('.reportPostButton').on('click',function(e){
@@ -199,7 +199,30 @@
         });
 
 
+        /***************************** Report Blog Modal **************************/
+        $('.reportBlogModal').click(function(){
+            let blogId = $(this).data('id');
+            $('.reportBlogButton').on('click',function(e){
+                e.preventDefault();
+                $.ajax({
+                    url:"{{route('website.blog.report')}}",
+                    type:'POST',
+                    data:{ '_token': '{{ csrf_token() }}','blogId' : blogId},
+                    success:function(result){
+                        toastr.success(result.success);
+                        $('#ReportBlogModal').modal('hide');
+                    },
+                    error:function(xhr, status, error){
+                        if(xhr.status == 500 || xhr.status == 422){
+                            toastr.error('Oops! Something went wrong while reporting.');
+                        }
+                    }
+                });
+            });
+        });
 
+
+        /*********************** Share Post *********************/
         $('.copy-link-share-btn').on('click',function(e){
             e.preventDefault();
             navigator.clipboard.writeText(window.location.href);

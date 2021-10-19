@@ -12,6 +12,7 @@ use App\Http\Controllers\website\KnowledgeForumPostController;
 use App\Http\Controllers\website\KnowledgeForumController;
 use App\Http\Controllers\website\KnowledgeForumCommentsController;
 use App\Http\Controllers\website\ReportPostController;
+use App\Http\Controllers\website\ReportBlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,10 @@ Route::prefix('blog')->group(function(){
     Route::get('', [BlogController::class,'getBlog'])->name('website.blog');
     Route::get('details/{id}',[BlogController::class,'details'])->name('website.blog.details');
     Route::post('create-blog',[BlogController::class,'createBlog'])->name('website.blog.create');
+
+    Route::get('report-blog',[ReportBlogController::class,'getReportedBlog'])->name('website.blog.report.get');
+    Route::post('report-blog',[ReportBlogController::class,'reportBlog'])->name('website.blog.report');
+    Route::post('remove-reported-blog',[ReportBlogController::class,'removeReportedBlog'])->name('website.blog.report.remove');
 });
 
 
