@@ -198,4 +198,15 @@
             });
         });
 
+
+
+        $('.copy-link-share-btn').on('click',function(e){
+            e.preventDefault();
+            navigator.clipboard.writeText(window.location.href);
+            $('#linkCopiedConfirmation').text('Copied');
+            setTimeout(function(){
+                $('#sharePostModal').modal('hide')
+            },2000);
+        });
+
 </script>
