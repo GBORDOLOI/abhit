@@ -42,7 +42,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                         </select>
                         <span class="text-danger" id="subject_id_error"></span>
                     </div>
-                    <div class="control-group after-add-more">
+                    <div class="after-add-more">
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="form-group">
@@ -139,7 +139,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
             $('#addMoreMultipleChoice').click(function(e){
                 e.preventDefault();
                 let html = $(".copy").html();
-                $(".after-add-more").after(html);
+                $(".after-add-more").append(html);
             });
 
             $("body").on("click","#removeMultipleChoice",function(){ 
