@@ -5,13 +5,14 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Common\BadWords;
 
 class BlogController extends Controller
 {
     //
     protected function index()
     {
-        $blogs = Blog::paginate(10);
+        $blogs = Blog::orderBy('id','DESC')->paginate(10);
         return view('admin.master.blog.blog', \compact('blogs'));
     }
 
@@ -60,7 +61,7 @@ class BlogController extends Controller
         Blog::create([
             'name' => $request->name,
             'blog_image' => $file,
-            'blog' => $blog
+            'blog' => \ConsoleTVs\Profanity\Builder::blocker($blog, BadWords::badWordsReplace)->strictClean(false)->filter(),
         ]);
 
         return \response()->json(['status'=>1]);
