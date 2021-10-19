@@ -65,20 +65,28 @@ Route::prefix('auth')->group(function(){
     Route::post('logout', [WebsiteAuthController::class,'logout'])->name('website.auth.logout');
 });
 
-Route::get('my-account',[UserDetailsController::class,'myAccount'])->name('website.user.account');
-Route::post('user-details',[UserDetailsController::class,'userDetails'])->name('website.user.details');
-Route::post('user-photo',[UserDetailsController::class,'uploadPhoto'])->name('website.user.upload.photo');
-Route::post('update-password',[UserDetailsController::class,'updatePassword'])->name('website.update.password');
+/* ------------------------------- Account ------------------------------------ */
+Route::prefix('account')->group(function(){
+    Route::get('my-account',[UserDetailsController::class,'myAccount'])->name('website.user.account');
+    Route::post('user-details',[UserDetailsController::class,'userDetails'])->name('website.user.details');
+    Route::post('user-photo',[UserDetailsController::class,'uploadPhoto'])->name('website.user.upload.photo');
+    Route::post('update-password',[UserDetailsController::class,'updatePassword'])->name('website.update.password');
+});
 
-// knowledge
-Route::get('knowledge-forum',[KnowledgeForumController::class,'index'])->name('website.knowledge.forum');
-Route::post('add-knowledge-question',[KnowledgeForumPostController::class,'addKnowledgeQuestion'])->name('website.add.knowledge.question');
-Route::get('knowledge-details-post/{id}',[KnowledgeForumController::class,'knowledgeDetailPost'])->name('website.knowledge.details.post');
-Route::post('knowledge-comment',[KnowledgeForumCommentsController::class,'knowledgeComment'])->name('website.knowledge.comment');
-Route::get('knowledge-tab', [KnowledgeForumController::class,'knowledgeTab'])->name('website.knowledge.tab');
-Route::get('get-report-knowledge-post',[ReportPostController::class,'getReportedPost'])->name('website.get.report.knowledge.post');
-Route::post('report-knowledge-post', [ReportPostController::class, 'reportPost'])->name('website.report.knowledge.post');
-Route::post('remove-reported-post',[ReportPostController::class, 'moveToTrash'])->name('website.remove.reported.post');
+
+/* ------------------------------- Knowledge Forum------------------------------------ */
+
+Route::prefix('knowledge')->group(function(){
+    Route::get('knowledge-forum',[KnowledgeForumController::class,'index'])->name('website.knowledge.forum');
+    Route::post('add-knowledge-question',[KnowledgeForumPostController::class,'addKnowledgeQuestion'])->name('website.add.knowledge.question');
+    Route::get('knowledge-details-post/{id}',[KnowledgeForumController::class,'knowledgeDetailPost'])->name('website.knowledge.details.post');
+    Route::post('knowledge-comment',[KnowledgeForumCommentsController::class,'knowledgeComment'])->name('website.knowledge.comment');
+    Route::get('knowledge-tab', [KnowledgeForumController::class,'knowledgeTab'])->name('website.knowledge.tab');
+    Route::get('get-report-knowledge-post',[ReportPostController::class,'getReportedPost'])->name('website.get.report.knowledge.post');
+    Route::post('report-knowledge-post', [ReportPostController::class, 'reportPost'])->name('website.report.knowledge.post');
+    Route::post('remove-reported-post',[ReportPostController::class, 'moveToTrash'])->name('website.remove.reported.post');
+});
+
 
 
 

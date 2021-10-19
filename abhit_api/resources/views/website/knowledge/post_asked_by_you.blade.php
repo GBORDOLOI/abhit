@@ -19,5 +19,8 @@
     </div>
 </li>
 @empty
-    <p class="p-4 mb-0">Nothing to show.</p>
+    <div style="position: absolute;left: 40%;margin-top:20px;"> 
+        <i class="fa fa-check-circle-o" aria-hidden="true" style="color:green;font-size:22px;"></i>
+        &nbsp; You are all caught up. 
+    </div>
 @endforelse
