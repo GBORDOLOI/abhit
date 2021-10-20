@@ -19,94 +19,74 @@
         </nav>
     </div>
 
-    {{-- <div class="col-lg-12 grid-margin stretch-card">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Course List</h4>
+                <h4 class="card-title">List Of Subjects Having MCQ's</h4>
                 </p>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th> # </th>
-                            <th> Name </th>
-                            <th> Image </th>
-                            <th> Status </th>
-                            <th>Publish Date & Time</th>
-                            <th> Action </th>
+                            <th> Subject Name </th>
+                            <th> Active Status </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($course as $key => $item)
+                       @forelse ($getMultipleChoice as $key => $mcq)
                             <tr>
-                                <td>{{ $course->firstItem() + $key }}</td>
-                                <td>{{ $item->name }}</td>
+                                <td>{{$key + 1}}</td>
+                                <td>{{$mcq->subject->name}}</td>
                                 <td>
-                                    <img src="{{ asset($item->course_pic) }}" alt="" srcset="">
-                                </td>
-                                <td>
-                                    @if ($item->is_activate == 1)
+                                    @if ($mcq->is_activate == 1)
                                         <label class="switch">
-                                            <input type="checkbox" id="testingUpdate" data-id="{{ $item->id }}" checked>
+                                            <input type="checkbox" id="mcqStatusUpdate" data-id="{{ $mcq->subject_id }}" checked>
                                             <span class="slider round"></span>
                                         </label>
                                     @else
                                         <label class="switch">
-                                            <input type="checkbox" id="testingUpdate" data-id="{{ $item->id }}">
+                                            <input type="checkbox" id="mcqStatusUpdate" data-id="{{ $mcq->subject_id }}">
                                             <span class="slider round"></span>
                                         </label>
                                     @endif
                                 </td>
-                                <td>
-                                    {{\Carbon\Carbon::parse($item->publish_date)->format('Y-m-d H:i:s')}}
-                                </td>
-                                <td class="d-flex">
-
-                                    <a href="{{route('admin.edit.course',['id'=>\Crypt::encrypt($item->id)])}}" data-toggle="tooltip" data-placement="top" title="Edit Course" class="btn mr-2 btn-gradient-primary btn-rounded btn-icon anchor_rounded">
-                                        <i class="mdi mdi-pencil-outline"></i>
-                                    </a>
-
-                                    <a href="{{route('admin.get.chapter',['id'=>\Crypt::encrypt($item->id)])}}" data-toggle="tooltip" data-placement="top" title="Add Chapter" class="btn mr-2 btn-gradient-primary btn-rounded btn-icon anchor_rounded">
-                                        <i class="mdi mdi-plus-outline"></i>
-                                    </a>
-
-                                    <a href="{{route('admin.price.course',['id'=>\Crypt::encrypt($item->id)])}}" data-toggle="tooltip" data-placement="top" title="View Details of Course" class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
-                                        <i class="mdi mdi-eye-outline"></i>
-                                    </a>
-
-                                </td>
                             </tr>
-                        @endforeach
-
+                       @empty
+                           
+                       @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection
 
 @section('scripts')
-    {{-- <script>
-        $(document.body).on('change', '#testingUpdate', function() {
-            var status = $(this).prop('checked') == true ? 1 : 0;
-            var user_id = $(this).data('id');
-            // console.log(status);
-            var formDat = {
-                catId: user_id,
-                active: status
+    <script>
+        $(document.body).on('change', '#mcqStatusUpdate', function() {
+            let status = $(this).prop('checked') == true ? 1 : 0;
+            let subject_id = $(this).data('id');
+            let formData = {
+                'subject_id': subject_id,
+                'active': status
             }
-            // console.log(formDat);
             $.ajax({
                 type: "post",
 
-                url: "{{ route('admin.active.course') }}",
-                data: formDat,
+                url: "{{ route('admin.is.activate.multiple.choice') }}",
+                data: formData,
 
-                success: function(data) {
-                    console.log(data)
+                success: function(result) {
+                    toastr.success(result.message)
+                },
+                error:function(xhr, status, error){
+                    if(xhr.status == 500 || xhr.status == 422){
+                        toastr.error('Oops! Something went wrong while reporting.');
+                    }
                 }
             });
         });
-    </script> --}}
+    </script>
 
 
 @endsection

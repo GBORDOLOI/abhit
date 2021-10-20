@@ -15,7 +15,16 @@ class CreateMultipleChoicesTable extends Migration
     {
         Schema::create('multiple_choices', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('subject_id');
+            $table->string('question');
+            $table->string('answer_1');
+            $table->string('answer_2');
+            $table->string('answer_3');
+            $table->string('answer_4');
+            $table->boolean('is_activate');
             $table->timestamps();
+
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
         });
     }
 

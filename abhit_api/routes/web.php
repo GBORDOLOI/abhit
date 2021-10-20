@@ -13,6 +13,7 @@ use App\Http\Controllers\website\KnowledgeForumController;
 use App\Http\Controllers\website\KnowledgeForumCommentsController;
 use App\Http\Controllers\website\ReportPostController;
 use App\Http\Controllers\website\ReportBlogController;
+use App\Http\Controllers\admin\MultipleChoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +89,9 @@ Route::prefix('knowledge')->group(function(){
 });
 
 
+/* ------------------------------- Multiple Choice Question ------------------------------------ */
+
+// Route::get('start-mcq-test/{id}',[MultipleChoiceController::class,'startMcq'])->name('website.start.multiple.choice');
 
 
 

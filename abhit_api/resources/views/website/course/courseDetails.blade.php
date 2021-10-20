@@ -1,7 +1,13 @@
+@php
+    use App\Models\MultipleChoice;
+    $multiChoice = MultipleChoice::where('subject_id', $course->subject->id)->simplePaginate(1);
+
+@endphp
+
+
 @extends('layout.website.website')
 
 @section('content')
-
     <section class="subheader1">
         <div class="container-fluid">
             <div class="row">
@@ -15,8 +21,8 @@
                         </nav>
                         <h2 class="heading-white">{{ $course->subject->name }}</h2>
                         <p>{{ $course->name }}</p>
-                        <div class="text-box"><a data-toggle="modal" data-target="#add-test-modal"
-                                class="mcq-test" style="cursor: pointer">MCQ Test</a></div>
+                        <div class="text-box">
+                            <a href="#" data-toggle="modal" data-target="#add-test-modal" class="mcq-test" style="cursor: pointer">MCQ Test</a></div>
                     </div>
                 </div>
                 <div class="col-lg-6 p0">
@@ -121,38 +127,39 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <ol class="pl15" type="1">
-                        <li>
-                            <h4 data-brackets-id="3991" class="small-heading-black mb20">The main source of chemicals which
-                                are used in
-                                industries is</h4>
-                            <div>
-                                <ul class="list-inline pl-0">
-                                    <li>
-                                        <input type="radio" id="test1" name="radio-group" checked>
-                                        <label for="test1"><span>(A)</span> Coke </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="test2" name="radio-group">
-                                        <label for="test2"><span>(B)</span> Peat </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="test3" name="radio-group">
-                                        <label for="test3"><span>(C)</span> Coal tar </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="test4" name="radio-group">
-                                        <label for="test4"><span>(D)</span> Liquefied Petroleum Gas </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ol>
-                    <div class="btn-box-test">
-                        <a href="#" class="btn btn-block add-question">Next</a>
+                    @forelse ($multiChoice as $item)
+                        <ol class="pl15" type="1">
+                            <li>
+                                <h4 data-brackets-id="3991" class="small-heading-black mb20">{{$item->question}}</h4>
+                                <div>
+                                    <ul class="list-inline pl-0">
+                                        <li>
+                                            <input type="radio" id="test1" name="radio-group" checked>
+                                            <label for="test1"><span>(A)</span> Coke </label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="test2" name="radio-group">
+                                            <label for="test2"><span>(B)</span> Peat </label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="test3" name="radio-group">
+                                            <label for="test3"><span>(C)</span> Coal tar </label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="test4" name="radio-group">
+                                            <label for="test4"><span>(D)</span> Liquefied Petroleum Gas </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ol>
+                    @empty
+                        <div class="text-center">
+                            No MCQ's Found
+                        </div>
+                    @endforelse
 
-                    </div>
-
+                    {{$multiChoice->links()}}
                 </div>
 
 
@@ -215,5 +222,8 @@
                 }
             }
         });
+
+
+
     </script>
 @endsection

@@ -9,6 +9,7 @@ use App\Common\Activation;
 use App\Models\Subject;
 use App\Models\Chapter;
 use Carbon\Carbon;
+use App\Models\MultipleChoice;
 
 class CourseController extends Controller
 {
@@ -90,6 +91,7 @@ class CourseController extends Controller
         $course_id = \Crypt::decrypt($request->id);
         $course = Course::find($course_id);
         $chapters = Chapter::where([['course_id',$course_id],['is_activate',Activation::Activate]])->get();
+
         return view('website.course.courseDetails', compact('course','chapters'));
 
     }
