@@ -32,7 +32,7 @@
     <div class="mcq-page-link">
         @if($multiChoice->hasMorePages() == false)
             <div class="text-center">
-                <button class="btn btn-success" >Submit</button>
+                <button class="btn btn-success">Submit</button>
             </div>
         @else
             <a href="{{ $multiChoice->nextPageUrl() }}" class="knowledge-link">Next</a>

@@ -220,12 +220,18 @@
         let interval = '';
         $('.mcq-test').on('click',function(){
             $('#startMcqModel').modal('show');
-            $('.startTest').on('click',function(e){
-                e.preventDefault();
-                $('#add-test-modal').modal('show');
-                $('#startMcqModel').modal('hide');
-                 interval = setInterval(updateTimer, 1000);
-            })
+            if({{$countMultiChoice}} == 0){
+                $('#startMcqModel').find('.modal-body').addClass('text-center');
+                $('#startMcqModel').find('.modal-body').html('<strong>Oops! No Questions Found</strong>');
+            }else{
+                $('.startTest').on('click',function(e){
+                    e.preventDefault();
+                    $('#add-test-modal').modal('show');
+                    $('#startMcqModel').modal('hide');
+                    interval = setInterval(updateTimer, 1000);
+                })
+            }
+            
         });
 
 

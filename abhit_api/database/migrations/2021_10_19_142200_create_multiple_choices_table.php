@@ -21,6 +21,7 @@ class CreateMultipleChoicesTable extends Migration
             $table->string('option_2');
             $table->string('option_3');
             $table->string('option_4');
+            $table->string('correct_answer');
             $table->boolean('is_activate');
             $table->timestamps();
 

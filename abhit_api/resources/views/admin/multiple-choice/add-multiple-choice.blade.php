@@ -67,6 +67,14 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Correct Answer</label>
+                                    <input type="text" class="form-control" name="correct_answer[]" placeholder="e.g what is the unit of temperature ?" required>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <button class="btn btn-primary">Submit</button>
                 </form>
@@ -109,6 +117,14 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                                 <div class="form-group">
                                     <label for="exampleInputName1">Option 4</label>
                                     <input type="text" class="form-control" name="option4[]" placeholder="e.g Kelvin">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Correct Answer</label>
+                                    <input type="text" class="form-control" name="correct_answer[]" placeholder="e.g what is the unit of temperature ?" required>
                                 </div>
                             </div>
                         </div>
