@@ -24,12 +24,22 @@
             </div>
         </li>
     </ol>
+
+    @if($multiChoice->hasMorePages() == false)
+        <div class="text-center">
+            <button class="btn btn-success">Submit</button>
+        </div>
+        <script>
+            $('.mcq-page-link').hide();
+        </script>
+    @endif
+
+    <div class="mcq-page-link">
+        <a href="{{ $multiChoice->nextPageUrl() }}" class="knowledge-link">Next</a>
+    </div>
 @empty
     <div class="text-center">
         No MCQ's Found
     </div>
 @endforelse
 
-<div class="mcq-page-link">
-    <a href="{{ $multiChoice->nextPageUrl() }}" class="knowledge-link">Next</a>
-</div>

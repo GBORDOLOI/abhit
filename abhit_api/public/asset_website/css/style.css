@@ -1305,8 +1305,8 @@ footer {
 /*.subheader1*/
 .subheader1 {
     margin: 0px 80px;
-    /* background: #404749; */
-    background-image: linear-gradient(to right, #252425, #353536, #474647, #59585a, #6b6b6d, #7a7b7d, #898b8d, #989b9d, #a7acae, #b7bdbf, #c7cecf, #d7e0e0);
+    background: #404749;
+    /* background-image: linear-gradient(to right, #252425, #353536, #474647, #59585a, #6b6b6d, #7a7b7d, #898b8d, #989b9d, #a7acae, #b7bdbf, #c7cecf, #d7e0e0); */
     position: relative;
     color: #fff;
     border-radius: 10px;

@@ -128,6 +128,7 @@
                 <!-- Modal body -->
                 <div class="modal-body" id="multipleChoiceModel">
                     @include('website.multiple-choice.mcq')
+                    <div class="end-message"></div>
                 </div>
             </div>
         </div>
