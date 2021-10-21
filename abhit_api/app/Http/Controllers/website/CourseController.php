@@ -91,8 +91,8 @@ class CourseController extends Controller
         $course_id = \Crypt::decrypt($request->id);
         $course = Course::find($course_id);
         $chapters = Chapter::where([['course_id',$course_id],['is_activate',Activation::Activate]])->get();
-        $multiChoice = MultipleChoice::where('subject_id', $course->subject->id)->paginate(1);
-        $countMultiChoice = MultipleChoice::where('subject_id', $course->subject->id)->count();
+        $multiChoice = MultipleChoice::where('subject_id', $course->subject->id)->where('is_activate', 1)->paginate(1);
+        $countMultiChoice = MultipleChoice::where('subject_id', $course->subject->id)->where('is_activate', 1)->count();
 
         if($request->ajax()){
             $view = view('website.multiple-choice.mcq', compact('multiChoice'))->render();
