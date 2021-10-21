@@ -17,10 +17,10 @@ class CreateMultipleChoicesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('subject_id');
             $table->string('question');
-            $table->string('answer_1');
-            $table->string('answer_2');
-            $table->string('answer_3');
-            $table->string('answer_4');
+            $table->string('option_1');
+            $table->string('option_2');
+            $table->string('option_3');
+            $table->string('option_4');
             $table->boolean('is_activate');
             $table->timestamps();
 

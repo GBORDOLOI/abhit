@@ -44,26 +44,26 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Answer 1</label>
-                                    <input type="text" class="form-control" name="answer1[]" placeholder="e.g Celcius" required>
+                                    <label for="exampleInputName1">Option 1</label>
+                                    <input type="text" class="form-control" name="option1[]" placeholder="e.g Celcius" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Answer 2</label>
-                                    <input type="text" class="form-control" name="answer2[]" placeholder="e.g Hertz" required>
+                                    <label for="exampleInputName1">Option 2</label>
+                                    <input type="text" class="form-control" name="option2[]" placeholder="e.g Hertz" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Answer 3</label>
-                                    <input type="text" class="form-control" name="answer3[]" placeholder="e.g Pascal" required>
+                                    <label for="exampleInputName1">Option 3</label>
+                                    <input type="text" class="form-control" name="option3[]" placeholder="e.g Pascal" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Answer 4</label>
-                                    <input type="text" class="form-control" name="answer4[]" placeholder="e.g Kelvin" required>
+                                    <label for="exampleInputName1">Option 4</label>
+                                    <input type="text" class="form-control" name="option4[]" placeholder="e.g Kelvin" required>
                                 </div>
                             </div>
                         </div>
@@ -89,26 +89,26 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Answer 1</label>
-                                    <input type="text" class="form-control" name="answer1[]" placeholder="e.g Celcius">
+                                    <label for="exampleInputName1">Option 1</label>
+                                    <input type="text" class="form-control" name="option1[]" placeholder="e.g Celcius">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Answer 2</label>
-                                    <input type="text" class="form-control" name="answer2[]" placeholder="e.g Hertz">
+                                    <label for="exampleInputName1">Option 2</label>
+                                    <input type="text" class="form-control" name="option2[]" placeholder="e.g Hertz">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Answer 3</label>
-                                    <input type="text" class="form-control" name="answer3[]" placeholder="e.g Pascal">
+                                    <label for="exampleInputName1">Option 3</label>
+                                    <input type="text" class="form-control" name="option3[]" placeholder="e.g Pascal">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Answer 4</label>
-                                    <input type="text" class="form-control" name="answer4[]" placeholder="e.g Kelvin">
+                                    <label for="exampleInputName1">Option 4</label>
+                                    <input type="text" class="form-control" name="option4[]" placeholder="e.g Kelvin">
                                 </div>
                             </div>
                         </div>
