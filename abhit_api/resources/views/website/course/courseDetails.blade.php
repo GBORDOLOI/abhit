@@ -1,8 +1,8 @@
-@php
+{{-- @php
     use App\Models\MultipleChoice;
     $multiChoice = MultipleChoice::where('subject_id', $course->subject->id)->simplePaginate(1);
 
-@endphp
+@endphp --}}
 
 
 @extends('layout.website.website')
@@ -126,43 +126,9 @@
 
 
                 <!-- Modal body -->
-                <div class="modal-body">
-                    @forelse ($multiChoice as $item)
-                        <ol class="pl15" type="1">
-                            <li>
-                                <h4 data-brackets-id="3991" class="small-heading-black mb20">{{$item->question}}</h4>
-                                <div>
-                                    <ul class="list-inline pl-0">
-                                        <li>
-                                            <input type="radio" id="test1" name="radio-group" checked>
-                                            <label for="test1"><span>(A)</span> Coke </label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="test2" name="radio-group">
-                                            <label for="test2"><span>(B)</span> Peat </label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="test3" name="radio-group">
-                                            <label for="test3"><span>(C)</span> Coal tar </label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="test4" name="radio-group">
-                                            <label for="test4"><span>(D)</span> Liquefied Petroleum Gas </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ol>
-                    @empty
-                        <div class="text-center">
-                            No MCQ's Found
-                        </div>
-                    @endforelse
-
-                    {{$multiChoice->links()}}
+                <div class="modal-body" id="multipleChoiceModel">
+                    @include('website.multiple-choice.mcq')
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -224,6 +190,32 @@
         });
 
 
+        function loadMcq(page){
+            let html = '<div class="text-center"> <i class="fa fa-check-circle-o" aria-hidden="true" style="color:green;font-size:22px;"></i>&nbsp;Test Done</div>';
+            $.ajax({
+                url: '?page=' + page,
+                type: 'get',
+            })
+            .done(function(data) {
+                if (data.mcq == '') {
+                    $('.end-message').html(html);
+                    return;
+                } else {
+                    $('.end-message').hide();
+                    $('#multipleChoiceModel').html(data.mcq);
+                }
 
+            })
+            .fail(function(jqXHR, ajaxOptions, thrownError) {
+                toastr.error('Oops!, Something went wrong');
+            })
+        }
+
+        let page = 1;
+        $(document).on('click','.mcq-page-link a',function(e) {
+            e.preventDefault();
+            page++;
+            loadMcq(page);
+        });
     </script>
 @endsection
