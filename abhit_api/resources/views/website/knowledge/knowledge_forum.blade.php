@@ -133,6 +133,7 @@
     @include('layout.website.include.modal_scripts')
     <script>
         function loadMorePost(page) {
+            let html = '<div style="position: absolute;left: 34%;"> <i class="fa fa-check-circle-o" aria-hidden="true" style="color:green;font-size:22px;"></i>&nbsp; You are all caught up. </div>';
             $.ajax({
                     url: '?page=' + page,
                     type: 'get',
@@ -142,7 +143,7 @@
                 })
                 .done(function(data) {
                     if (data.knowledge_forum_post == '') {
-                        $('.ajax-loading').text('No post to show');
+                        $('.ajax-loading').html(html);
                         return;
                     } else {
                         $('.ajax-loading').hide();

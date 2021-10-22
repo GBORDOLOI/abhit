@@ -14,13 +14,13 @@ class KnowledgeForumController extends Controller
 {
     public function index(Request $request){
         $top_knowledge_post =''; $total_post = ''; $total_post_commented_by_one_user = ''; $user_details = '';
-        $knowledge_post = KnowledgeForumPost::with('user')->orderBy('created_at', 'desc')->paginate(3);
+        $knowledge_post = KnowledgeForumPost::with('user')->where('is_activate', 1)->orderBy('created_at', 'desc')->paginate(3);
 
         if($request->ajax()){
             $post = view('website.knowledge.knowledge_post', compact('knowledge_post'))->render();
             return response()->json(['knowledge_forum_post' =>  $post]);
         }    
-        $top_knowledge_post = KnowledgeForumPost::with('user')->orderBy('created_at', 'desc')->limit(3)->get();
+        $top_knowledge_post = KnowledgeForumPost::with('user')->where('is_activate', 1)->orderBy('created_at', 'desc')->limit(3)->get();
         if(Auth::check()){
             $total_post = KnowledgeForumPost::where('user_id',Auth::user()->id)->count();
             $total_post_commented_by_one_user = KnowledgeForumComment::where('user_id' , Auth::user()->id)->count();

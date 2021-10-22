@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\BannerController;
 use App\Http\Controllers\admin\ChapterController;
 use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\admin\GalleryController;
+use App\Http\Controllers\admin\MultipleChoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,4 +98,14 @@ Route::prefix('master')->group(function () {
         Route::post('editing',[GalleryController::class,'edit'])->name('admin.editing.gallery');
     });
 
+    
+});
+
+
+/* ------------------------------- Multiple Choice Questions ------------------------------------ */
+Route::prefix('multiple-choice')->group(function(){
+    Route::get('multiple-choice-question',[MultipleChoiceController::class,'index'])->name('admin.index.multiple.choice');
+    Route::get('add-multiple-choice',[MultipleChoiceController::class,'addMultipleChoice'])->name('admin.add.multiple.choice');
+    Route::post('insert-multiple-choice',[MultipleChoiceController::class,'insertMultipleChoice'])->name('admin.insert.multiple.choice');
+    Route::post('is-activate-multiple-choice',[MultipleChoiceController::class,'isActivateMultipleChoice'])->name('admin.is.activate.multiple.choice');
 });

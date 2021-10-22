@@ -29,7 +29,7 @@ class ReportPostController extends Controller
 
     public function getReportedPost(Request $request){
         $reportedPosts = ReportPost::all();
-        return view('admin.post.reported-post')->with(['reportedPosts' => $reportedPosts]);
+        return view('admin.report.reported-post')->with(['reportedPosts' => $reportedPosts]);
     }
 
     public function moveToTrash(Request $request){

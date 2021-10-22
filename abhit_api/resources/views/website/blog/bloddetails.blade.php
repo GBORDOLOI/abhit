@@ -43,7 +43,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 p0">
-                    <span class="icon-Calender-09 calendar-icon"></span><span>{{\Carbon\Carbon::parse($blog->created_at)->format('F d, Y')}}</span>
+                    <span class="icon-Calender-09 calendar-icon"></span><span>{{\Carbon\Carbon::parse($blog->created_at)->format('F d, Y')}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        @auth
+                        <a href="javascript:void(0);" data-id="{{$blog->id}}" data-toggle="modal" data-target="#ReportBlogModal" class="reportBlogModal" style="display:inline;font-size:12px;" >
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;  Report
+                        </a>
+                        @endauth
+                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  data-toggle="modal" data-target="#sharePostModal" style="display:inline;font-size:12px;">
+                            <i class="fa fa-share" aria-hidden="true"></i> &nbsp; Share
+                        </a>
                     <div class="mt-5">
                         {!!$blog->blog!!}
                     </div>
@@ -52,4 +60,9 @@
 
         </div>
     </section>
+    @include('layout.website.include.modals')
+@endsection
+    
+@section('scripts')
+    @include('layout.website.include.modal_scripts')
 @endsection

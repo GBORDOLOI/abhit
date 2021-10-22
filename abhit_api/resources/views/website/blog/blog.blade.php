@@ -77,16 +77,7 @@
                                     </div>
                                 </a>
 
-                                <div class="dropdown" style="float:right;">
-                                    <a type="button"  data-toggle="dropdown" ><i class="fa fa-ellipsis-v" aria-hidden="true" style="font-size:17px;"></i></a>
-                                    <div class="dropdown-menu">
-                                        @auth
-                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#ReportPostModal" class="dropdown-item reportModal" style="float:right;font-size:12px;" ><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                                              &nbsp;  Report</a>
-                                        @endauth
-                                        <a href="javascript:void(0);" class="dropdown-item"  data-toggle="modal" data-target="#sharePostModal" style="font-size:12px;"><i class="fa fa-share" aria-hidden="true"></i> &nbsp; Share</a>
-                                    </div>
-                                </div> 
+                                
                             </li>
                         @endforeach
                     </ul>

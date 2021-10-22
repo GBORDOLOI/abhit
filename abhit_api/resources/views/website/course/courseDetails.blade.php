@@ -1,7 +1,13 @@
+{{-- @php
+    use App\Models\MultipleChoice;
+    $multiChoice = MultipleChoice::where('subject_id', $course->subject->id)->simplePaginate(1);
+
+@endphp --}}
+
+
 @extends('layout.website.website')
 
 @section('content')
-
     <section class="subheader1">
         <div class="container-fluid">
             <div class="row">
@@ -15,8 +21,8 @@
                         </nav>
                         <h2 class="heading-white">{{ $course->subject->name }}</h2>
                         <p>{{ $course->name }}</p>
-                        <div class="text-box"><a data-toggle="modal" data-target="#add-test-modal"
-                                class="mcq-test" style="cursor: pointer">MCQ Test</a></div>
+                        <div class="text-box">
+                            <a href="#"  class="mcq-test" style="cursor: pointer">MCQ Test</a></div>
                     </div>
                 </div>
                 <div class="col-lg-6 p0">
@@ -107,55 +113,46 @@
 
 
     <!-- The Modal -->
-    <div class="modal" id="add-test-modal">
+    <div class="modal" id="add-test-modal" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-heading">
-                    <h2 class="heading-mcq ">MCQ Test</h2>
-                    <p class="modal-sub-head-left">Question 1/15</p>
-                    <p class="modal-sub-head-right">Time Left : <b>15:00 Mins</b></p><button type="button"
+                    <h5>{{ $course->subject->name }} Test</h5>
+                    <p class="modal-sub-head-left">Question <span id="mcqLeft">1</span> /{{$countMultiChoice}}</p>
+                    <p class="modal-sub-head-right">Time Left : <b><span id="timer">15:00</span></b></p><button type="button"
                         class="close" data-dismiss="modal"><span class="icon-cancel-20"></span></button>
                 </div>
 
 
                 <!-- Modal body -->
-                <div class="modal-body">
-                    <ol class="pl15" type="1">
-                        <li>
-                            <h4 data-brackets-id="3991" class="small-heading-black mb20">The main source of chemicals which
-                                are used in
-                                industries is</h4>
-                            <div>
-                                <ul class="list-inline pl-0">
-                                    <li>
-                                        <input type="radio" id="test1" name="radio-group" checked>
-                                        <label for="test1"><span>(A)</span> Coke </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="test2" name="radio-group">
-                                        <label for="test2"><span>(B)</span> Peat </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="test3" name="radio-group">
-                                        <label for="test3"><span>(C)</span> Coal tar </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="test4" name="radio-group">
-                                        <label for="test4"><span>(D)</span> Liquefied Petroleum Gas </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ol>
-                    <div class="btn-box-test">
-                        <a href="#" class="btn btn-block add-question">Next</a>
+                <div class="modal-body" id="multipleChoiceModel">
+                    @include('website.multiple-choice.mcq')
+                    <div class="end-message"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    </div>
-
+    <div class="modal" id="startMcqModel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-heading">
+                    <h4>{{ $course->subject->name }} Test</h4>
+                    <p class="modal-sub-head-left">Total Questions {{$countMultiChoice}}</p>
+                    <p class="modal-sub-head-right">Time : <b>15:00 Mins</b></p>
+                    <button type="button" class="close" data-dismiss="modal"><span class="icon-cancel-20"></span></button>
                 </div>
 
 
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="text-center">
+                        <button class="knowledge-link startTest">Start Test</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -215,5 +212,83 @@
                 }
             }
         });
+
+        
+
+
+        /********************************************* For  MCQ's ************************************************/
+        let interval = '';
+        $('.mcq-test').on('click',function(){
+            $('#startMcqModel').modal('show');
+            if({{$countMultiChoice}} == 0){
+                $('#startMcqModel').find('.modal-body').addClass('text-center');
+                $('#startMcqModel').find('.modal-body').html('<strong>Oops! No Questions Found</strong>');
+            }else{
+                $('.startTest').on('click',function(e){
+                    e.preventDefault();
+                    $('#add-test-modal').modal('show');
+                    $('#startMcqModel').modal('hide');
+                    interval = setInterval(updateTimer, 1000);
+                })
+            }
+            
+        });
+
+
+        function loadMcq(page){
+            let html = '<div class="text-center"> <i class="fa fa-check-circle-o" aria-hidden="true" style="color:green;font-size:22px;"></i>&nbsp;Test Done</div>';
+            $.ajax({
+                url: '?page=' + page,
+                type: 'get',
+            })
+            .done(function(data) {
+                if (data.mcq == '') {
+                    $('.end-message').html(html);
+                    return;
+                } else {
+                    $('.end-message').hide();
+                    $('#multipleChoiceModel').html(data.mcq);
+                }
+
+            })
+            .fail(function(jqXHR, ajaxOptions, thrownError) {
+                toastr.error('Oops!, Something went wrong');
+            })
+        }
+        
+        let page = 1;
+        $(document).on('click','.mcq-page-link a',function(e) {
+            e.preventDefault();
+            page++;
+            loadMcq(page);
+            $('#mcqLeft').text(page);
+            
+        });
+
+
+        /******************************* For Time Left Countdown Time *********************************/
+
+        const startingMinutes = 15;
+        let time = startingMinutes * 60;
+        const timer = document.getElementById('timer');
+        
+        function updateTimer(){
+            const minutes =  Math.floor(time / 60);
+            let seconds = time % 60;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            timer.innerHTML = `${minutes}:${seconds}`;
+            if(time == 0){
+                time = 0;
+                alert('Oops!, Times Up');
+                clearInterval(interval);
+                $('.mcq-page-link').hide();
+                $('.check-result').show();
+            }else{
+                time--;
+            }
+        }
+
+        
     </script>
 @endsection

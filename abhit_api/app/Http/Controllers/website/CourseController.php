@@ -9,6 +9,7 @@ use App\Common\Activation;
 use App\Models\Subject;
 use App\Models\Chapter;
 use Carbon\Carbon;
+use App\Models\MultipleChoice;
 
 class CourseController extends Controller
 {
@@ -90,7 +91,15 @@ class CourseController extends Controller
         $course_id = \Crypt::decrypt($request->id);
         $course = Course::find($course_id);
         $chapters = Chapter::where([['course_id',$course_id],['is_activate',Activation::Activate]])->get();
-        return view('website.course.courseDetails', compact('course','chapters'));
+        $multiChoice = MultipleChoice::where('subject_id', $course->subject->id)->where('is_activate', 1)->paginate(1);
+        $countMultiChoice = MultipleChoice::where('subject_id', $course->subject->id)->where('is_activate', 1)->count();
+
+        if($request->ajax()){
+            $view = view('website.multiple-choice.mcq', compact('multiChoice'))->render();
+            return response()->json(['mcq' => $view]);
+        }
+
+        return view('website.course.courseDetails', compact('course','chapters','multiChoice','countMultiChoice'));
 
     }
 }

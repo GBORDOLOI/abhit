@@ -219,7 +219,7 @@
     </div>
 </div>
 
-<!-- Report Blog/ Post Modal-->
+<!-- Report  Post Modal-->
 <div class="modal" id="ReportPostModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -238,6 +238,24 @@
     </div>
 </div>
 
+<!-- Report  Blog Modal-->
+<div class="modal" id="ReportBlogModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="text-center">
+                    <h5>Are you sure ?</h5>
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                </div>
+                <div style="float:right;" class="mt-3">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger reportBlogButton">Yes, Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- Add Blog Modal -->
