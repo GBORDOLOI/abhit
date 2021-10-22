@@ -120,8 +120,8 @@
                 <div class="modal-heading">
                     <h5>{{ $course->subject->name }} Test</h5>
                     <p class="modal-sub-head-left">Question <span id="mcqLeft">1</span> /{{$countMultiChoice}}</p>
-                    <p class="modal-sub-head-right">Time Left : <b><span id="timer">15:00</span></b></p><button type="button"
-                        class="close" data-dismiss="modal"><span class="icon-cancel-20"></span></button>
+                    <p class="modal-sub-head-right">Time Left : <b><span id="timer">15:00</span></b></p>
+                    {{-- <button type="button" class="close" data-dismiss="modal"><span class="icon-cancel-20"></span></button> --}}
                 </div>
 
 
@@ -129,7 +129,6 @@
                 <div class="modal-body" id="multipleChoiceModel">
                     @include('website.multiple-choice.mcq')
                     <div class="end-message"></div>
-                    
                 </div>
             </div>
         </div>
@@ -257,16 +256,23 @@
         }
         
         let page = 1;
-        $(document).on('click','.mcq-page-link a',function(e) {
+        $(document).on('click','.mcq-page-link #saveOptions',function(e) {
             e.preventDefault();
-            page++;
-            loadMcq(page);
-            $('#mcqLeft').text(page);
-            
+            let options = document.getElementsByName('mcq-group');
+                if (!$("input[name='mcq-group']:checked").val()) {
+                    toastr.error('Nothing is selected!');
+                    return false;
+                }else{
+                    page++;
+                    loadMcq(page);
+                    if(page == "{{$countMultiChoice}}"){
+                        $('#mcqLeft').text(page);
+                    }
+                }
         });
 
 
-        /******************************* For Time Left Countdown Time *********************************/
+        /******************************* For Time Left Countdown Timer *********************************/
 
         const startingMinutes = 15;
         let time = startingMinutes * 60;
@@ -289,6 +295,44 @@
             }
         }
 
+        /******************************* Check MCQ's If it is correct *********************************/
+        let mcqArray = [];
+        $(document).on('click','.mcq-page-link #saveOptions',function(){
+            let options = document.getElementsByName('mcq-group');
+            for(let i=0; i<options.length; i++){
+                if(options[i].checked){
+                    mcqArray.push(options[i].value);
+                }
+            }
+        });
+
+        $(document).on('submit','#mcqForm',function(e){
+            e.preventDefault();
+            timer.innerHTML = '0:00';
+            clearInterval(interval);
+            
+            $.ajax({
+                url:"{{route('website.check.is.correct-mcq')}}",
+                type:"POST",
+                data:{
+                    '_token': '{{ csrf_token() }}',
+                    'mcArray' : mcqArray,
+                    'subject_id' : "{{$course->subject->id}}"
+                },
+                success:function(result){
+                    $('#mcqSubmitBtn').hide();
+                    $('#totalCorrect').html('<div class="text-center text-success">'+'<span style="font-size:20px;">Total Corrects: '+ result.Total_corrects+' out of '+"{{$countMultiChoice}}" +'</div>');
+                    setTimeout(() => {
+                        location.reload(true);
+                    }, 2000);
+                },
+                error:function(xhr, status, error){
+                    if(xhr.status == 500 || xhr.status == 422){
+                        toastr.error("Oops! Something went wrong");
+                    }
+                }
+            });
+       });
         
     </script>
 @endsection

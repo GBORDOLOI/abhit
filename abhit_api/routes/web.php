@@ -91,7 +91,7 @@ Route::prefix('knowledge')->group(function(){
 
 /* ------------------------------- Multiple Choice Question ------------------------------------ */
 
-// Route::get('start-mcq-test/{id}',[MultipleChoiceController::class,'startMcq'])->name('website.start.multiple.choice');
+Route::post('check-is-correct-mcq',[MultipleChoiceController::class,'checkIsCorrectMcq'])->name('website.check.is.correct-mcq');
 
 
 
