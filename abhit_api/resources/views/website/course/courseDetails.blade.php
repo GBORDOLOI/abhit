@@ -41,7 +41,12 @@
                 <div class="col-lg-12 p0">
                     <ul class="list-inline course-desc-list">
                         <li>
-                            <h4 data-brackets-id="12020" class="small-heading-black mb20">Description</h4>
+                            <h4 data-brackets-id="12020" class="small-heading-black mb20">Description
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  data-toggle="modal" data-target="#sharePostModal" style="display:inline;font-size:12px;">
+                                    <i class="fa fa-share" aria-hidden="true"></i> &nbsp; Share
+                                </a>
+                            </h4>
+                            
                             <p>{!!$course->description ?? 'Desciption not given'!!}</p>
 
                             <div class="form-div1 mt-5">
@@ -155,11 +160,12 @@
             </div>
         </div>
     </div>
-
+    @include('layout.website.include.modals')
 
 @endsection
 
 @section('scripts')
+    @include('layout.website.include.modal_scripts')
     <script type="text/javascript">
         $('#add_cart').prop('disabled', true);
         $("#add_cart").css("background-color", "grey");
