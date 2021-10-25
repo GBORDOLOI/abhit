@@ -1,10 +1,3 @@
-{{-- @php
-    use App\Models\MultipleChoice;
-    $multiChoice = MultipleChoice::where('subject_id', $course->subject->id)->simplePaginate(1);
-
-@endphp --}}
-
-
 @extends('layout.website.website')
 
 @section('content')
@@ -22,7 +15,13 @@
                         <h2 class="heading-white">{{ $course->subject->name }}</h2>
                         <p>{{ $course->name }}</p>
                         <div class="text-box">
-                            <a href="#"  class="mcq-test" style="cursor: pointer">MCQ Test</a></div>
+                            @auth
+                                <a href="#"  class="mcq-test" style="cursor: pointer">MCQ Test</a>
+                            @endauth
+                            @guest
+                                <a data-toggle="modal" class="btn btn-default" data-target="#login-modal" style="cursor: pointer;border: 1px solid white;color: white !important;">MCQ Test</a>
+                            @endguest
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 p0">
@@ -85,16 +84,20 @@
                             </label>
                             <h5 class="small-heading-black mt15 mb20">Select Lesson</h5>
                             <ul class="list-inline centered">
-                                @foreach ($chapters as $key => $item)
+                                @forelse ($chapters as $key => $item)
                                     <li>
-                                        <input class="styled-checkbox item_price" id="styled-checkbox-{{ $key + 1 }}"
-                                            data-price="{{ $item->price }}" type="checkbox"
-                                            value="value{{ $key + 1 }}">
-                                        <label for="styled-checkbox-{{ $key + 1 }}">{{ $item->name }}</label>
+                                        <input class="styled-checkbox item_price chapter-value" id="styled-checkbox-{{ $key + 1 }}" data-id="{{$item->id}}"  data-name="{{ $item->name }}" data-price="{{ $item->price }}" type="checkbox"  value="{{ $item->id }}" >
+                                        <label for="styled-checkbox-{{ $key + 1 }}" >{{ $item->name }}</label>
                                         <span class="course-price mr-2"><i class="fa fa-inr"
                                                 aria-hidden="true"></i>{{ $item->price }}</span>
                                     </li>
-                                @endforeach
+                                @empty 
+                                <li>
+                                    <div class="text-center">
+                                        <p>No Lessons Found!</p>
+                                    </div>
+                                </li>
+                                @endforelse
                             </ul>
 
                             <div class="total">
@@ -105,7 +108,7 @@
                             <div class="total-cart">
                                 <ul class="list-inline total-car-list">
                                     <li class="mr-md-3"><button class="add-cart form-control" id="add_cart">Add to Cart</button></li>
-                                    <li><a href="#" class="text-center enquiry form-control">Buy Now</a></li>
+                                    {{-- <li><a href="#" class="text-center enquiry form-control">Buy Now</a></li> --}}
                                 </ul>
                             </div>
                 </div>
@@ -169,10 +172,11 @@
     <script type="text/javascript">
         $('#add_cart').prop('disabled', true);
         $("#add_cart").css("background-color", "grey");
-        var selectAllItems = "#select-all";
-        var checkboxItem = '.item_price';
+        let selectAllItems = "#select-all";
+        let checkboxItem = '.item_price';
+        let chapterId = [];
+        let allPrice = 0.00;
 
-        var allPrice = 0.00;
         $(selectAllItems).click(function() {
             allPrice = 0.00
 
@@ -180,6 +184,7 @@
                 $(checkboxItem).each(function() {
                     this.checked = true;
                     allPrice = parseFloat(allPrice) + parseFloat($(this).attr("data-price"));
+                    chapterId.push($(this).data('id'));
                     $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                     console.log($(this).attr("data-price"));
                     $('#add_cart').prop('disabled', false)
@@ -190,6 +195,7 @@
                 $(checkboxItem).each(function() {
                     this.checked = false;
                     allPrice = 0.00
+                    chapterId = [];
                     $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                     $('#add_cart').prop('disabled', true)
                     $("#add_cart").css("background-color", "grey");
@@ -202,11 +208,21 @@
         $(checkboxItem).change(function() {
             if (this.checked) {
                 allPrice = parseFloat(allPrice) + parseFloat($(this).attr("data-price"));
+                chapterId.push($(this).data('id'));
                 $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                 $('#add_cart').prop('disabled', false)
                 $("#add_cart").css("background-color", "#3ac162");
             } else {
                 allPrice = parseFloat(allPrice) - parseFloat($(this).attr("data-price"));
+                let itemName = $(this).attr('data-name');
+                let indexOf = chapterId.indexOf($(this).data('id'));
+                if(indexOf > -1) {
+                    chapterId.splice(indexOf, 1);
+                }
+
+
+
+
                 $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                 if (allPrice == 0) {
                     $('#add_cart').prop('disabled', true)
@@ -218,7 +234,43 @@
             }
         });
 
-        
+        /********************************************* Adding Item To Cart ************************************************/
+        $('#add_cart').on('click',function(e){
+           e.preventDefault();
+            if("{{Auth::check()}}" == false){
+                $('#add_cart').on('click',function(e){
+                    e.preventDefault();
+                    $('#login-modal').modal('show');
+                });  
+            }else{
+                $.ajax({
+                    url:"{{route('website.add-to-cart')}}",
+                    type:"POST",
+                    data:{
+                        '_token' : "{{csrf_token()}}",
+                        'course_id' : "{{$course->id}}",
+                        'chapter_id' : chapterId,
+                    },
+                    success:function(result){
+                    toastr.success(result.message);
+                    $(checkboxItem).each(function() {
+                            this.checked = false;
+                            allPrice = 0.00
+                            chapterId = [];
+                            $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
+                            $('#add_cart').prop('disabled', true)
+                            $("#add_cart").css("background-color", "grey");
+                        });
+                    },
+                    error:function(xhr, status, error){
+                        if(xhr.status == 500 || xhr.status == 422){
+                            toastr.error('Oops! Something went wrong. Not able to add to cart.');
+                        }
+                    }
+                });
+            }
+          
+        });
 
 
         /********************************************* For  MCQ's ************************************************/
