@@ -219,10 +219,6 @@
                 if(indexOf > -1) {
                     chapterId.splice(indexOf, 1);
                 }
-
-
-
-
                 $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                 if (allPrice == 0) {
                     $('#add_cart').prop('disabled', true)
@@ -253,19 +249,20 @@
                     },
                     success:function(result){
                     toastr.success(result.message);
-                    $(checkboxItem).each(function() {
+                        $(checkboxItem).each(function() {
                             this.checked = false;
                             allPrice = 0.00
-                            chapterId = [];
                             $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                             $('#add_cart').prop('disabled', true)
                             $("#add_cart").css("background-color", "grey");
                         });
+                        chapterId = [];
                     },
                     error:function(xhr, status, error){
                         if(xhr.status == 500 || xhr.status == 422){
                             toastr.error('Oops! Something went wrong. Not able to add to cart.');
                         }
+                        chapterId = [];
                     }
                 });
             }

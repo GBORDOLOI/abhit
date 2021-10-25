@@ -18,6 +18,7 @@ class CreateCartsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('chapter_id');
             $table->unsignedBigInteger('course_id');
+            $table->boolean('is_paid')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
