@@ -1,4 +1,3 @@
-
 @extends('layout.website.website')
 
 @section('title','Cart')
@@ -11,7 +10,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="heading-black mb0">Cart({{$countItemInsideCart}})</h2>
+                <h2 class="heading-black mb0">Cart({{$countCartItem}})</h2>
             </div>
         </div>
     </div>
@@ -22,48 +21,48 @@
         <div class="row">
             <div class="col-lg-8">
                 <ul class="list-inline cart-course-list1">
-                    @forelse ($cartCourse as $item)
+                    @forelse ($cart as $item)
                     <li>
-                        <div class="cart-course-image1"><img src="{{asset($item->course->course_pic)}}" class="w100"></div>
+                        <div class="cart-course-image1"><img src="{{asset($item->course->course_pic)}}" style="height:50px;width:70px;"></div>
                         <div class="cart-course-desc">
-                            <h4 data-brackets-id="12020" class="small-heading-black">{{$item->course->name}}</h4>
-                            <p>{{$item->course->description}}</p>
+                            <h6 data-brackets-id="12020">Chapter: {{$item->chapter->name}}</h6>
+                            <p>course: {{$item->course->name}}</p>
                             
-                            <div class="dropdown course-tooltip">
+                            {{-- <div class="dropdown course-tooltip">
                                 <button class="dropbtn">Course Item Details<span><i class="fa fa-info-circle ml5" aria-hidden="true"></i></span></button>
                                 <div class="dropdown-content box arrow-top">
                                     <div class="scrollbar" id="style-1">
                                         <div class="force-overflow">
                                             <h6>Lessons</h6>
                                             <ul class="list-inline tooltip-course-list">
-                                                {{-- @foreach ($getChapter as $chapter)
                                                 <li>
-                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>{{$chapter->name}}
+                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>{{$item->chapter->name}}
                                                 </li>
-                                                @endforeach --}}
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <span class="course-price2"><i class="fa fa-inr" aria-hidden="true"></i>5000</span>
+                            </div> --}}
+                            <span class="course-price2" id="itemPrice"><i class="fa fa-inr" aria-hidden="true"></i>{{$item->chapter->price}}</span>
                             <div class="mt10"><a href="#" class="remove">Remove</a></div>
                         </div>
                        
                     </li>
                     @empty
-                        <h4>Cart Empty !</h4>
+                        <h4>Cart empty !</h4>
                     @endforelse
                 </ul>
                 <div class="shipping-div text-center"><a href="{{route('website.course')}}" target="_blank" class="shipping-btn">Continue shoping</a></div>
                 
             </div>
             <div class="col-lg-4">
-                <div class="cart-checkout">
-                    <label>Total:</label>
-                    <h2 class="heading-black mb20"><i class="fa fa-inr" aria-hidden="true"></i>5000</h2>
-                       <a href="{{route('website.checkout')}}" class="btn btn-block knowledge-link-new">Checkout</a>
-                </div>
+                @auth   
+                    <div class="cart-checkout">
+                        <label>Total:</label>
+                        <h2 class="heading-black mb20"><i class="fa fa-inr" aria-hidden="true"></i>{{ $countPrice}}</h2>
+                        <a href="{{route('website.checkout')}}" class="btn btn-block knowledge-link-new">Checkout</a>
+                    </div>
+                @endauth
             </div>
         </div>
     </div>

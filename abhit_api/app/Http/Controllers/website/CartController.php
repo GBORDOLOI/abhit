@@ -11,17 +11,17 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     public function index(Request $request){
-        $cartCourse = [];
-        $countItemInsideCart = 0;
-        // $cart = [];
-        $chapter = [];
+        $cart = []; $countCartItem=0;  $price = [];
         if(Auth::check()){
-            $cartCourse=  Cart::with('course')->where('user_id',Auth::user()->id)->where('is_paid', 0)->distinct()->get(['course_id']);
-            $countItemInsideCart = Cart::where('user_id',Auth::user()->id)->where('is_paid', 0)->distinct()->get(['course_id'])->count();
-           
-        }
+            $cart = Cart::where('user_id',Auth::user()->id)->where('is_paid', 0)->get();
+            $countCartItem = Cart::where('user_id',Auth::user()->id)->where('is_paid', 0)->count();
+            foreach($cart as $item){
+                $countPrice = Chapter::where('id', $item->chapter_id)->sum('price');
+               array_push($price, $countPrice);
 
-        return view('website.cart.cart')->with(['cartCourse' => $cartCourse,'countItemInsideCart' => $countItemInsideCart]);
+            }
+        }
+        return view('website.cart.cart')->with(['cart' => $cart, 'countCartItem' => $countCartItem, 'countPrice' =>  array_sum($price)]);
         
     }
 
