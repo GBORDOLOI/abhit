@@ -27,7 +27,6 @@
                         <div class="cart-course-desc">
                             <h6 data-brackets-id="12020">Chapter: {{$item->chapter->name}}</h6>
                             <p>course: {{$item->course->name}}</p>
-                            
                             {{-- <div class="dropdown course-tooltip">
                                 <button class="dropbtn">Course Item Details<span><i class="fa fa-info-circle ml5" aria-hidden="true"></i></span></button>
                                 <div class="dropdown-content box arrow-top">
@@ -44,7 +43,7 @@
                                 </div>
                             </div> --}}
                             <span class="course-price2" id="itemPrice"><i class="fa fa-inr" aria-hidden="true"></i>{{$item->chapter->price}}</span>
-                            <div class="mt10"><a href="#" class="remove">Remove</a></div>
+                            <div class="mt10"><a href="#" class="remove removeCartItem" data-id="{{$item->chapter_id}}">Remove</a></div>
                         </div>
                        
                     </li>
@@ -73,6 +72,26 @@
 <script>
     $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    $('.removeCartItem').on('click',function(e){
+        $.ajax({
+            url:"{{route('website.remove-from-cart')}}",
+            type:"POST",
+            data:{
+                '_token' : "{{csrf_token()}}",
+                'chapter_id' : $(this).data('id'),
+            },
+            success:function(result){
+                toastr.success(result.message);
+                location.reload(true);
+            },
+            error:function(xhr, status, error){
+                if(xhr.status == 500 || xhr.status == 422){
+                    toastr.error('Something Went Wrong');
+                }
+            }
+        });
     });
 </script>
 @endsection

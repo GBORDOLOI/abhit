@@ -38,4 +38,12 @@ class CartController extends Controller
         return response()->json(['message' => "Item added to cart successfully."]);
         
     }
+
+
+    public function removeFromCart(Request $request){
+        if(Auth::check()){
+            Cart::where('user_id', Auth::user()->id)->where('is_paid', 0)->where('chapter_id', $request->chapter_id)->delete();
+            return response()->json(['message' => 'Item removed successfully']);
+        }
+    }
 }

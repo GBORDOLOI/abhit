@@ -99,6 +99,7 @@ Route::post('check-is-correct-mcq',[MultipleChoiceController::class,'checkIsCorr
 Route::prefix('cart')->group(function(){
     Route::get('cart',[CartController::class,'index'])->name('website.cart');
     Route::post('add-to-cart',[CartController::class,'addToCart'])->name('website.add-to-cart');
+    Route::post('remove-from-cart',[CartController::class,'removeFromCart'])->name('website.remove-from-cart');
 });
 
 
