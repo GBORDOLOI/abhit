@@ -65,4 +65,19 @@ class MultipleChoiceController extends Controller
         $startMcq = MultipleChoice::where('subject_id', $id)->simplePaginate(5);
         return back()->with('startMcq',  $startMcq);
     }
+
+
+    public function checkIsCorrectMcq(Request $request){
+        $subject_id = $request->subject_id;
+        $mcArray = $request->mcArray;
+
+        $checkMcq = MultipleChoice::where('subject_id', $subject_id)->get();
+        $correctAnswerArray = [];
+        foreach( $checkMcq as $item){
+            array_push($correctAnswerArray, $item->correct_answer);
+        }
+        $output = array_intersect( $mcArray,$correctAnswerArray);
+
+        return response()->json(['Total_corrects' => count($output)]);
+    }
 }

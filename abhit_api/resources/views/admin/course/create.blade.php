@@ -50,7 +50,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                     </div>
 
                     <div class="form-group">
-                        <label>File upload</label>
+                        <label>File Upload</label>
                         <input type="file" class="filepond" name="pic" id="course_pic" data-max-file-size="1MB"
                             data-max-files="1" />
                         <span class="text-danger" id="pic_error"></span>
@@ -87,6 +87,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('scripts')
@@ -215,6 +216,22 @@ $subjects = Subject::where('is_activate', Activation::Activate)
             // showButtonPanel: true,
             dateFormat: 'yy-mm-dd',
         });
+
+
+        /**************************** close-upload-image-modal **********************************/
+
+        $('.close-upload-image-modal').on('click', function(e){
+            e.preventDefault();
+            pond.removeFile();
+            $('#courseImageUploadModal').modal('hide');
+        })
+
+
+
+
+
+
+
     </script>
 
 

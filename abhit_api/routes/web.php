@@ -14,6 +14,7 @@ use App\Http\Controllers\website\KnowledgeForumCommentsController;
 use App\Http\Controllers\website\ReportPostController;
 use App\Http\Controllers\website\ReportBlogController;
 use App\Http\Controllers\admin\MultipleChoiceController;
+use App\http\Controllers\website\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,9 +92,14 @@ Route::prefix('knowledge')->group(function(){
 
 /* ------------------------------- Multiple Choice Question ------------------------------------ */
 
-// Route::get('start-mcq-test/{id}',[MultipleChoiceController::class,'startMcq'])->name('website.start.multiple.choice');
+Route::post('check-is-correct-mcq',[MultipleChoiceController::class,'checkIsCorrectMcq'])->name('website.check.is.correct-mcq');
 
+/* ------------------------------- Cart ------------------------------------ */
 
+Route::prefix('cart')->group(function(){
+    Route::get('cart',[CartController::class,'index'])->name('website.cart');
+    Route::post('add-to-cart',[CartController::class,'addToCart'])->name('website.add-to-cart');
+});
 
 
 
@@ -101,7 +107,6 @@ Route::prefix('knowledge')->group(function(){
 Route::view('about-us','website.about.about')->name('website.about');
 
 Route::view('contact','website.contact.contact')->name('website.contact');
-Route::view('cart','website.cart.cart')->name('website.cart');
 Route::view('checkout','website.cart.checkout')->name('website.checkout');
 Route::view('website/login','website.auth.login')->name('website.login');
 Route::view('website/forgot-password','website.auth.forgot')->name('website.forgot.password');
