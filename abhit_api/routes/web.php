@@ -14,7 +14,9 @@ use App\Http\Controllers\website\KnowledgeForumCommentsController;
 use App\Http\Controllers\website\ReportPostController;
 use App\Http\Controllers\website\ReportBlogController;
 use App\Http\Controllers\admin\MultipleChoiceController;
-use App\http\Controllers\website\CartController;
+use App\Http\Controllers\website\CartController;
+use App\Http\Controllers\website\RazorpayPaymentController;
+use App\Http\Controllers\website\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,17 +99,26 @@ Route::post('check-is-correct-mcq',[MultipleChoiceController::class,'checkIsCorr
 /* ------------------------------- Cart ------------------------------------ */
 
 Route::prefix('cart')->group(function(){
-    Route::get('cart',[CartController::class,'index'])->name('website.cart');
+    Route::get('cart-details',[CartController::class,'index'])->name('website.cart');
     Route::post('add-to-cart',[CartController::class,'addToCart'])->name('website.add-to-cart');
+    Route::post('remove-from-cart',[CartController::class,'removeFromCart'])->name('website.remove-from-cart');
 });
 
+
+/* ------------------------------- Checkout / Payment------------------------------------ */
+Route::get('checkout', [PaymentController::class, 'checkout'])->name('website.checkout');
+
+Route::prefix('payment')->group(function(){
+    // Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('razorpay.payment.index');;
+    Route::post('verify-payment', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
+});
 
 
 /* ------------------------------- Views -> Alok ------------------------------------ */
 Route::view('about-us','website.about.about')->name('website.about');
 
 Route::view('contact','website.contact.contact')->name('website.contact');
-Route::view('checkout','website.cart.checkout')->name('website.checkout');
+
 Route::view('website/login','website.auth.login')->name('website.login');
 Route::view('website/forgot-password','website.auth.forgot')->name('website.forgot.password');
 Route::view('website/new-password','website.auth.newpassword')->name('website.new.password');
