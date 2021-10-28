@@ -454,7 +454,7 @@
 @endsection
 
 @section('scripts')
-
+    @include('layout.website.include.modal_scripts')
     <script>
 
         function previewImage(event){
@@ -554,6 +554,7 @@
                     toastr.success(data.message);
                     $('#photoUploadForm')[0].reset();
                     $('.upload-photo-btn').text('save');
+                    location.reload(true);
                 },
                 error:function(xhr, status, error){
                     if(xhr.status == 500 || xhr.status == 422){
