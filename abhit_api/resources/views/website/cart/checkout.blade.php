@@ -9,10 +9,111 @@
     <section class="check-describtion">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12 p0">
+                <div class="col-md-7">
+                    <h4 data-brackets-id="12020" class="small-heading-black mb20">Order Summary</h4>
+                    <div style="margin-top:10px;">
+                        <ul class="list-inline cart-course-list" style="border:none;">
+                            @forelse ($cart as $item)
+                                <li>
+                                    <div class="cart-course-image1"><img src="{{asset($item->course->course_pic)}}" style="height:50px;width:70px;"></div>
+                                    <div class="cart-course-desc">
+                                        <h6 data-brackets-id="12020">Chapter: {{$item->chapter->name}}</h6>
+                                        <p>course: {{$item->course->name}}</p>
+                                        <span class="course-price2" id="itemPrice"><i class="fa fa-inr" aria-hidden="true"></i>{{$item->chapter->price}}</span>
+                                    </div>
+                                
+                                </li>
+                            @empty
+                                <h4>Cart empty !</h4>
+                            @endforelse
+                        </ul>
+                    </div>
+                    <div class="total1">
+                        <p class=""><b>Total</b></p>
+                        <span class=" course-price1">
+                            <i class="fa fa-inr" aria-hidden="true"></i>{{$countPrice}}.00</span>
+                    </div>
+                </div>
+                <div class="col-md-5" style="border-left:2px solid #ddd;">
+                    <button id="rzp-button1" class="btn btn-lg btn-success">Pay &nbsp; <i class="fa fa-inr" aria-hidden="true"></i>  {{$countPrice}}</span></button>
+                    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                    <form name='razorpayform' action="{{route('payment.verify')}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+                        <input type="hidden" name="razorpay_signature"  id="razorpay_signature" >
+                        <input type="hidden" name="razorpay_order_id"  id="razorpay_order_id" >
+                    </form>
+                </div>
+                {{-- <div class="col-lg-12 p0">
                     <ul class="list-inline cart-desc-list1">
+                        <li class="">
+
+                            <div class="course-desc-list-left">
+                                <h4 data-brackets-id="12020" class="small-heading-black mb20">Order Summary</h4>
+                                <ul class="list-inline cart-course-list">
+                                    @forelse ($cart as $item)
+                                        <li>
+                                            <div class="cart-course-image1"><img src="{{asset($item->course->course_pic)}}" style="height:50px;width:70px;"></div>
+                                            <div class="cart-course-desc">
+                                                <h6 data-brackets-id="12020">Chapter: {{$item->chapter->name}}</h6>
+                                                <p>course: {{$item->course->name}}</p>
+                                                {{-- <div class="dropdown course-tooltip">
+                                                    <button class="dropbtn">Course Item Details<span><i class="fa fa-info-circle ml5" aria-hidden="true"></i></span></button>
+                                                    <div class="dropdown-content box arrow-top">
+                                                        <div class="scrollbar" id="style-1">
+                                                            <div class="force-overflow">
+                                                                <h6>Lessons</h6>
+                                                                <ul class="list-inline tooltip-course-list">
+                                                                    <li>
+                                                                        <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>{{$item->chapter->name}}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                <span class="course-price2" id="itemPrice"><i class="fa fa-inr" aria-hidden="true"></i>{{$item->chapter->price}}</span>
+                                                <div class="mt10"><a href="#" class="remove removeCartItem" data-id="{{$item->chapter_id}}">Remove</a></div>
+                                            </div>
+                                        
+                                        </li>
+                                    @empty
+                                        <h4>Cart empty !</h4>
+                                    @endforelse
+                                </ul>
+                                <form class="coupon-form" role="search" method="GET" action="">
+                                    <div class="input-group add-on">
+                                        <input class="form-control" placeholder="Discount Code" name="Discount_Code"
+                                            id="Discount Code" type="text">
+                                        <div class="input-group-btn">
+                                            <button id="btn_code" class="btn-code-old" type="button">Apply</button>
+                                        </div>
+                                        <!-- after filling the input by coupon code button class will be change from btn-code-old to btn-code-new. btn-code-new is already added in the css-->
+                                    </div>
+                                </form>
+                                <ul class="list-inline price-section">
+                                    <li class="">
+                                        <p class=" mb0">Original price:</p>
+                                        <span class="original-price"><i class="fa fa-inr"
+                                                aria-hidden="true"></i>5000</span>
+                                    </li>
+                                    <!-- after coupon is applied the discounted price will be shown here-->
+                                    <li class="">
+                                        <p class=" mb0">Discount Code:</p>
+                                        <span class="original-price"><i class="fa fa-inr"
+                                                aria-hidden="true"></i>5000</span>
+                                    </li>
+                                </ul>
+
+                                <div class="total1">
+                                    <p class=""><b>Total</b></p>
+                                    <span class=" course-price1">
+                                        <i class="fa fa-inr" aria-hidden="true"></i>5000</span>
+                                </div>
+                            </div>
+                        </li>
                         <li>
-                            <div class="cart-box">
+                            <div class="cart-box course-desc-list-right">
                                 <h4 data-brackets-id="12020" class="small-heading-black mb20">Checkout</h4>
 
                                 <form action="#" class="payment">
@@ -20,11 +121,15 @@
                                         <input type="radio" id="test1" name="radio-group" checked>
                                         <label for="test1">Credit or Debit Card
                                             <ul class="list-inline payment-cart-list">
-                                                <li><img src="{{asset('asset_website/img/cart/american-express.png')}}" class="w100">
+                                                <li><img src="{{ asset('asset_website/img/cart/american-express.png') }}"
+                                                        class="w100">
                                                 </li>
-                                                <li><img src="{{asset('asset_website/img/cart/mastercard.png')}}" class="w100"></li>
-                                                <li><img src="{{asset('asset_website/img/cart/rupay.png')}}" class="w100"></li>
-                                                <li><img src="{{asset('asset_website/img/cart/visa.png')}}" class="w100"></li>
+                                                <li><img src="{{ asset('asset_website/img/cart/mastercard.png') }}"
+                                                        class="w100"></li>
+                                                <li><img src="{{ asset('asset_website/img/cart/rupay.png') }}"
+                                                        class="w100"></li>
+                                                <li><img src="{{ asset('asset_website/img/cart/visa.png') }}"
+                                                        class="w100"></li>
                                             </ul>
                                         </label>
                                     </p>
@@ -103,301 +208,78 @@
                                     </div>
 
 
-                                </form>
+                                </form> 
                             </div>
 
                         </li>
-                        <li class="">
-
-                        <div class=" course-desc-list-right">
-                            <h4 data-brackets-id="12020" class="small-heading-black mb20">Order Summary</h4>
-                            <ul class="list-inline cart-course-list">
-                                <li>
-                                    <div class="cart-course-image"><img src="{{asset('asset_website/img/cart/image.png')}}"
-                                            class="w100"></div>
-                                    <div class="cart-course-desc">
-                                        <h4 data-brackets-id="12020" class="small-heading-black mb20">Chemistry</h4>
-                                        <p>Basic understanding of chemistry
-                                            and maths.</p>
-                                        <span class="course-price2"><i class="fa fa-inr"
-                                                aria-hidden="true"></i>5000</span>
-                                        <div class="dropdown course-tooltip">
-                                            <button class="dropbtn">Full Course<span><i class="fa fa-info-circle ml5"
-                                                        aria-hidden="true"></i></span></button>
-                                            <div class="dropdown-content box arrow-top">
-                                                <div class="scrollbar" id="style-1">
-                                                    <div class="force-overflow">
-                                                        <h6>Lessons</h6>
-                                                        <ul class="list-inline tooltip-course-list">
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Aldehydes, Ketones and
-                                                                Carboxylic Acids
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Alcohols, Phenols and
-                                                                Ethers
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Haloalkanes and
-                                                                Haloarenes
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Biomolecules
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Polymers
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Chemistry in Everyday
-                                                                Life
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>d and f- Block
-                                                                Elements
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Electrochemistry
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Chemical Kinetics
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Surface Chemistry
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Solutions
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="cart-course-image"><img src="{{asset('asset_website/img/cart/image.png')}}"
-                                            class="w100"></div>
-                                    <div class="cart-course-desc">
-                                        <h4 data-brackets-id="12020" class="small-heading-black mb20">Chemistry</h4>
-                                        <p>Basic understanding of chemistry
-                                            and maths.</p>
-                                        <span class="course-price2"><i class="fa fa-inr"
-                                                aria-hidden="true"></i>5000</span>
-                                        <div class="dropdown course-tooltip">
-                                            <button class="dropbtn">Full Course<span><i class="fa fa-info-circle ml5"
-                                                        aria-hidden="true"></i></span></button>
-                                            <div class="dropdown-content box arrow-top">
-                                                <div class="scrollbar" id="style-1">
-                                                    <div class="force-overflow">
-                                                        <h6>Lessons</h6>
-                                                        <ul class="list-inline tooltip-course-list">
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Aldehydes, Ketones and
-                                                                Carboxylic Acids
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Alcohols, Phenols and
-                                                                Ethers
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Haloalkanes and
-                                                                Haloarenes
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Biomolecules
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Polymers
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Chemistry in Everyday
-                                                                Life
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>d and f- Block
-                                                                Elements
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Electrochemistry
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Chemical Kinetics
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Surface Chemistry
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Solutions
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="cart-course-image"><img src="{{asset('asset_website/img/cart/image.png')}}"
-                                            class="w100"></div>
-                                    <div class="cart-course-desc">
-                                        <h4 data-brackets-id="12020" class="small-heading-black mb20">Chemistry</h4>
-                                        <p>Basic understanding of chemistry
-                                            and maths.</p>
-                                        <span class="course-price2"><i class="fa fa-inr"
-                                                aria-hidden="true"></i>5000</span>
-                                        <div class="dropdown course-tooltip">
-                                            <button class="dropbtn">Full Course<span><i
-                                                        class="fa fa-info-circle ml5"
-                                                        aria-hidden="true"></i></span></button>
-                                            <div class="dropdown-content box arrow-top">
-                                                <div class="scrollbar" id="style-1">
-                                                    <div class="force-overflow">
-                                                        <h6>Lessons</h6>
-                                                        <ul class="list-inline tooltip-course-list">
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Aldehydes, Ketones and
-                                                                Carboxylic Acids
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Alcohols, Phenols and
-                                                                Ethers
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Haloalkanes and
-                                                                Haloarenes
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Biomolecules
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Polymers
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Chemistry in Everyday
-                                                                Life
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>d and f- Block
-                                                                Elements
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Electrochemistry
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Chemical Kinetics
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Surface Chemistry
-                                                            </li>
-                                                            <li>
-                                                                <span class="star"><i class="fa fa-star"
-                                                                        aria-hidden="true"></i></span>Solutions
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <form class="coupon-form" role="search" method="GET" action="">
-                                <div class="input-group add-on">
-                                    <input class="form-control" placeholder="Discount Code" name="Discount_Code"
-                                        id="Discount Code" type="text">
-                                    <div class="input-group-btn">
-                                        <button id="btn_code" class="btn-code-old" type="button">Apply</button>
-                                    </div>
-                                    <!-- after filling the input by coupon code button class will be change from btn-code-old to btn-code-new. btn-code-new is already added in the css-->
-                                </div>
-                            </form>
-                            <ul class="list-inline price-section">
-                                <li class="">
-                                    <p class=" mb0">Original price:</p>
-                                    <span class="original-price"><i class="fa fa-inr"
-                                            aria-hidden="true"></i>5000</span>
-                                </li>
-                                <!-- after coupon is applied the discounted price will be shown here-->
-                                <li class="">
-                                    <p class=" mb0">Discount Code:</p>
-                                    <span class="original-price"><i class="fa fa-inr"
-                                            aria-hidden="true"></i>5000</span>
-                                </li>
-                            </ul>
-
-                            <div class="total1">
-                                <p class=""><b>Total</b></p>
-                                <span class=" course-price1">
-                                    <i class="fa fa-inr" aria-hidden="true"></i>5000</span>
-                            </div>
-                </div>
-                </li>
-                </ul>
+                        
+                    </ul>
+                </div> --}}
             </div>
-        </div>
         </div>
     </section>
 @endsection
 
 @section('scripts')
-<script>
-    $(document).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
+    <script>
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 
-<script>
-    const select = document.querySelectorAll('.selectBtn');
-    const option = document.querySelectorAll('.option');
-    let index = 1;
+    <script>
+        // const select = document.querySelectorAll('.selectBtn');
+        // const option = document.querySelectorAll('.option');
+        // let index = 1;
 
-    select.forEach(a => {
-        a.addEventListener('click', b => {
-            const next = b.target.nextElementSibling;
-            next.classList.toggle('toggle');
-            next.style.zIndex = index++;
-        })
-    })
-    option.forEach(a => {
-        a.addEventListener('click', b => {
-            b.target.parentElement.classList.remove('toggle');
+        // select.forEach(a => {
+        //     a.addEventListener('click', b => {
+        //         const next = b.target.nextElementSibling;
+        //         next.classList.toggle('toggle');
+        //         next.style.zIndex = index++;
+        //     })
+        // })
+        // option.forEach(a => {
+        //     a.addEventListener('click', b => {
+        //         b.target.parentElement.classList.remove('toggle');
 
-            const parent = b.target.closest('.select').children[0];
-            parent.setAttribute('data-type', b.target.getAttribute('data-type'));
-            parent.innerText = b.target.innerText;
-        })
-    })
-</script>
+        //         const parent = b.target.closest('.select').children[0];
+        //         parent.setAttribute('data-type', b.target.getAttribute('data-type'));
+        //         parent.innerText = b.target.innerText;
+        //     })
+        // })
+
+
+
+        // Checkout details as a json
+        var options = @json($checkoutParam);
+
+        /**
+        * The entire list of checkout fields is available at
+        * https://docs.razorpay.com/docs/checkout-form#checkout-fields
+        */
+        options.handler = function (response){
+            document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+            document.getElementById('razorpay_signature').value = response.razorpay_signature;
+            document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
+            document.razorpayform.submit();
+
+           if(response.flag == 201){
+                toastr.success(response.message);
+           }else if(response.flag == 400){
+                toastr.error(response.message);
+           }
+        };
+
+        // Boolean whether to show image inside a white frame. (default: true)
+        options.theme.image_padding = false;
+
+        var rzp = new Razorpay(options);
+
+        document.getElementById('rzp-button1').onclick = function(e){
+            rzp.open();
+            e.preventDefault();
+        }
+
+    </script>
 @endsection

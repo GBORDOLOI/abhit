@@ -21,6 +21,18 @@
         <div class="row">
             <div class="col-lg-8">
                 <ul class="list-inline cart-course-list1">
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>    
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
+                    @if ($message = Session::get('error'))
+                        <div class="alert alert-danger alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>    
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
                     @forelse ($cart as $item)
                     <li>
                         <div class="cart-course-image1"><img src="{{asset($item->course->course_pic)}}" style="height:50px;width:70px;"></div>
@@ -45,7 +57,6 @@
                             <span class="course-price2" id="itemPrice"><i class="fa fa-inr" aria-hidden="true"></i>{{$item->chapter->price}}</span>
                             <div class="mt10"><a href="#" class="remove removeCartItem" data-id="{{$item->chapter_id}}">Remove</a></div>
                         </div>
-                       
                     </li>
                     @empty
                         <h4>Cart empty !</h4>
@@ -67,7 +78,7 @@
     </div>
 </section>
 @endsection
-
+ 
 @section('scripts')
 <script>
     $(document).ready(function() {
