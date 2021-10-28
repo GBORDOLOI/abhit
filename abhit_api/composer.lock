@@ -1083,13 +1083,6 @@
                 "Result-Type",
                 "result"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/GrahamCampbell/Result-Type/issues",
-                "source": "https://github.com/GrahamCampbell/Result-Type/tree/v1.0.3"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -1206,13 +1199,6 @@
                 "rest",
                 "web service"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.4.0"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -1293,13 +1279,6 @@
             "keywords": [
                 "promise"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/1.5.0"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -1411,13 +1390,6 @@
                 "uri",
                 "url"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.1.0"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -1599,13 +1571,6 @@
                 "framework",
                 "laravel"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/laravel/framework/issues",
-                "source": "https://github.com/laravel/framework"
-            },
-=======
->>>>>>> origin/dipankar
             "time": "2021-10-12T13:43:13+00:00"
         },
         {
@@ -1696,39 +1661,6 @@
                     "dev-master": "1.x-dev"
                 }
             },
-<<<<<<< HEAD
-            "time": "2021-10-13T13:38:15+00:00"
-        },
-        {
-            "name": "laravel/serializable-closure",
-            "version": "v1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "6cfc678735f22ccedad761b8cae2bab14c3d8e5b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/6cfc678735f22ccedad761b8cae2bab14c3d8e5b",
-                "reference": "6cfc678735f22ccedad761b8cae2bab14c3d8e5b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.3|^8.0"
-            },
-            "require-dev": {
-                "pestphp/pest": "^1.18",
-                "phpstan/phpstan": "^0.12.98",
-                "symfony/var-dumper": "^5.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-=======
->>>>>>> origin/dipankar
             "autoload": {
                 "psr-4": {
                     "Laravel\\SerializableClosure\\": "src/"
@@ -1754,13 +1686,6 @@
                 "laravel",
                 "serializable"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/laravel/serializable-closure/issues",
-                "source": "https://github.com/laravel/serializable-closure"
-            },
-=======
->>>>>>> origin/dipankar
             "time": "2021-10-07T14:00:57+00:00"
         },
         {
@@ -1825,13 +1750,6 @@
                 "laravel",
                 "psysh"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/laravel/tinker/issues",
-                "source": "https://github.com/laravel/tinker/tree/v2.6.2"
-            },
-=======
->>>>>>> origin/dipankar
             "time": "2021-09-28T15:47:34+00:00"
         },
         {
@@ -2148,13 +2066,6 @@
                 }
             ],
             "description": "Mime-type detection for Flysystem",
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/thephpleague/mime-type-detection/issues",
-                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.8.0"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://github.com/frankdejonge",
@@ -2250,13 +2161,6 @@
                 "logging",
                 "psr-3"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.3.5"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://github.com/Seldaek",
@@ -3120,13 +3024,6 @@
                 "interactive",
                 "shell"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.10.9"
-            },
-=======
->>>>>>> origin/dipankar
             "time": "2021-10-10T13:37:39+00:00"
         },
         {
@@ -3236,13 +3133,6 @@
                 "queue",
                 "set"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/ramsey/collection/issues",
-                "source": "https://github.com/ramsey/collection/tree/1.2.2"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://github.com/ramsey",
@@ -3337,13 +3227,6 @@
                 "identifier",
                 "uuid"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.2.3"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://github.com/ramsey",
@@ -3415,13 +3298,6 @@
                 "mail",
                 "mailer"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/swiftmailer/swiftmailer/issues",
-                "source": "https://github.com/swiftmailer/swiftmailer/tree/v6.3.0"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://github.com/fabpot",
@@ -4204,12 +4080,6 @@
             ],
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
-            "support": {
-                "source": "https://github.com/symfony/http-kernel/tree/v5.3.9"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4290,12 +4160,6 @@
                 "mime",
                 "mime-type"
             ],
-<<<<<<< HEAD
-            "support": {
-                "source": "https://github.com/symfony/mime/tree/v5.3.8"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5510,12 +5374,6 @@
             ],
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
-            "support": {
-                "source": "https://github.com/symfony/translation/tree/v5.3.9"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5679,12 +5537,6 @@
                 "debug",
                 "dump"
             ],
-<<<<<<< HEAD
-            "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v5.3.8"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5816,13 +5668,6 @@
                 "env",
                 "environment"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/vlucas/phpdotenv/issues",
-                "source": "https://github.com/vlucas/phpdotenv/tree/v5.3.1"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -6257,15 +6102,6 @@
                 "laravel",
                 "page"
             ],
-<<<<<<< HEAD
-            "support": {
-                "docs": "https://flareapp.io/docs/ignition-for-laravel/introduction",
-                "forum": "https://twitter.com/flareappio",
-                "issues": "https://github.com/facade/ignition/issues",
-                "source": "https://github.com/facade/ignition"
-            },
-=======
->>>>>>> origin/dipankar
             "time": "2021-10-11T15:24:06+00:00"
         },
         {
@@ -6445,13 +6281,6 @@
                 "throwable",
                 "whoops"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.14.4"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://github.com/denis-sokolov",
@@ -6565,13 +6394,6 @@
                 "docker",
                 "laravel"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/laravel/sail/issues",
-                "source": "https://github.com/laravel/sail"
-            },
-=======
->>>>>>> origin/dipankar
             "time": "2021-10-12T15:38:11+00:00"
         },
         {
@@ -6633,13 +6455,6 @@
                 "debug",
                 "debugbar"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/maximebf/php-debugbar/issues",
-                "source": "https://github.com/maximebf/php-debugbar/tree/v1.17.2"
-            },
-=======
->>>>>>> origin/dipankar
             "time": "2021-10-18T09:39:00+00:00"
         },
         {
@@ -7123,13 +6938,6 @@
                 }
             ],
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.5.1"
-            },
-=======
->>>>>>> origin/dipankar
             "time": "2021-10-02T14:08:47+00:00"
         },
         {
@@ -7604,13 +7412,6 @@
                 "testing",
                 "xunit"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.10"
-            },
-=======
->>>>>>> origin/dipankar
             "funding": [
                 {
                     "url": "https://phpunit.de/donate.html",
