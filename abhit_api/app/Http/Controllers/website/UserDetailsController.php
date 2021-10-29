@@ -17,7 +17,11 @@ class UserDetailsController extends Controller
         $user_details = ''; $order = [];
         if(Auth::check()){
             $user_details = UserDetails::with('user')->where('email',Auth::user()->email)->first();
-            $order = Order::where('user_id', Auth::user()->id)->get();
+            $order = Order::where('user_id', Auth::user()->id)->paginate(3);
+            if($request->ajax()){
+                $view = view('website.my_account.purchase_history',compact('order'))->render();
+                return response()->json(['purchase_history' => $view]);
+            }
         }
         return view('website.my_account.my_account')->with(['user_details' => $user_details, 'order' => $order]);
     }

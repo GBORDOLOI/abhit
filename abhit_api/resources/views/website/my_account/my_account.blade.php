@@ -273,24 +273,10 @@
                                 <h4 class="small-heading-black">Purchase History</h4>
                             </div>
                             <div class="col-lg-12">
-                                <ul class="list-inline cart-course-list1">
-                                    @forelse ($order as $item)
-                                        @if ($item->payment_status == 'paid')
-                                            <li>
-                                                <div class="cart-course-image1"><img src="{{asset($item->course->course_pic)}}" style="height:50px;width:70px;"></div>
-                                                <div class="cart-course-desc">
-                                                    <h6 data-brackets-id="12020">Chapter: {{$item->chapter->name}}</h6>
-                                                    <p>course: {{$item->course->name}}</p>
-                                                    <span class="course-price2" id="itemPrice"><i class="fa fa-inr" aria-hidden="true"></i>{{$item->chapter->price}}</span>
-                                                </div>
-                                            </li>
-                                        @endif
-                                    @empty
-                                        <div class="text-center">
-                                            <h3>No items found.</h3>
-                                        </div>
-                                    @endforelse
-                                    
+                                <ul class="list-inline cart-course-list1" style="border:none;">
+                                    <div id="purchaseHistory">
+                                        @include('website.my_account.purchase_history')
+                                    </div>
                                 </ul>
                             </div>
                         </div>
@@ -449,6 +435,40 @@
                         $('.change-password-btn').text('Change Password');
                     }
                 });
+            }
+        });
+
+        /*******************************  Infinite Scroll Purchase History***************************************/
+
+        function loadMorePurchaseHistory(page) {
+            let html = '<div style="position: absolute;left: 34%;"> <i class="fa fa-check-circle-o" aria-hidden="true" style="color:green;font-size:22px;"></i>&nbsp; You are all caught up. </div>';
+            $.ajax({
+                    url: '?page=' + page,
+                    type: 'get',
+                    beforeSend: function() {
+                        $('.ajax-loading').show();
+                    }
+                })
+                .done(function(data) {
+                    if (data.purchase_history == '') {
+                        $('.ajax-loading').html(html);
+                        return;
+                    } else {
+                        $('.ajax-loading').hide();
+                        $('#purchaseHistory').append(data.purchase_history);
+                    }
+
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    toastr.error('Oops!, Something went wrong');
+                })
+        }
+
+        let page = 1;
+        $(window).scroll(function() {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                page++;
+                loadMorePurchaseHistory(page);
             }
         });
     </script>
