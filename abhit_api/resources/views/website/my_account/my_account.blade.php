@@ -73,11 +73,11 @@
                                 @if($user_details != null)
                                     <div class="form-group col-lg-6 pr10">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="name3" value="{{Auth::user()->firstname}}" required>
+                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="firstname" value="{{Auth::user()->firstname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="p_number3" value="{{Auth::user()->lastname}}" required>
+                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lastname" value="{{Auth::user()->lastname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Email ID</label>
@@ -85,15 +85,15 @@
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Mobile number</label>
-                                        <input type="number" class="form-control" name="phone" placeholder="Enter Phone" id="phone" value="{{$user_details->phone}}">
+                                        <input type="number" class="form-control" name="phone" placeholder="Enter Phone" id="phone" value="{{$user_details->phone}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Education</label>
-                                        <input type="text" class="form-control" name="education" placeholder="Enter Education" id="education" value="{{$user_details->education}}">
+                                        <input type="text" class="form-control" name="education" placeholder="Enter Education" id="education" value="{{$user_details->education}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Gender</label>
-                                        <select name="gender" id="gender" class="form-control">
+                                        <select name="gender" id="gender" class="form-control" required>
                                             <option value="{{$user_details->gender}}">{{$user_details->gender}}</option>
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
@@ -103,27 +103,27 @@
                                 @else
                                     <div class="form-group col-lg-6 pr10">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="name3" value="{{Auth::user()->firstname}}">
+                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="firstname" value="{{Auth::user()->firstname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="p_number3" value="{{Auth::user()->lastname}}">
+                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lastname" value="{{Auth::user()->lastname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Email ID</label>
-                                        <input type="email" class="form-control" name="email" placeholder="Enter Email" id="email" value="{{Auth::user()->email}}">
+                                        <input type="email" class="form-control" name="email" placeholder="Enter Email" id="email" value="{{Auth::user()->email}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Mobile number</label>
-                                        <input type="number" class="form-control" name="phone" placeholder="Enter Phone" id="phone">
+                                        <input type="number" class="form-control" name="phone" placeholder="Enter Phone" id="phone" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Education</label>
-                                        <input type="text" class="form-control" name="education" placeholder="Enter Education" id="education">
+                                        <input type="text" class="form-control" name="education" placeholder="Enter Education" id="education" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Gender</label>
-                                        <select name="gender" id="gender" class="form-control">
+                                        <select name="gender" id="gender" class="form-control" required>
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
                                             <option value="other">Other</option>
