@@ -13652,3 +13652,17 @@ input:checked + .slider:before {
     justify-content: center;
     align-items: center;
 }
+
+
+.video-upload-div{
+  height:75px;
+  border-radius: 10px;
+  background-color: #f1f0ef;
+}
+.video-upload-div input{
+  position:absolute;
+  top:31%;
+  left:50%;
+  transform:translate(-31%,-50%);
+  box-sizing: border-box;
+}

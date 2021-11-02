@@ -16,4 +16,12 @@ class Chapter extends Model
     public function getCourse(){
         return $this->belongsTo(Course::class,'course_id','id');
     }
+
+    public function cart(){
+        return $this->hasMany('App\Models\Cart');
+    }
+
+    public function order(){
+        return $this->hasMany('App\Models\Order');
+    }
 }

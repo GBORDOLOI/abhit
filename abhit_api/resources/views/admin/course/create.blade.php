@@ -51,8 +51,20 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 
                     <div class="form-group">
                         <label>File Upload</label>
-                        <input type="file" class="filepond" name="pic" id="course_pic" data-max-file-size="1MB"
-                            data-max-files="1" />
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select File
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="btn ml-3" id="uploadVideo">Video</a></li>
+                                <li><a href="#" class="btn ml-3" id="uploadImage">Image</a></li>
+                            </ul>
+                        </div>
+                        <div class="upload-image-div" style="margin-top:15px;display: none;">
+                            <input type="file" class="filepond" name="pic" id="course_pic" data-max-file-size="1MB" data-max-files="1">
+                        </div>
+                        <div class="video-upload-div" style="margin-top:15px;display: none;">
+                            <input type="file" name="video" id="course_video">
+                        </div>
                         <span class="text-danger" id="pic_error"></span>
                     </div>
                     <div class="form-group">
@@ -143,9 +155,21 @@ $subjects = Subject::where('is_activate', Activation::Activate)
             }
         );
 
+        $('#uploadVideo').on('click',function(e){
+
+           $('.video-upload-div').css('display', 'block');
+           $('.upload-image-div').css('display', 'none');
+
+        });
+
+        $('#uploadImage').on('click',function(){
+            $('.upload-image-div').css('display', 'block');
+            $('.video-upload-div').css('display', 'none');
+        });
+
         $("#createCourse").submit(function(e) {
 
-            e.preventDefault(); // avoid to execute the actual submit of the form.
+            e.preventDefault(); 
 
             $("#name_error").empty();
             $("#subject_id_error").empty();
@@ -155,7 +179,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
             $("#data_error").empty();
 
             var formdata = new FormData(this);
-            var data = CKEDITOR.instances.editor.getData();
+            var data = CKEDITOR.instances.editor.document.getBody().getText();
 
             pondFiles = pond.getFiles();
             for (var i = 0; i < pondFiles.length; i++) {
@@ -163,43 +187,49 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                 formdata.append('pic', pondFiles[i].file);
             }
             formdata.append('data', data);
+            
+           formdata.append('video',document.getElementById('course_video').files[0]);
 
+            if( (pondFiles.length == 0) && (document.getElementById('course_video').value == '')){
+                toastr.error('Image or Video must be selected from the file upload dropdown');
+            }else{
+                $.ajax({
 
-
-            $.ajax({
-
-                type: "POST",
-                url: "{{ route('admin.creating.course') }}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-
-                // data: form.serialize(), // serializes the form's elements.
-                data: formdata,
-                processData: false,
-                contentType: false,
-                statusCode: {
-                    422: function(data) {
-                        var errors = $.parseJSON(data.responseText);
-                        $.each(errors.errors, function(key, val) {
-                            $("#" + key + "_error").text(val[0]);
-                        });
-
+                    type: "POST",
+                    url: "{{ route('admin.creating.course') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    200: function(data) {
-                        if (data.status == 2) {
-                            toastr["success"](data.error);
 
-                        } else {
-                            location.reload();
+                    // data: form.serialize(), // serializes the form's elements.
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    statusCode: {
+                        422: function(data) {
+                            var errors = $.parseJSON(data.responseText);
+                            $.each(errors.errors, function(key, val) {
+                                $("#" + key + "_error").text(val[0]);
+                            });
 
+                        },
+                        200: function(data) {
+                            if (data.status == 2) {
+                                toastr["success"](data.error);
+
+                            } else {
+                                toastr.success('Publish Successfull');
+                                location.reload();
+
+                            }
+                        },
+                        500: function() {
+                            alert('500 someting went wrong');
                         }
-                    },
-                    500: function() {
-                        alert('500 someting went wrong');
                     }
-                }
-            });
+                });
+            }
+            
 
 
         })
