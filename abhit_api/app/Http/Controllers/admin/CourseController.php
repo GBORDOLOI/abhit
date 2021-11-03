@@ -8,6 +8,7 @@ use App\Models\Course;
 use Carbon\Carbon;
 use App\Models\Chapter;
 use App\Common\Activation;
+use App\Common\BadWords;
 
 class CourseController extends Controller
 {
@@ -73,7 +74,7 @@ class CourseController extends Controller
                     'durations' => $request->duration,
                     'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
                     'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
-                    'description' => $request->data,
+                    'description' =>  \ConsoleTVs\Profanity\Builder::blocker($request->data, BadWords::badWordsReplace)->strictClean(false)->filter(),
                 ]);
                 return response()->json(['status'=>1]);
             }
@@ -102,7 +103,7 @@ class CourseController extends Controller
                 'durations' => $request->duration,
                 'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
                 'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
-                'description' => $request->data,
+                'description' =>  \ConsoleTVs\Profanity\Builder::blocker($request->data, BadWords::badWordsReplace)->strictClean(false)->filter(),
 
             ]);
             return response()->json(['status'=>1]);
@@ -165,7 +166,7 @@ class CourseController extends Controller
             $course->course_pic = $file;
             $course->publish_date = Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s');
             $course->time = Carbon::parse($request->publish_time)->format('H:i:s');
-            $course->description = $request->data;
+            $course->description = \ConsoleTVs\Profanity\Builder::blocker($request->data, BadWords::badWordsReplace)->strictClean(false)->filter();
             $course->save();
         }
 
