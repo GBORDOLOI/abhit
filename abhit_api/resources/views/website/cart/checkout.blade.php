@@ -225,9 +225,6 @@
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
         });
-    </script>
-
-    <script>
         // const select = document.querySelectorAll('.selectBtn');
         // const option = document.querySelectorAll('.option');
         // let index = 1;

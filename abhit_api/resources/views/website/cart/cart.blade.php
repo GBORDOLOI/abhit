@@ -70,7 +70,11 @@
                     <div class="cart-checkout">
                         <label>Total:</label>
                         <h2 class="heading-black mb20"><i class="fa fa-inr" aria-hidden="true"></i>{{ $countPrice}}</h2>
-                        <a href="{{route('website.checkout')}}" class="btn btn-block knowledge-link-new">Checkout</a>
+                        @if ($countPrice == 0)
+                            <a href="javascript:void(0)" class="btn btn-block btn-secondary" disabled>Checkout</a>
+                        @else
+                            <a href="{{route('website.checkout')}}" class="btn btn-block knowledge-link-new">Checkout</a>
+                        @endif
                     </div>
                 @endauth
             </div>
@@ -104,5 +108,6 @@
             }
         });
     });
+
 </script>
 @endsection

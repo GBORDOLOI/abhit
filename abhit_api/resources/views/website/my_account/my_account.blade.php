@@ -73,11 +73,11 @@
                                 @if($user_details != null)
                                     <div class="form-group col-lg-6 pr10">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="name3" value="{{Auth::user()->firstname}}" required>
+                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="firstname" value="{{Auth::user()->firstname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="p_number3" value="{{Auth::user()->lastname}}" required>
+                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lastname" value="{{Auth::user()->lastname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Email ID</label>
@@ -85,15 +85,15 @@
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Mobile number</label>
-                                        <input type="number" class="form-control" name="phone" placeholder="Enter Phone" id="phone" value="{{$user_details->phone}}">
+                                        <input type="number" class="form-control" name="phone" placeholder="Enter Phone" id="phone" value="{{$user_details->phone}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Education</label>
-                                        <input type="text" class="form-control" name="education" placeholder="Enter Education" id="education" value="{{$user_details->education}}">
+                                        <input type="text" class="form-control" name="education" placeholder="Enter Education" id="education" value="{{$user_details->education}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Gender</label>
-                                        <select name="gender" id="gender" class="form-control">
+                                        <select name="gender" id="gender" class="form-control" required>
                                             <option value="{{$user_details->gender}}">{{$user_details->gender}}</option>
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
@@ -103,27 +103,27 @@
                                 @else
                                     <div class="form-group col-lg-6 pr10">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="name3" value="{{Auth::user()->firstname}}">
+                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="firstname" value="{{Auth::user()->firstname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="p_number3" value="{{Auth::user()->lastname}}">
+                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lastname" value="{{Auth::user()->lastname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Email ID</label>
-                                        <input type="email" class="form-control" name="email" placeholder="Enter Email" id="email" value="{{Auth::user()->email}}">
+                                        <input type="email" class="form-control" name="email" placeholder="Enter Email" id="email" value="{{Auth::user()->email}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Mobile number</label>
-                                        <input type="number" class="form-control" name="phone" placeholder="Enter Phone" id="phone">
+                                        <input type="number" class="form-control" name="phone" placeholder="Enter Phone" id="phone" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Education</label>
-                                        <input type="text" class="form-control" name="education" placeholder="Enter Education" id="education">
+                                        <input type="text" class="form-control" name="education" placeholder="Enter Education" id="education" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Gender</label>
-                                        <select name="gender" id="gender" class="form-control">
+                                        <select name="gender" id="gender" class="form-control" required>
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
                                             <option value="other">Other</option>
@@ -273,172 +273,10 @@
                                 <h4 class="small-heading-black">Purchase History</h4>
                             </div>
                             <div class="col-lg-12">
-                                <ul class="list-inline cart-course-list1">
-                                    <li>
-                                        <div class="cart-course-image1"><img src="{{asset('asset_website/img/cart/image.png')}}" class="w100"></div>
-                                        <div class="cart-course-desc">
-                                            <h4 data-brackets-id="12020" class="small-heading-black">Chemistry</h4>
-                                            <p>Basic understanding of chemistry
-                                                and maths.</p>
-                                            <span class="course-price2"><i class="fa fa-inr" aria-hidden="true"></i>5000</span>
-                                            <div class="dropdown course-tooltip">
-                                                <button class="dropbtn">Full Course<span><i class="fa fa-info-circle ml5" aria-hidden="true"></i></span></button>
-                                                <div class="dropdown-content box arrow-top">
-                                                    <div class="scrollbar" id="style-1">
-                                                        <div class="force-overflow">
-                                                            <h6>Lessons</h6>
-                                                            <ul class="list-inline tooltip-course-list">
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Aldehydes, Ketones and Carboxylic Acids
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Alcohols, Phenols and Ethers
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Haloalkanes and Haloarenes
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Biomolecules
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Polymers
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Chemistry in Everyday Life
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>d and f- Block Elements
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Electrochemistry
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Chemical Kinetics
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Surface Chemistry
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Solutions
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mt10"><a href="#" class="remove">Remove</a></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cart-course-image1"><img src="{{asset('asset_website/img/cart/image.png')}}" class="w100"></div>
-                                        <div class="cart-course-desc">
-                                            <h4 data-brackets-id="12020" class="small-heading-black">Chemistry</h4>
-                                            <p>Basic understanding of chemistry
-                                                and maths.</p>
-                                            <span class="course-price2"><i class="fa fa-inr" aria-hidden="true"></i>5000</span>
-                                            <div class="dropdown course-tooltip">
-                                                <button class="dropbtn">Lesson Selected<span><i class="fa fa-info-circle ml5" aria-hidden="true"></i></span></button>
-                                                <div class="dropdown-content box arrow-top">
-                                                    <div class="scrollbar" id="style-1">
-                                                        <div class="force-overflow">
-                                                            <h6>Lessons</h6>
-                                                            <ul class="list-inline tooltip-course-list">
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Aldehydes, Ketones and Carboxylic Acids
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Alcohols, Phenols and Ethers
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Haloalkanes and Haloarenes
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Biomolecules
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Polymers
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Chemistry in Everyday Life
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>d and f- Block Elements
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Electrochemistry
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Chemical Kinetics
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Surface Chemistry
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Solutions
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mt10"><a href="#" class="remove">Remove</a></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cart-course-image1"><img src="{{asset('asset_website/img/cart/image.png')}}" class="w100"></div>
-                                        <div class="cart-course-desc">
-                                            <h4 data-brackets-id="12020" class="small-heading-black">Chemistry</h4>
-                                            <p>Basic understanding of chemistry
-                                                and maths.</p>
-                                            <span class="course-price2"><i class="fa fa-inr" aria-hidden="true"></i>5000</span>
-                                            <div class="dropdown course-tooltip">
-                                                <button class="dropbtn">Full Course<span><i class="fa fa-info-circle ml5" aria-hidden="true"></i></span></button>
-                                                <div class="dropdown-content box arrow-top">
-                                                    <div class="scrollbar" id="style-1">
-                                                        <div class="force-overflow">
-                                                            <h6>Lessons</h6>
-                                                            <ul class="list-inline tooltip-course-list">
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Aldehydes, Ketones and Carboxylic Acids
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Alcohols, Phenols and Ethers
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Haloalkanes and Haloarenes
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Biomolecules
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Polymers
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Chemistry in Everyday Life
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>d and f- Block Elements
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Electrochemistry
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Chemical Kinetics
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Surface Chemistry
-                                                                </li>
-                                                                <li>
-                                                                    <span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>Solutions
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mt10"><a href="#" class="remove">Remove</a></div>
-                                        </div>
-                                    </li>
+                                <ul class="list-inline cart-course-list1" style="border:none;">
+                                    <div id="purchaseHistory">
+                                        @include('website.my_account.purchase_history')
+                                    </div>
                                 </ul>
                             </div>
                         </div>
@@ -454,7 +292,7 @@
 @endsection
 
 @section('scripts')
-
+    @include('layout.website.include.modal_scripts')
     <script>
 
         function previewImage(event){
@@ -554,6 +392,7 @@
                     toastr.success(data.message);
                     $('#photoUploadForm')[0].reset();
                     $('.upload-photo-btn').text('save');
+                    location.reload(true);
                 },
                 error:function(xhr, status, error){
                     if(xhr.status == 500 || xhr.status == 422){
@@ -596,6 +435,40 @@
                         $('.change-password-btn').text('Change Password');
                     }
                 });
+            }
+        });
+
+        /*******************************  Infinite Scroll Purchase History***************************************/
+
+        function loadMorePurchaseHistory(page) {
+            let html = '<div style="position: absolute;left: 34%;"> <i class="fa fa-check-circle-o" aria-hidden="true" style="color:green;font-size:22px;"></i>&nbsp; You are all caught up. </div>';
+            $.ajax({
+                    url: '?page=' + page,
+                    type: 'get',
+                    beforeSend: function() {
+                        $('.ajax-loading').show();
+                    }
+                })
+                .done(function(data) {
+                    if (data.purchase_history == '') {
+                        $('.ajax-loading').html(html);
+                        return;
+                    } else {
+                        $('.ajax-loading').hide();
+                        $('#purchaseHistory').append(data.purchase_history);
+                    }
+
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    toastr.error('Oops!, Something went wrong');
+                })
+        }
+
+        let page = 1;
+        $(window).scroll(function() {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                page++;
+                loadMorePurchaseHistory(page);
             }
         });
     </script>

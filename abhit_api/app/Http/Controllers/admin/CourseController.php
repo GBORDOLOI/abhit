@@ -26,7 +26,6 @@ class CourseController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'subject_id' => 'required',
-            'pic' => 'required',
             'duration' => 'required',
             'publish_date' => 'required',
             'publish_time' => 'required',
@@ -35,12 +34,12 @@ class CourseController extends Controller
         ],[
             'name.required' => 'Course name is required',
             'subject_id.required' => 'Select subject',
-            'pic.required' => 'Picture required',
             'duration.required' => 'Duration is required',
             'publish_date.required' => 'Publish date is required',
             'publish_time.required' => 'Publish time is required',
             'data.required' => 'Description is required',
         ]);
+
 
         if (Carbon::parse($request->publish_date)->format('Y-m-d') == Carbon::today()->format('Y-m-d')) {
             $publishTime = Carbon::parse($request->publish_time)->format('H:i');
@@ -49,17 +48,28 @@ class CourseController extends Controller
                 return response()->json(["status"=>2,'error'=>'Publish Time can\'t be lesser then Present Time']);
             } else {
                 $document = $request->pic;
+                $video = $request->video;
+                $imgFile = '';
+                $videoFile = '';
                 if (isset($document) && !empty($document)) {
-                    $new_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
+                    $new_img_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
                     // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
-                    $document->move(public_path('/files/course/'), $new_name);
-                    $file = 'files/course/' . $new_name;
+                    $document->move(public_path('/files/course/'), $new_img_name);
+                    $imgFile = 'files/course/' . $new_img_name;
+                }else if(isset($video) && !empty($video)){
+                    $new_video_name = date('d-m-Y-H-i-s') . '_' . $video->getClientOriginalName();
+                    // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
+                    $video->move(public_path('/files/course/'), $new_video_name);
+                    $videoFile = 'files/course/' . $new_video_name;
+                }else{
+                    return response()->json(["status"=>1,'error'=>'Image or Video is required']);
                 }
 
                 Course::create([
                     'name' => $request->name,
                     'subject_id' => $request->subject_id,
-                    'course_pic' => $file,
+                    'course_pic' => $imgFile,
+                    'course_video' => $videoFile,
                     'durations' => $request->duration,
                     'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
                     'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
@@ -69,17 +79,26 @@ class CourseController extends Controller
             }
         } else {
             $document = $request->pic;
+            $video = $request->video;
             if (isset($document) && !empty($document)) {
-                $new_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
+                $new_img_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
                 // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
-                $document->move(public_path('/files/course/'), $new_name);
-                $file = 'files/course/' . $new_name;
+                $document->move(public_path('/files/course/'), $new_img_name);
+                $imgFile = 'files/course/' . $new_img_name;
+            }else if(isset($video) && !empty($video)){
+                $new_video_name = date('d-m-Y-H-i-s') . '_' . $video->getClientOriginalName();
+                // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
+                $video->move(public_path('/files/course/'), $new_video_name);
+                $videoFile = 'files/course/' . $new_video_name;
+            }else{
+                return response()->json(["status"=>2,'error'=>'Image or Video is required']);
             }
 
             Course::create([
                 'name' => $request->name,
                 'subject_id' => $request->subject_id,
-                'course_pic' => $file,
+                'course_pic' => $imgFile,
+                'course_video' => $videoFile,
                 'durations' => $request->duration,
                 'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
                 'time' => Carbon::parse($request->publish_time)->format('H:i:s'),

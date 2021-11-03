@@ -4,10 +4,13 @@ namespace App\Http\Controllers\website;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Common\Activation;
 use App\Models\Subject;
 use App\Models\Chapter;
+use App\Models\Cart;
+use App\Models\Order;
 use Carbon\Carbon;
 use App\Models\MultipleChoice;
 
@@ -93,13 +96,17 @@ class CourseController extends Controller
         $chapters = Chapter::where([['course_id',$course_id],['is_activate',Activation::Activate]])->get();
         $multiChoice = MultipleChoice::where('subject_id', $course->subject->id)->where('is_activate', 1)->paginate(1);
         $countMultiChoice = MultipleChoice::where('subject_id', $course->subject->id)->where('is_activate', 1)->count();
+        $cart = []; $order = [];
+        if(Auth::check()){
+            $cart = Cart::where('user_id', Auth::user()->id )->get();
+            $order = Order::where('user_id', Auth::user()->id )->get();
+        }
 
         if($request->ajax()){
             $view = view('website.multiple-choice.mcq', compact('multiChoice'))->render();
             return response()->json(['mcq' => $view]);
         }
-
-        return view('website.course.courseDetails', compact('course','chapters','multiChoice','countMultiChoice'));
+        return view('website.course.courseDetails', compact('course','chapters','multiChoice','countMultiChoice','cart', 'order'));
 
     }
 }

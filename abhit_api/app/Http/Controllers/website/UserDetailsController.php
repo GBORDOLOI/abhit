@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UserDetails;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,11 +14,16 @@ class UserDetailsController extends Controller
 {
 
     public function myAccount(Request $request){
-        $user_details = '';
+        $user_details = ''; $order = [];
         if(Auth::check()){
             $user_details = UserDetails::with('user')->where('email',Auth::user()->email)->first();
+            $order = Order::where('user_id', Auth::user()->id)->paginate(3);
+            if($request->ajax()){
+                $view = view('website.my_account.purchase_history',compact('order'))->render();
+                return response()->json(['purchase_history' => $view]);
+            }
         }
-        return view('website.my_account.my_account')->with('user_details',$user_details);
+        return view('website.my_account.my_account')->with(['user_details' => $user_details, 'order' => $order]);
     }
 
 
@@ -86,4 +92,5 @@ class UserDetailsController extends Controller
             return response()->json(['message' => 'Something went wrong']);
         }
     }
+
 }

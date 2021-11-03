@@ -8,6 +8,7 @@ use App\Models\KnowledgeForumComment;
 use App\Models\KnowledgeForumPost;
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Common\BadWords;
 use Illuminate\Support\Facades\Auth;
 
 class KnowledgeForumCommentsController extends Controller
@@ -25,7 +26,7 @@ class KnowledgeForumCommentsController extends Controller
 
         $create = KnowledgeForumComment::create([
             'knowledge_forum_post_id' => $request->post_id,
-            'comments' => $comment,
+            'comments' =>  \ConsoleTVs\Profanity\Builder::blocker($comment, BadWords::badWordsReplace)->strictClean(false)->filter(),
             'user_id' => $request->commented_by,
             'user_detail_id' => $userDetails->id,
             'is_activate' => $is_activate->is_activate,
