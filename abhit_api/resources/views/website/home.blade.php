@@ -19,8 +19,8 @@
                                     <div class="home-slide"><img src="{{ asset($item->banner_image) }}"
                                             style="border-radius: 20px" class="w100"></div>
                                     <div class="home-desc">
-                                        <h2 class="heading-black">{{ $item->name }}</h2>
-                                        <p class="banner-para">{{ $item->description }}</p>
+                                        <h2 class="heading-black">{!! $item->name !!}</h2>
+                                        <p class="banner-para">{!! $item->description !!}</p>
                                         @if ($item->course_id != null)
                                             <div><a href="{{ route('website.course.details', ['id' => \Crypt::encrypt($item->course_id)]) }}"
                                                     target="_blank" class="about-view">View More</a></div>
