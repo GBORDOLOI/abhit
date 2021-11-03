@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\KnowledgeForumPost;
 use App\Models\UserDetails;
+use App\Common\BadWords;
 use Illuminate\Support\Facades\Auth;
 use App\Common\Activation;
 
@@ -25,8 +26,8 @@ class KnowledgeForumPostController extends Controller
         $user_detail = UserDetails::where('user_id', Auth::user()->id)->first();
         
         $create = KnowledgeForumPost::create([
-            'question' => $question,
-            'description' => $description,
+            'question' =>  \ConsoleTVs\Profanity\Builder::blocker($question, BadWords::badWordsReplace)->strictClean(false)->filter(),
+            'description' =>  \ConsoleTVs\Profanity\Builder::blocker($description, BadWords::badWordsReplace)->strictClean(false)->filter(),
             'links' => $link,
             'user_id' => Auth::user()->id,
             'user_detail_id' => $user_detail->id,

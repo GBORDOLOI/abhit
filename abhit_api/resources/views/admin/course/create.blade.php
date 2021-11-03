@@ -94,7 +94,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                     </div>
 
 
-                    <button class="btn btn-primary">Submit</button>
+                    <button class="btn btn-primary" id="addCourseSubmitButton">Submit</button>
                 </form>
             </div>
         </div>
@@ -159,12 +159,14 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 
            $('.video-upload-div').css('display', 'block');
            $('.upload-image-div').css('display', 'none');
+           pond.removeFile();
 
         });
 
         $('#uploadImage').on('click',function(){
             $('.upload-image-div').css('display', 'block');
             $('.video-upload-div').css('display', 'none');
+            document.getElementById('course_video').value = '';
         });
 
         $("#createCourse").submit(function(e) {
@@ -188,11 +190,18 @@ $subjects = Subject::where('is_activate', Activation::Activate)
             }
             formdata.append('data', data);
             
-           formdata.append('video',document.getElementById('course_video').files[0]);
+            formdata.append('video',document.getElementById('course_video').files[0]);
+            
+       
+
+
 
             if( (pondFiles.length == 0) && (document.getElementById('course_video').value == '')){
                 toastr.error('Image or Video must be selected from the file upload dropdown');
-            }else{
+            }
+            else{
+                $('#addCourseSubmitButton').text('Please wait');
+                $('#addCourseSubmitButton').attr('disabled', true);
                 $.ajax({
 
                     type: "POST",
@@ -211,20 +220,28 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                             $.each(errors.errors, function(key, val) {
                                 $("#" + key + "_error").text(val[0]);
                             });
+                            $('#addCourseSubmitButton').text('Submit');
+                            $('#addCourseSubmitButton').attr('disabled', false);
 
                         },
                         200: function(data) {
                             if (data.status == 2) {
                                 toastr["success"](data.error);
+                                $('#addCourseSubmitButton').text('Submit');
+                                $('#addCourseSubmitButton').attr('disabled', false);
 
                             } else {
                                 toastr.success('Publish Successfull');
+                                $('#addCourseSubmitButton').text('Submit');
+                                $('#addCourseSubmitButton').attr('disabled', false);
                                 location.reload();
 
                             }
                         },
                         500: function() {
                             alert('500 someting went wrong');
+                            $('#addCourseSubmitButton').text('Submit');
+                                $('#addCourseSubmitButton').attr('disabled', false);
                         }
                     }
                 });
