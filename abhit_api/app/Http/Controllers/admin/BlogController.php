@@ -101,7 +101,7 @@ class BlogController extends Controller
 
         if ($document->getClientOriginalName() == 'blob') {
             $blog->name = $request->name;
-            $blog->blog = $request->data;
+            $blog->blog =  \ConsoleTVs\Profanity\Builder::blocker($request->data, BadWords::badWordsReplace)->strictClean(false)->filter();
             $blog->save();
         } else {
             if (isset($document) && !empty($document)) {
@@ -112,7 +112,7 @@ class BlogController extends Controller
             }
             $blog->name = $request->name;
             $blog->blog_image = $file;
-            $blog->blog = $request->data;
+            $blog->blog =  \ConsoleTVs\Profanity\Builder::blocker($request->data, BadWords::badWordsReplace)->strictClean(false)->filter();
             $blog->save();
         }
 
