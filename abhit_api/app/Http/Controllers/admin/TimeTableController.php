@@ -7,14 +7,28 @@ use Illuminate\Http\Request;
 use App\Models\Subject;
 use App\Models\Course;
 use App\Models\Chapter;
+use App\Models\Order;
 use App\Common\Activation;
 use App\Models\TimeTable;
+
+use Illuminate\Support\Facades\Auth;
 
 class TimeTableController extends Controller
 {
 
     public function websiteViewTimeTable(Request $request){
-        return view('website.time-table.time-table');
+        $data = [];
+        if(Auth::check()){
+            $details = Order::where('user_id', Auth::user()->id)->get();
+            foreach($details as $item){
+            
+                $time_data = TimeTable::with('course', 'chapter')->where('course_id', $item->course_id)->where('chapter_id', $item->chapter_id)->where('is_activate', 1)->get();
+                array_push($data, $time_data);
+            }
+        }
+        
+        
+        return view('website.time-table.time-table')->with(['data' =>  $data]);
     }
 
     public function timeTable(Request $request){
