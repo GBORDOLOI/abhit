@@ -20,6 +20,13 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('asset_admin/images/favicon.ico') }}" />
     <link rel="stylesheet" href="{{asset('asset_admin/toaster/toastr.min.css')}}">
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css' rel='stylesheet'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <style>
+        .ui-datepicker .ui-datepicker-header{
+            background: linear-gradient(to right, #da8cff, #9a55ff);
+        }
+    </style>
     @yield('head')
 </head>
 
@@ -63,6 +70,7 @@
     <!-- Custom js for this page -->
     <script src="{{ asset('asset_admin/js/dashboard.js') }}"></script>
     <script src="{{ asset('asset_admin/js/todolist.js') }}"></script>
+    
     <!-- End custom js for this page -->
     <script>
         $.ajaxSetup({
@@ -94,7 +102,7 @@
             "hideMethod": "fadeOut"
         }
     </script>
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     @yield('scripts')
 </body>
 

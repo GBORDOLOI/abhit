@@ -11,6 +11,7 @@
                 <li><a href="{{route('website.gallery')}}">Gallery</a></li>
                 <li><a href="{{route('website.blog')}}">Blogs</a></li>
                 <li><a href="{{route('website.knowledge.forum')}}">Knowledge Forum</a></li>
+                <li><a href="{{route('website.get.time.table')}}">Time Table</a></li>
                 <li><a href="{{route('website.contact')}}" class="about-view">Contact Us</a></li>
 
             </ul>
