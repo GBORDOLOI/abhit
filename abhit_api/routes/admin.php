@@ -9,6 +9,9 @@ use App\Http\Controllers\admin\ChapterController;
 use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\admin\GalleryController;
 use App\Http\Controllers\admin\MultipleChoiceController;
+use App\Http\Controllers\admin\EnrolledController;
+use App\Http\Controllers\admin\TimeTableController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -108,4 +111,16 @@ Route::prefix('multiple-choice')->group(function(){
     Route::get('add-multiple-choice',[MultipleChoiceController::class,'addMultipleChoice'])->name('admin.add.multiple.choice');
     Route::post('insert-multiple-choice',[MultipleChoiceController::class,'insertMultipleChoice'])->name('admin.insert.multiple.choice');
     Route::post('is-activate-multiple-choice',[MultipleChoiceController::class,'isActivateMultipleChoice'])->name('admin.is.activate.multiple.choice');
+});
+
+
+/* ------------------------------- Enrolled Students ------------------------------------ */
+Route::prefix('enrolled')->group(function(){
+    Route::get('students',[ EnrolledController::class, 'getEnrolledStudents'])->name('admin.get.enrolled.students');
+});
+
+/* ------------------------------- Time Table ------------------------------------ */
+Route::prefix('time-table')->group(function(){
+    Route::get('timeTable',[ TimeTableController::class, 'timeTable'])->name('admin.time.table');
+    Route::post('addTimeTable',[ TimeTableController::class, 'addTimeTable'])->name('admin.add.time.table');
 });

@@ -59,5 +59,13 @@
             <a class="nav-link" href="{{route('website.blog.report.get')}}"><span class="menu-title">Reported Blogs</span>
                 <i class="mdi  mdi-alert menu-icon"></i></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.get.enrolled.students')}}"><span class="menu-title">Enrolled Students</span>
+                <i class="mdi  mdi-account-multiple menu-icon"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.time.table')}}"><span class="menu-title">Add Time-Table</span>
+                <i class="mdi  mdi-calendar-clock menu-icon"></i></a>
+        </li>
     </ul>
 </nav>
