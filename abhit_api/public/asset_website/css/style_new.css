@@ -73,3 +73,7 @@
 .centered li {
     position: unset;
 }
+
+.dropdown-item:focus, .dropdown-item:hover{
+    background: #fff;
+}
