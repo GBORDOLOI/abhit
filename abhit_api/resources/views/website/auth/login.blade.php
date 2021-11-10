@@ -72,7 +72,7 @@
                                             <span class="text-danger">@error('lname'){{$message}}@enderror</span>
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <input type="text" name="email" class="form-control" placeholder="Email" id="p_number1" value="{{old('email')}}" required>
+                                            <input type="email" name="email" class="form-control" placeholder="Email" id="p_number1" value="{{old('email')}}" required>
                                             <span class="text-danger">@error('email'){{$message}}@enderror</span>
                                         </div>
                                         <div class="form-group col-lg-12">
@@ -120,7 +120,13 @@
                     type:"POST",
                     data:$('#signupForm').serialize(),
                     success:function(data){
-                        toastr.success(data.message);
+                        if(data.status == '201'){
+                            toastr.success(data.message);
+                        }else if(data.status == '403'){
+                            toastr.error(data.message);
+                        }else{
+                            toastr.error('Oops! Something went wrong');
+                        }
                         $('#signupForm')['0'].reset();
                         $('#signupBtn').text('Sign up');
                     

@@ -22,7 +22,14 @@
                 type:"POST",
                 data:$('#signupForm').serialize(),
                 success:function(data){
-                    toastr.success(data.message);
+                    
+                    if(data.status == '201'){
+                        toastr.success(data.message);
+                    }else if(data.status == '403'){
+                        toastr.error(data.message);
+                    }else{
+                        toastr.error('Oops! Something went wrong');
+                    }
                     $('#signupForm')['0'].reset();
                     $('#signupBtn').text('Sign up');
 
@@ -231,5 +238,5 @@
                 $('#sharePostModal').modal('hide')
             },2000);
         });
-
+        
 </script>
