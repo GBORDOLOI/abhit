@@ -32,7 +32,7 @@ class WebsiteAuthController extends Controller
 
         $check_email_exists = User::where([['email',$email],['role_id',Role::User]])->exists();
         if($check_email_exists){
-            return response()->json(['message' => 'Oops! Email already exists', 'status' => 422]);
+            return response()->json(['message' => 'Oops! Email already exists', 'status' => 403]);
         }else{
 
             $create = User::create([

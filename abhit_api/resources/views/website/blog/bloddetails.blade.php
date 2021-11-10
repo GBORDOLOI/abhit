@@ -22,10 +22,10 @@
                             <h2 class="heading-white">{{$blog->name}}</h2>
                         </div>
 
-                        <div>
+                        {{-- <div>
                             <h6 class="mb0">Ramjan Ali Anik</h6>
                             <p class="mb0">Math Teacher</p>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
@@ -49,8 +49,17 @@
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;  Report
                         </a>
                         @endauth
-                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  data-toggle="modal" data-target="#sharePostModal" style="display:inline;font-size:12px;">
-                            <i class="fa fa-share" aria-hidden="true"></i> &nbsp; Share
+                        &nbsp;&nbsp;&nbsp;&nbsp;<a type="button" class="btn btn-default"  data-toggle="dropdown"> <span style="font-size: 15px;"><i class="fa fa-share" aria-hidden="true" ></i> &nbsp; Share</span></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown-item social-link-btn">
+                                <a href="#" id="facebookLink" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true" style="color:#1877f2;font-size: 20px;margin-top:10px;"></i></a>&nbsp;&nbsp;&nbsp;
+                                <a href="#" id="whatsappLink" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true" style="color:#128c7e;font-size: 20px;margin-top:10px;"></i></a>&nbsp;&nbsp;&nbsp;
+                                <a href="#" id="mailLink" target="_blank"><i class="fa fa-envelope" aria-hidden="true" style="color:#dd4b39;font-size: 20px;margin-top:10px;"></i></a>&nbsp;&nbsp;&nbsp;
+                                <a href="#" id="redditLink" target="_blank"><i class="fa fa-reddit-square" aria-hidden="true" style="color:#ff4500;font-size: 20px;margin-top:10px;"></i></a>
+                                
+                            </div>
+                            {{-- <a href="javascript:void(0);" class="dropdown-item"  data-toggle="modal" data-target="#sharePostModal" style="font-size:12px;"><i class="fa fa-share" aria-hidden="true"></i> &nbsp; Share</a> --}}
+                        </div>
                         </a>
                     <div class="mt-5">
                         {!!$blog->blog!!}
@@ -65,4 +74,19 @@
     
 @section('scripts')
     @include('layout.website.include.modal_scripts')
+    <script>
+        const facebookBtn = document.getElementById('facebookLink');
+        const whatsappBtn = document.getElementById('whatsappLink');
+        const mailBtn = document.getElementById('mailLink');
+        const redditBtn = document.getElementById('redditLink');
+
+        let postUrl = encodeURI(document.location.href);
+        let postTitle = encodeURI('{{$blog->name}}');
+
+        facebookBtn.setAttribute('href', `https://www.facebook.com/sharer.php?u=${postUrl}`);
+        whatsappBtn.setAttribute('href', `https://api.whatsapp.com/send?text=Post-Title: ${postTitle} ---- Post-Link:- ${postUrl}`);
+        mailBtn.setAttribute('href',`https://mail.google.com/mail/?view=cm&su=Post Title: ${postTitle}&body=${postUrl}`);
+        redditBtn.setAttribute('href',`https://reddit.com/submit?url=${postUrl}&title=${postTitle}`);
+
+    </script>
 @endsection
