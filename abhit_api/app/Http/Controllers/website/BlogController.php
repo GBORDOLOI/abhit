@@ -21,7 +21,7 @@ class BlogController extends Controller
 
     protected function getBlog()
     {
-        $blogs = Blog::where('is_activate', Activation::Activate)->orderBy('id','DESC')->paginate(10);
+        $blogs = Blog::where('is_activate', Activation::Activate)->orderBy('id','DESC')->paginate(4);
 
         return view('website.blog.blog',\compact('blogs'));
     }

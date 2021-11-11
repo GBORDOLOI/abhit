@@ -81,6 +81,9 @@
                             </li>
                         @endforeach
                     </ul>
+                    <div style="float:right;margin-right:20px;">
+                        {{$blogs->links()}}
+                    </div>
                 </div>
             </div>
         </div>
