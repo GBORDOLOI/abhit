@@ -3,6 +3,12 @@
 @section('title', 'My Account')
 
 @section('head')
+<style>
+    .sidebar {
+            position: sticky;
+            top: 150px;
+        }
+</style>
 @endsection
 
 @section('content')
@@ -12,7 +18,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-4 col-12">
-                <div class="knowledge-forum-right1">
+                <div class="knowledge-forum-right1 sidebar">
                     <div class="knowledge-forum-profile-top"><img src="{{asset('asset_website/img/knowladge-forum/bg.png')}}" class="w100"></div>
                     <div class="knowledge-forum-profile-bottom1">
                         <div class="knowledge-pic">
@@ -234,6 +240,49 @@
                                         </div>
 
                                     </li>
+                                    <li>
+                                        <div>
+                                            <div class="card-img"><img src="{{asset('asset_website/img/cart/visa.png')}}" class="w100"></div>
+                                            <div class="card-desc">
+                                                <p class=""><span class="f14">ICICI CREDIT CARD5267-</span> <br />
+                                                    <span class="f12">XXXXXXXX-3499 </span><br />
+                                                    <span class="f10">VALID TILL 08/23</span>
+                                                </p>
+                                            </div>
+                                            <div class="name-on-card">Hirak jyoti das</div>
+                                            <div class="remove-card"><a href="">REMOVE</a></div>
+                                        </div>
+
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <div class="card-img"><img src="{{asset('asset_website/img/cart/visa.png')}}" class="w100"></div>
+                                            <div class="card-desc">
+                                                <p class=""><span class="f14">ICICI CREDIT CARD5267-</span> <br />
+                                                    <span class="f12">XXXXXXXX-3499 </span><br />
+                                                    <span class="f10">VALID TILL 08/23</span>
+                                                </p>
+                                            </div>
+                                            <div class="name-on-card">Hirak jyoti das</div>
+                                            <div class="remove-card"><a href="">REMOVE</a></div>
+                                        </div>
+
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <div class="card-img"><img src="{{asset('asset_website/img/cart/visa.png')}}" class="w100"></div>
+                                            <div class="card-desc">
+                                                <p class=""><span class="f14">ICICI CREDIT CARD5267-</span> <br />
+                                                    <span class="f12">XXXXXXXX-3499 </span><br />
+                                                    <span class="f10">VALID TILL 08/23</span>
+                                                </p>
+                                            </div>
+                                            <div class="name-on-card">Hirak jyoti das</div>
+                                            <div class="remove-card"><a href="">REMOVE</a></div>
+                                        </div>
+
+                                    </li>
+
                                 </ul>
                             </div>
                         </div>
