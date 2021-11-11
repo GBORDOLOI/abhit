@@ -110,7 +110,6 @@ Route::prefix('cart')->group(function(){
 Route::get('checkout', [PaymentController::class, 'checkout'])->name('website.checkout');
 
 Route::prefix('payment')->group(function(){
-    // Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('razorpay.payment.index');;
     Route::post('verify-payment', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
 });
 

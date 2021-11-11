@@ -53,7 +53,7 @@
         e.preventDefault();
 
         let question = $('#questionAsk').val();
-        let editorQuestion = CKEDITOR.instances.editorQuestion.document.getBody().getText();
+        let editorQuestion = CKEDITOR.instances.editorQuestion.getData();
         let questionLink = $('#questionLink').val();
 
         $('#addQuestionBtn').text('Please wait...');
@@ -128,7 +128,7 @@
             $('.websiteAddBlogBtn').text('Please wait...');
             let formdata = new FormData(this);
 
-            let websiteAddBlogEditor = CKEDITOR.instances.websiteAddBlogEditor.document.getBody().getText();
+            let websiteAddBlogEditor = CKEDITOR.instances.websiteAddBlogEditor.getData();
 
             pondFiles = pond.getFiles();
             for (var i = 0; i < pondFiles.length; i++) {

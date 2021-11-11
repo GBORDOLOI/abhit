@@ -100,7 +100,7 @@
 
             var formdata = new FormData(this);
 
-            var data = CKEDITOR.instances.editor.document.getBody().getText();
+            var data = CKEDITOR.instances.editor.getData();
 
             pondFiles = pond.getFiles();
             for (var i = 0; i < pondFiles.length; i++) {
