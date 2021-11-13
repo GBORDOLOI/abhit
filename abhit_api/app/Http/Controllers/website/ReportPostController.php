@@ -34,12 +34,11 @@ class ReportPostController extends Controller
 
     public function moveToTrash(Request $request){
         $postId = $request->postId;
-        $removeFromKnowledgePost = KnowledgeForumPost::where('id',$postId)->delete();
-        $removeFromReportPost = ReportPost::where('knowledge_forum_post_id',$postId)->delete();
-        if($removeFromKnowledgePost && $removeFromReportPost){
-            return response()->json(['success' => 'Post move to trash successfully']);
-        }else{
-            return response()->json(['error' => 'Oops!, something went wrong']);
-        }
+
+        KnowledgeForumPost::where('id',$postId)->update([
+            'is_activate' => 0
+        ]);
+        ReportPost::where('knowledge_forum_post_id',$postId)->delete();
+        return response()->json(['success' => 'Post move to trash successfully']);
     }
 }
