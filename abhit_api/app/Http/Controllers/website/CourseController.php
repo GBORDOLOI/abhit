@@ -93,7 +93,7 @@ class CourseController extends Controller
         # code...
         $course_id = \Crypt::decrypt($request->id);
         $course = Course::find($course_id);
-        $chapters = Chapter::where([['course_id',$course_id],['is_activate',Activation::Activate]])->get();
+        $chapters = Chapter::with('cart')->where([['course_id',$course_id],['is_activate',Activation::Activate]])->get();
         $multiChoice = MultipleChoice::where('subject_id', $course->subject->id)->where('is_activate', 1)->paginate(1);
         $countMultiChoice = MultipleChoice::where('subject_id', $course->subject->id)->where('is_activate', 1)->count();
         $cart = []; $order = [];

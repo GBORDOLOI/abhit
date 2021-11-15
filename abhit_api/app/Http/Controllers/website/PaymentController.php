@@ -98,6 +98,8 @@ class PaymentController extends Controller
 
                return redirect()->route('website.cart')->with('success','Payment Successfull!');
 
+            return response( $attributes);
+
             }
             catch(SignatureVerificationError $e)
             {

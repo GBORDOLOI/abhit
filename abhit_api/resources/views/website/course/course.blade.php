@@ -48,7 +48,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>{{$item['duration']. 'Weeks'}}</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">{{$item['name']}}</h4></div>
                             <span>₹{{$item['final_price']}}</span>
-                            <a href="{{route('website.course.details',['id'=>\Crypt::encrypt($item['id'])])}}" target="_blank" class="enroll">Enroll now</a>
+                            <a href="{{route('website.course.details',['id'=>\Crypt::encrypt($item['id'])])}}"  class="enroll">Enroll now</a>
                         </div>
                     </li>
 

@@ -29,15 +29,20 @@ class CartController extends Controller
     public function addToCart(Request $request){
         $course_id = $request->course_id;
         $chapter_id = $request->chapter_id;
-        foreach($chapter_id as $item){
-            $create = Cart::create([
-                'user_id' => Auth::user()->id,
-                'course_id' => $course_id,
-                'chapter_id' => $item
-            ]);    
-        }
-        return response()->json(['message' => "Item added to cart successfully."]);
-        
+
+       $check_item_exists_inside_cart = Cart::where('user_id', Auth::user()->id)->where('chapter_id', $chapter_id)->exists();
+       if($check_item_exists_inside_cart == true){
+            return response()->json(['message' => 'Item Already present inisde cart. Please check cart', 'status' => 2]);
+       }else{
+            foreach($chapter_id as $item){
+                $create = Cart::create([
+                    'user_id' => Auth::user()->id,
+                    'course_id' => $course_id,
+                    'chapter_id' => $item
+                ]);    
+            }
+            return response()->json(['message' => "Item added to cart successfully." , 'status' => 1]);
+       }
     }
 
 
