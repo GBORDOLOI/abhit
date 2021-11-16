@@ -70,8 +70,7 @@
                                                 {!!$item->blog!!}
                                             </div>
                                             <div>
-                                                <h6 class="mb0">Ramjan Ali Anik</h6>
-                                                <p class="mb0">Math Teacher</p>
+                                                <span class="mb0">- Anonymous</span>
                                             </div>
                                         </div>
                                     </div>
