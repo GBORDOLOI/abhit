@@ -79,11 +79,11 @@
                                 @if($user_details != null)
                                     <div class="form-group col-lg-6 pr10">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="firstname" value="{{Auth::user()->firstname}}" required>
+                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="firstname" pattern="^([a-zA-Z]+)$" title="Please Enter Letters only." value="{{Auth::user()->firstname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lastname" value="{{Auth::user()->lastname}}" required>
+                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lastname" pattern="^([a-zA-Z]+)$" title="Please Enter Letters only." value="{{Auth::user()->lastname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Email ID</label>
@@ -91,7 +91,7 @@
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Mobile number</label>
-                                        <input type="number" class="form-control" name="phone" placeholder="Enter Phone" id="phone" value="{{$user_details->phone}}" required>
+                                        <input type="text" class="form-control" name="phone" placeholder="Enter Phone" id="phone" pattern="(0|91)?[6-9][0-9]{9}" title="Phone number should start with 6 or 7 or 8 or 9 and 10 chars long. ( e.g 7896845214)" value="{{$user_details->phone}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Education</label>
@@ -109,11 +109,11 @@
                                 @else
                                     <div class="form-group col-lg-6 pr10">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="firstname" value="{{Auth::user()->firstname}}" required>
+                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="firstname" pattern="^([a-zA-Z]+)$" title="Please Enter Letters only." value="{{Auth::user()->firstname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lastname" value="{{Auth::user()->lastname}}" required>
+                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lastname" pattern="^([a-zA-Z]+)$" title="Please Enter Letters only." value="{{Auth::user()->lastname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Email ID</label>
@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Mobile number</label>
-                                        <input type="number" class="form-control" name="phone" placeholder="Enter Phone" id="phone" required>
+                                        <input type="text" class="form-control" name="phone" placeholder="Enter Phone" id="phone" pattern="(0|91)?[6-9][0-9]{9}" title="Phone number should start with 6 or 7 or 8 or 9  and 10 chars long.( e.g 7896845214)" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Education</label>
@@ -429,28 +429,37 @@
             let formData = new FormData(this);
             $('.upload-photo-btn').text('uploading...');
 
-            $.ajax({
-                url:"{{route('website.user.upload.photo')}}",
-                type:"POST",
-                enctype: 'multipart/form-data',
-                processData: false,
-                contentType: false,
-                cache: false,
-                data:formData,
-                success:function(data){
-                    toastr.success(data.message);
-                    $('#photoUploadForm')[0].reset();
-                    $('.upload-photo-btn').text('save');
-                    location.reload(true);
-                },
-                error:function(xhr, status, error){
-                    if(xhr.status == 500 || xhr.status == 422){
-                        toastr.error('Oops! Something went wrong while saving.');
+            let photoName = $('#imageUpload').val();
+            let extension = photoName.split('.').pop();
+
+            if( ! (extension == 'jpg'  || extension == 'png' || extension == 'jpeg') ){
+                toastr.error('Oops! Not an image. Allowed extensions JPG, PNG, JPEG');
+                $('#photoUploadForm')[0].reset();
+                $('.upload-photo-btn').text('save');
+            }else{
+                $.ajax({
+                    url:"{{route('website.user.upload.photo')}}",
+                    type:"POST",
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data:formData,
+                    success:function(data){
+                        toastr.success(data.message);
+                        $('#photoUploadForm')[0].reset();
+                        $('.upload-photo-btn').text('save');
+                        location.reload(true);
+                    },
+                    error:function(xhr, status, error){
+                        if(xhr.status == 500 || xhr.status == 422){
+                            toastr.error('Oops! Something went wrong while saving.');
+                        }
+                        $('#photoUploadForm')[0].reset();
+                        $('.upload-photo-btn').text('save');
                     }
-                    $('#photoUploadForm')[0].reset();
-                    $('.upload-photo-btn').text('save');
-                }
-            });
+                });
+            }
         });
 
     /**************************** Update Password Section **************************/    
@@ -458,10 +467,19 @@
             e.preventDefault();
             $('.change-password-btn').text('please wait...')
 
+            let crntPwd = $('#currentPassword').val();
             let newPwd = $('#newPassword').val();
             let confPwd = $('#confirmPassword').val();
 
-            if(newPwd != confPwd){
+            if(crntPwd == newPwd){
+                toastr.error('Oops! New Password and Current Password should not be same');
+                $('#updatePasswordForm')[0].reset();
+                $('.change-password-btn').text('Change Password');
+            }else if(newPwd.length < 4){
+                toastr.error('Oops! password length should not be less than 4 characters');
+                $('#updatePasswordForm')[0].reset();
+                $('.change-password-btn').text('Change Password');
+            }else if(newPwd != confPwd){
                 toastr.error('Oops! password not matched');
                 $('#updatePasswordForm')[0].reset();
                 $('.change-password-btn').text('Change Password');
@@ -471,8 +489,11 @@
                     type:"POST",
                     data:$('#updatePasswordForm').serialize(),
                     success:function(data){
-                        console.log(data.message);
-                        toastr.success(data.message);
+                        if(data.status == 1){
+                            toastr.success(data.message);
+                        }else{
+                            toastr.error(data.message);
+                        }
                         $('#updatePasswordForm')[0].reset();
                         $('.change-password-btn').text('Change Password');
                     },

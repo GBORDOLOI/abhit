@@ -1,3 +1,12 @@
+@php
+    use App\Models\Cart;
+    use Illuminate\Support\Facades\Auth;
+    if(Auth::check()){
+        $cart_items = Cart::where('user_id',Auth::user()->id)->where('is_paid', 0)->where('is_remove_from_cart', 0)->count();
+    }
+@endphp
+
+
 <div class="top-header">
     <div class="container-fluid">
         <div class="row">
@@ -26,7 +35,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{{route('website.cart')}}" class="login-text"><span class="icon-cart-08 login-details-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></span>Cart</a>
+                        <a href="{{route('website.cart')}}" class="login-text"><span class="icon-cart-08 login-details-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></span>Cart ( {{ $cart_items }} )</a>                            
                     </li>
                 </ul>
             </div>

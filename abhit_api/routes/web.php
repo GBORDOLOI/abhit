@@ -17,7 +17,7 @@ use App\Http\Controllers\admin\MultipleChoiceController;
 use App\Http\Controllers\website\CartController;
 use App\Http\Controllers\website\RazorpayPaymentController;
 use App\Http\Controllers\website\PaymentController;
-use App\Http\controllers\admin\TimeTableController;
+use App\Http\Controllers\admin\TimeTableController;
 
 /*
 |--------------------------------------------------------------------------

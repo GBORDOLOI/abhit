@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\website;
+namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,15 +9,11 @@ use App\Models\Course;
 use App\Common\Activation;
 use App\Models\Subject;
 use App\Models\Chapter;
-use App\Models\Cart;
-use App\Models\Order;
 use Carbon\Carbon;
-use App\Models\MultipleChoice;
 
 class CourseController extends Controller
 {
-    //
-    protected function index()
+    public function index()
     {
         # code...
         // $courses = Course::where('is_activate',Activation::Activate)->paginate(10);
@@ -84,29 +80,13 @@ class CourseController extends Controller
             }
         }
         $subjects = Subject::where('is_activate',Activation::Activate)->get();
+
+        $response = [
+            'subjects' => $subjects, 
+            'publishCourse' => $publishCourse,
+            'upcomingCourse' => $upComingCourse
+        ];
         // dd($publishCourse);
-        return view('website.course.course',\compact('subjects','publishCourse'));
-    }
-
-    protected function details(Request $request)
-    {
-        # code...
-        $course_id = \Crypt::decrypt($request->id);
-        $course = Course::find($course_id);
-        $chapters = Chapter::with('cart')->where([['course_id',$course_id],['is_activate',Activation::Activate]])->get();
-        $multiChoice = MultipleChoice::where('subject_id', $course->subject->id)->where('is_activate', 1)->paginate(1);
-        $countMultiChoice = MultipleChoice::where('subject_id', $course->subject->id)->where('is_activate', 1)->count();
-        $cart = []; $order = [];
-        if(Auth::check()){
-            $cart = Cart::where('user_id', Auth::user()->id )->get();
-            $order = Order::where('user_id', Auth::user()->id )->get();
-        }
-
-        if($request->ajax()){
-            $view = view('website.multiple-choice.mcq', compact('multiChoice'))->render();
-            return response()->json(['mcq' => $view]);
-        }
-        return view('website.course.courseDetails', compact('course','chapters','multiChoice','countMultiChoice','cart', 'order'));
-
+        return response()->json(['response' => $response, 'message' => 'Data fetch successfully']);
     }
 }

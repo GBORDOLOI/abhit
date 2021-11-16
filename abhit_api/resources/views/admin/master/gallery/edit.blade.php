@@ -105,8 +105,10 @@ $course = Course::where('is_activate', Activation::Activate)->get();
                 formdata.append('pic', pondFiles[i].file);
             }
 
-
-            $.ajax({
+            if(pondFiles.length == 0){
+                toastr.error('Please add an image');
+            }else{
+                $.ajax({
 
                 type: "POST",
                 url: "{{ route('admin.editing.gallery') }}",
@@ -124,6 +126,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
                     },
                     200: function(data) {
                         // $('#bannerForm').trigger("reset");
+                        toastr.success('Gallery updated successfully');
                         location.reload();
 
                         // alert('200 status code! success');
@@ -132,9 +135,8 @@ $course = Course::where('is_activate', Activation::Activate)->get();
                         alert('500 someting went wrong');
                     }
                 }
-            });
-
-
+                });
+            }
         })
         // $('.input-images').imageUploader();
 

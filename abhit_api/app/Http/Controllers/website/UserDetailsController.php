@@ -83,13 +83,14 @@ class UserDetailsController extends Controller
             'newPassword' => 'required',
             'confirmPassword' => 'required'
         ]);
-
+        
         $user_details = User::where('email',Auth::user()->email)->first();
+
         if(Hash::check($currentPassword, $user_details->password)) {
             User::where('email', Auth::user()->email)->update(['password' => Hash::make($newPassword)]);
-            return response()->json(['message' => 'Password updated']);
+            return response()->json(['message' => 'Password updated' , 'status' => 1]);
         }else{
-            return response()->json(['message' => 'Something went wrong']);
+            return response()->json(['message' => 'Existing Password Not matched', 'status' => 2]);
         }
     }
 

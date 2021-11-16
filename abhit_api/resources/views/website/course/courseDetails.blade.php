@@ -251,7 +251,11 @@
                         'chapter_id': chapterId,
                     },
                     success: function(result) {
-                        toastr.success(result.message);
+                        if(result.status == 1){
+                            toastr.success(result.message);
+                        }else{
+                            toastr.error(result.message);
+                        }
                         $(checkboxItem).each(function() {
                             this.checked = false;
                             allPrice = 0.00
@@ -259,6 +263,7 @@
                                 '<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                             $('#add_cart').prop('disabled', true)
                             $("#add_cart").css("background-color", "grey");
+                            location.reload(true);
                         });
                         chapterId = [];
                     },
