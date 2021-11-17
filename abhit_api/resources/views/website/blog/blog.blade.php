@@ -68,6 +68,8 @@
                                             </div>
                                             <div class="block-ellipsis2 ">
                                                 {!!$item->blog!!}
+                                                {{-- {{ \Illuminate\Support\Str::limit(strip_tags($item->blog), 100) }}
+                                                {!! strlen(strip_tags($item->blog)) > 100 ? "<p class='mt-3'><b>ReadMore...</b></p>" : "" !!}  --}}
                                             </div>
                                             <div>
                                                 <span class="mb0">- Anonymous</span>
