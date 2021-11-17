@@ -28,7 +28,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
                     <div class="form-group">
                         <label for="exampleInputName1">Name</label>
                         <input type="text" class="form-control" id="banner_name" name="name" value="{{$gallery->name}}"
-                            placeholder="Enter Gallery Name">
+                            placeholder="Enter Gallery Name" required>
                             <span class="text-danger" id="name_error"></span>
                         </div>
 
