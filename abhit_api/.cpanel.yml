@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/devekgoi/repositories/abhit
+    - /bin/cp * $DEPLOYPATH
