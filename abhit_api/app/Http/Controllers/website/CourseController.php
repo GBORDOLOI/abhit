@@ -99,7 +99,7 @@ class CourseController extends Controller
         $cart = []; $order = [];
         if(Auth::check()){
             $cart = Cart::where('user_id', Auth::user()->id )->get();
-            $order = Order::where('user_id', Auth::user()->id )->get();
+            $order = Order::where('user_id', Auth::user()->id )->orderBy('desc','created_at')->get();
         }
 
         if($request->ajax()){
