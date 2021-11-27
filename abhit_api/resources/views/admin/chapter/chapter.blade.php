@@ -42,11 +42,11 @@
                     <tbody>
                         <tr>
                             <th>#</th>
-                            <th>Chapter Name</th>
-                            <th>Price</th>
+                            <th class="pl-4">Chapter Name</th>
+                            <th class="pl-4">Price</th>
                             @if (!$chapters->isEmpty())
                                 <th>
-                                    <button type="button" class="btn btn-success editChapterBtn">Edit</button>
+                                    <button type="button" class="btn btn-success editChapterBtn" style="width: 100%;">Edit</button>
                                     <button type="button" class="btn btn-warning cancelEditChapterBtn" style="display:none;">Cancel Edit</button>
                                 </th>
                             @endif
@@ -61,7 +61,7 @@
                                     <input type="text" name="price"  placeholder="Enter Price" class="form-control name_list chapterPrice" id="cprice_{{$item->id}}" pattern="\d+(\.)?(\d)?" title="Value should be a format of price. E.g 22 or 22.9" value="{{$item->price}}" required>
                                 </td>
                                 <td class="footable-last-visible" style="display: table-cell;">
-                                    <button type="button" name="add"  class="btn btn-success updateChapterBtn" data-id="{{$item->id}}" data-name="" data-price="{{$item->price}}" style="display:none;">Update</button>
+                                    <button type="button" name="add"  class="btn btn-success updateChapterBtn" data-id="{{$item->id}}" data-name="" data-price="{{$item->price}}" style="display:none; width:100%">Update</button>
                                 </td>
                             </tr>
                         @empty
