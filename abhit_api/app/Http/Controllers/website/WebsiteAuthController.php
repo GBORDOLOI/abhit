@@ -73,7 +73,7 @@ class WebsiteAuthController extends Controller
         ]);
        
         if (Auth::attempt(['email' => $request->email,  'password' => $request->password, 'role_id' => Role::User, 'is_activate'=> Activation::Activate ])) {
-            if($request->current_route == $request->current_route){
+            if($request->current_route == 'knowledge-forum'){
                 return redirect($request->current_route);
             }else{
                 return redirect()->route('website.dashboard');
