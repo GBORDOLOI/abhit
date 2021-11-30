@@ -98,3 +98,16 @@
         margin-right: 10px;
     }
 }
+
+@media (min-width: 1200px) {
+    #header{
+        padding: 5px 20px;
+    }
+}
+
+
+@media (min-width: 1400px) {
+    #header{
+        padding: 5px 80px;
+    }
+}
